@@ -1,25 +1,24 @@
-// ------------------------------------------------------------------------------------
-// OVERWORLD SCENE
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// GENERAL GAME SCENE
 
-let GameScene = new Phaser.Class({
+class GameScene extends Phaser.Scene {
 
-  Extends: Phaser.Scene,
+  // Extends: Phaser.Scene,
 
-  initialize: function GameScene () {
-    this.wasEmbedded = false;
+  constructor() {
+    super();
     this.cursors = undefined;
     this.player = undefined;
-    this.zone1 = undefined;
-    this.wasEmbedded = false;
-    Phaser.Scene.call(this, { key: 'GameScene' });
-    },
+    this.zones = [];
+  }
 
   // --------------------------------------------------------------------------------------------------
   // PRELOAD
 
-  preload: function () {
-    this.load.image("tiles", "./assets/test/tuxmon-sample-32px-extruded.png");
-    this.load.tilemapTiledJSON("map", "./assets/test/tuxemon-town.json");
+  preload() {
+    this.load.image("tiles", this.tileset);
+    this.load.tilemapTiledJSON("map", this.tilemap);
     // this.load.image("tiles", "./assets/test/tuxmon-sample-32px.png");
     // this.load.tilemapTiledJSON("map", "./assets/test/acantilado-prueba2.json");
     // An atlas is a way to pack multiple images together into one texture. I'm using it to load all
@@ -28,18 +27,18 @@ let GameScene = new Phaser.Class({
     // If you don't use an atlas, you can do the same thing with a spritesheet, see:
     //  https://labs.phaser.io/view.html?src=src/animation/single%20sprite%20sheet.js
     this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-    },
+  }
 
 
   // --------------------------------------------------------------------------------------------------
   // CREATE
 
-  create: function() {
+  create() {
     const map = this.make.tilemap({ key: "map" });
 
     // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
     // Phaser's cache (i.e. the name you used in preload)
-    const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
+    const tileset = map.addTilesetImage(this.tilesetImageName, "tiles");
     // const tileset = map.addTilesetImage("tuxmon-sample-32px", "tiles");
 
     // Parameters: layer name (or index) from Tiled, tileset, x, y
@@ -160,24 +159,29 @@ let GameScene = new Phaser.Class({
     this.scale.on('resize', this.resize, this);
 
     // Zones
-    // DEFINIR EL x E y EN TILED CON LANDMARKS!
-    // CUANDO LO ARMEMOS BIEN, LA ZONA TIENE QUE CUBRIR LA MITAD SUPERIOR DEL CUADRADO DE COLOR
-    // ASI DETECTA EL OVERLAP SOLO CUANDO LOS PIES (NO LA CABEZA) ENTRAN
-    this.zone1 = this.add.zone(spawnPoint.x, spawnPoint.y, 64, 64);
-    this.physics.world.enable(this.zone1, 0);  // (0) DYNAMIC (1) STATIC
-    this.physics.add.overlap(this.player, [this.zone1]);
-
     // Dialog plugin
     let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
 
-    this.zone1.on('enterzone', () => dialogPlugin.showDialog('Entering zone', this));
-    this.zone1.on('leavezone', () => dialogPlugin.hideDialog(this));
-    },
+    // CALL registerZones after this coded executes once you've added them in your inherited class
+  }
+
+  registerZones() {
+    let scene = this;
+    let dialogPlugin = this.plugins.get("dialogPlugin");
+    this.zones.forEach(function (item, index) {
+      scene.add.existing(item);
+      scene.physics.world.enable(item, 0);  // (0) DYNAMIC (1) STATIC
+      item.on('enterzone', () => dialogPlugin.showDialog(item.displayText, scene));
+      item.on('leavezone', () => dialogPlugin.hideDialog(scene));
+      item.wasEmbedded = false;
+    });
+    scene.physics.add.overlap(scene.player, scene.zones);
+  }
 
   // --------------------------------------------------------------------------------------------------
   // UPDATE
 
-  update: function(time, delta) {
+  update(time, delta) {
     const speed = 175;
     const prevVelocity = this.player.body.velocity.clone();
 
@@ -216,7 +220,6 @@ let GameScene = new Phaser.Class({
     }
 
     // Keyboard movement
-
     // Horizontal movement
     if (this.cursors.left.isDown) {
       moveleft = true;
@@ -269,28 +272,28 @@ let GameScene = new Phaser.Class({
 
     // Zone interaction
     // (for some reason, .embedded alone does not detect diagonal movement, so check touching as well
-    var touching = this.zone1.body.touching;
-    var isEmbedded = this.zone1.body.embedded;
+    this.zones.forEach(function (item, index) {
+      let touching = !item.body.touching.none;
+      let isEmbedded = item.body.embedded;
 
-    if (!this.wasEmbedded) {
-      // If the player was not in the zone and is now embedded and not moving
-      // if ((isEmbedded || !touching.none) && !isMoving) {
-      if (isEmbedded && !isMoving) {
-        this.zone1.emit('enterzone');
-        this.wasEmbedded = true;
+      if (!item.wasEmbedded) {
+        // If the player was not in the zone and is now embedded and not moving
+        if (isEmbedded && !isMoving) {
+          item.emit('enterzone');
+          item.wasEmbedded = true;
+        }
       }
-    }
-    else {
-      // Leavezone is only called when the player exits the square, movement within does not count
-      // if ((!isEmbedded && touching.none) || isMoving) {
-      if (!isEmbedded && touching.none) {
-        this.zone1.emit('leavezone');
-        this.wasEmbedded = false;
+      else {
+        // Leavezone is only called when the player exits the square, movement within does not count
+        if (!isEmbedded && !touching) {
+          item.emit('leavezone');
+          item.wasEmbedded = false;
+        }
       }
-    }
+      item.body.debugBodyColor = isEmbedded ? 0x00ffff : 0xffff00;
+    });
 
-    this.zone1.body.debugBodyColor = isEmbedded ? 0x00ffff : 0xffff00;
-  },
+  }
 
   resize (gameSize, baseSize, displaySize, resolution) {
     var width = gameSize.width;
@@ -299,8 +302,43 @@ let GameScene = new Phaser.Class({
     this.cameras.resize(width, height);
   }
 
-});
+}
 
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// OVERWORLD SCENE
+
+class OverworldScene extends GameScene {
+
+  constructor() {
+    super();
+    this.tileset = "./assets/test/tuxmon-sample-32px-extruded.png";
+    this.tilemap = "./assets/test/tuxemon-town.json";
+    this.tilesetImageName = "tuxmon-sample-32px-extruded";
+
+    // Phaser.Scene.call(this, { key: 'OverworldScene' });
+  }
+
+  create() {
+    super.create();
+
+    // ZONE DEFINITIONS
+
+    // DEFINIR EL x E y EN TILED CON LANDMARKS?!
+    // CUANDO LO ARMEMOS BIEN, LA ZONA TIENE QUE CUBRIR LA MITAD SUPERIOR DEL CUADRADO DE COLOR
+    // ASI DETECTA EL OVERLAP SOLO CUANDO LOS PIES (NO LA CABEZA) ENTRAN
+    let zone1 = new Phaser.GameObjects.Zone(this, 200, 1000, 64, 64)
+    zone1.displayText = "Zone 1"
+    this.zones.push(zone1);
+
+    let zone2 = new Phaser.GameObjects.Zone(this, 500, 1000, 64, 64)
+    zone2.displayText = "Zone 2"
+    this.zones.push(zone2);
+
+    super.registerZones();
+  }
+
+}
 
 
 // ------------------------------------------------------------------------------------
@@ -348,7 +386,7 @@ const config = {
       gravity: { y: 0 }
     }
   },
-  scene: [GameScene]
+  scene: [OverworldScene]
 };
 
 const game = new Phaser.Game(config);
