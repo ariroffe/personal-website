@@ -9,6 +9,7 @@ class GameScene extends Phaser.Scene {
   constructor(key) {
     super(key);
     this.zones = [];
+    this.resetSigns = true;
   }
 
   // --------------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ class GameScene extends Phaser.Scene {
     // To have "Above Player" layer to sit on top of the player, we give it a depth.
     aboveLayer.setDepth(10);
 
-    // In the tmx file, there's an object layer "Objects" with a point named "Spawn Point"
+    // Object layer of the tilemap
     const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
 
     // Create a sprite with physics enabled via the physics system. The image used for the sprite has
@@ -136,8 +137,33 @@ class GameScene extends Phaser.Scene {
     // Resize behavior
     this.scale.on('resize', this.resize, this);
 
-    // Zones
-    // Dialog plugin
+    // INTERACTIVE OBJECTS
+    // SIGNS
+    const signObjects = map.createFromObjects("Objects", {
+      key: "sign",  // the image to show
+      name: "sign",
+      classType: Phaser.GameObjects.Image
+    });
+    console.log(signObjects);
+    const signs = this.physics.add.staticGroup();
+    signs.addMultiple(signObjects, true);
+    this.physics.add.collider(this.player, signs,
+        (player, sign) => {
+          if (this.resetSigns && player.body.touching.up && !player.body.wasTouching.up) {
+            console.log('Choque con', sign.data.list.text);
+            this.resetSigns = false;
+          }
+        }
+    );
+
+    // DOORS
+    // Esto deberia ser mas facil porque con el primer choque ya laucheas la otra escena
+
+    // ZONES
+    // Dialog plugin - SACAR ESTO?
+    // Lo dejamos como zonas? O hacemos como arriba, metemos una imagen especial (los dos tiles de arriba)
+    // y hacemos algo similar con una variable resetZone? Es un poco menos flexible si el player no mide 32 x 32
+    // pero deberia medir eso en la version final
     let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
     // Call registerZones after this coded executes once you've added them in your inherited class
   }
@@ -244,6 +270,9 @@ class GameScene extends Phaser.Scene {
     // Normalize and scale the velocity so that player can't move faster along a diagonal
     this.player.body.velocity.normalize().scale(speed);
 
+    if (!this.resetSigns && (moveleft || moveright || movedown)) {
+      this.resetSigns = true;
+    }
 
     // Zone interaction
     // (for some reason, .embedded alone does not detect diagonal movement, so check touching as well
@@ -325,6 +354,11 @@ export class TestScene extends GameScene {
     this.tileset = "./assets/test/tuxmon-sample-32px.png";
     this.tilemap = "./assets/test/acantilado-prueba2.json";
     this.tilesetImageName = "tuxmon-sample-32px";
+  }
+
+  preload() {
+    super.preload();
+    this.load.image("sign", "./assets/test/sign.png");
   }
 
   create() {
