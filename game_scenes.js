@@ -4,7 +4,7 @@ import {DialogPlugin} from "./dialog_plugin.js";
 // ---------------------------------------------------------------------------------------------------
 // GENERAL GAME SCENE
 
-class GameScene extends Phaser.Scene {
+class BaseScene extends Phaser.Scene {
 
   constructor(key) {
     super(key);
@@ -13,22 +13,12 @@ class GameScene extends Phaser.Scene {
   }
 
   // --------------------------------------------------------------------------------------------------
-  // PRELOAD
-
-  preload() {
-    this.load.image("tiles", this.tileset);
-    this.load.tilemapTiledJSON("map", this.tilemap);
-    this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-  }
-
-
-  // --------------------------------------------------------------------------------------------------
   // CREATE
 
-  create() {
+  create(tilemapKey, tilesetKey, tilesetImageName) {
     // Map and tileset
-    const map = this.make.tilemap({ key: "map" });
-    const tileset = map.addTilesetImage(this.tilesetImageName, "tiles");
+    const map = this.make.tilemap({ key: tilemapKey });
+    const tileset = map.addTilesetImage(tilesetImageName, tilesetKey);
 
     // Map layers (defined in Tiled)
     const belowLayer = map.createLayer("Below Player", tileset, 0, 0);
@@ -46,10 +36,6 @@ class GameScene extends Phaser.Scene {
       .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
       .setSize(30, 40)
       .setOffset(0, 24);
-
-    // Watch the player and worldLayer for collisions, for the duration of the scene:
-    worldLayer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, worldLayer);
 
     // Create the player's walking animations from the texture atlas. These are stored in the global
     // animation manager so any sprite can access them.
@@ -144,7 +130,6 @@ class GameScene extends Phaser.Scene {
       name: "sign",
       classType: Phaser.GameObjects.Image
     });
-    console.log(signObjects);
     const signs = this.physics.add.staticGroup();
     signs.addMultiple(signObjects, true);
     this.physics.add.collider(this.player, signs,
@@ -157,26 +142,50 @@ class GameScene extends Phaser.Scene {
     );
 
     // DOORS
-    // Esto deberia ser mas facil porque con el primer choque ya laucheas la otra escena
+    const doorObjects = map.createFromObjects("Objects", {
+      key: "door",  // the image to show
+      name: "door",
+      classType: Phaser.GameObjects.Image
+    });
+    const doors = this.physics.add.staticGroup();
+    doors.addMultiple(doorObjects, true);
+    // Make the hitbox smaller so that collisions with the door are not detected
+    // too far away from it:
+    doors.children.entries.forEach((door) => {
+      door.body.setSize(door.body.width - 24, door.body.height);
+    });
+    // Collision handling for doors, scene switch
+    this.physics.add.collider(this.player, doors,
+        (player, door) => {
+          if (player.body.touching.up && !player.body.wasTouching.up) {
+            console.log('collision with', door.data.list.destination);
+            this.scene.switch(door.data.list.destination);
+          }
+        }
+    );
 
     // ZONES
     // Dialog plugin - SACAR ESTO?
-    // Lo dejamos como zonas? O hacemos como arriba, metemos una imagen especial (los dos tiles de arriba)
-    // y hacemos algo similar con una variable resetZone? Es un poco menos flexible si el player no mide 32 x 32
-    // pero deberia medir eso en la version final
-    let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
+    // let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
     // Call registerZones after this coded executes once you've added them in your inherited class
+
+    // Collision with the worldLayer
+    // Has to come after the rest of the colliders in order for them to detect
+    worldLayer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, worldLayer);
   }
 
   registerZones() {
     let scene = this;
-    let dialogPlugin = this.plugins.get("dialogPlugin");
-    this.zones.forEach(function (item, index) {
-      scene.add.existing(item);
-      scene.physics.world.enable(item, 0);  // (0) DYNAMIC (1) STATIC
-      item.on('enterzone', () => dialogPlugin.showDialog(item.displayText, scene));
-      item.on('leavezone', () => dialogPlugin.hideDialog(scene));
-      item.wasEmbedded = false;
+    // let dialogPlugin = this.plugins.get("dialogPlugin");
+    this.zones.forEach(function (zone, index) {
+      scene.add.existing(zone);
+      scene.physics.world.enable(zone, 0);  // (0) DYNAMIC (1) STATIC
+      // zone.on('enterzone', () => dialogPlugin.showDialog(zone.displayText, scene));
+      // zone.on('leavezone', () => dialogPlugin.hideDialog(scene));
+      zone.on('enterzone', () => console.log('Enter zone ', zone));
+      zone.on('leavezone', () => console.log('Leave zone ', zone));
+      zone.wasEmbedded = false;
     });
     scene.physics.add.overlap(scene.player, scene.zones);
   }
@@ -294,7 +303,7 @@ class GameScene extends Phaser.Scene {
           item.wasEmbedded = false;
         }
       }
-      item.body.debugBodyColor = isEmbedded ? 0x00ffff : 0xffff00;
+      item.body.debugBodyColor = item.body.embedded ? 0x00ffff : 0xffff00;
     });
 
   }
@@ -312,17 +321,28 @@ class GameScene extends Phaser.Scene {
 // ---------------------------------------------------------------------------------------------------
 // OVERWORLD SCENE
 
-export class OverworldScene extends GameScene {
+export class OverworldScene extends BaseScene {
 
   constructor() {
     super('OverworldScene');
-    this.tileset = "./assets/test/tuxmon-sample-32px-extruded.png";
-    this.tilemap = "./assets/test/tuxemon-town.json";
-    this.tilesetImageName = "tuxmon-sample-32px-extruded";
+  }
+
+  preload() {
+    // The keys have to be unique! Otherwise they will not be preloaded again
+    // Instead, the asset will be taken from the other scene
+    // Assets used in more than one scene can be preloaded only once (in the starting scene)
+
+    this.load.image("OverworldTiles", "./assets/test/tuxmon-sample-32px-extruded.png");
+    this.load.tilemapTiledJSON("OverworldMap", "./assets/test/tuxemon-town.json");
+
+    // Already loaded before...
+    // this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
+    // this.load.image("sign", "./assets/test/sign.png");
+    // this.load.image("door", "./assets/test/door.png");
   }
 
   create() {
-    super.create();
+    super.create("OverworldMap", "OverworldTiles", "tuxmon-sample-32px-extruded");
 
     // ZONE DEFINITIONS
 
@@ -337,7 +357,7 @@ export class OverworldScene extends GameScene {
     zone2.displayText = "Zone 2"
     this.zones.push(zone2);
 
-    super.registerZones();
+    this.registerZones();
   }
 
 }
@@ -347,23 +367,24 @@ export class OverworldScene extends GameScene {
 // ---------------------------------------------------------------------------------------------------
 // TEST SCENE
 
-export class TestScene extends GameScene {
+export class TestScene extends BaseScene {
 
   constructor() {
     super('TestScene');
-    this.tileset = "./assets/test/tuxmon-sample-32px.png";
-    this.tilemap = "./assets/test/acantilado-prueba2.json";
-    this.tilesetImageName = "tuxmon-sample-32px";
   }
 
   preload() {
-    super.preload();
+    this.load.image("TestTiles", "./assets/test/tuxmon-sample-32px.png");
+    this.load.tilemapTiledJSON("TestMap", "./assets/test/acantilado-prueba2.json");
+
+    this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
     this.load.image("sign", "./assets/test/sign.png");
+    this.load.image("door", "./assets/test/door.png");
   }
 
   create() {
-    super.create();
-    let zone1 = new Phaser.GameObjects.Zone(this, 200, 1000, 64, 64)
+    super.create("TestMap", "TestTiles", "tuxmon-sample-32px");
+    let zone1 = new Phaser.GameObjects.Zone(this, 800, 910, 64, 32)
     zone1.displayText = "Test zone 1"
     this.zones.push(zone1);
     super.registerZones();
