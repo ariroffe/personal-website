@@ -136,7 +136,7 @@ class BaseScene extends Phaser.Scene {
     // INTERACTIVE OBJECTS
     // SIGNS
     const signObjects = map.createFromObjects("Objects", {
-      key: "sign",  // the image to show
+      key: "empty_tile",  // the image to show
       name: "sign",
       classType: Phaser.GameObjects.Image
     });
@@ -153,17 +153,17 @@ class BaseScene extends Phaser.Scene {
 
     // DOORS
     const doorObjects = map.createFromObjects("Objects", {
-      key: "door",  // the image to show
+      key: "empty_tile",  // the image to show
       name: "door",
       classType: Phaser.GameObjects.Image
     });
     const doors = this.physics.add.staticGroup();
     doors.addMultiple(doorObjects, true);
-    // Make the hitbox smaller so that collisions with the door are not detected
-    // too far away from it:
-    doors.children.entries.forEach((door) => {
-      door.body.setSize(door.body.width - 24, door.body.height);
-    });
+    // // Make the hitbox smaller so that collisions with the door are not detected
+    // // too far away from it:
+    // doors.children.entries.forEach((door) => {
+    //   door.body.setSize(door.body.width - 24, door.body.height);
+    // });
     // Collision handling for doors, scene switch
     this.physics.add.collider(this.player, doors,
         (player, door) => {
@@ -348,6 +348,7 @@ export class OverworldScene extends BaseScene {
     // Assets used in more than one scene can be preloaded only once (in the starting scene)
 
     this.load.image("OverworldTiles", "./assets/prod/poke_converted.png");
+    this.load.image("empty_tile", "./assets/prod/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/overworld.json");
     this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
 
