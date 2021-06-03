@@ -186,8 +186,8 @@ class BaseScene extends Phaser.Scene {
     collision2Layer.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, collision2Layer);
 
-    //this.player.setCollideWorldBounds(true);
-    //this.player.onWorldBounds = true;
+    this.player.setCollideWorldBounds(true);
+    this.player.onWorldBounds = true;
   }
 
   registerZones() {
@@ -328,7 +328,6 @@ class BaseScene extends Phaser.Scene {
     var height = gameSize.height;
 
     this.cameras.resize(width, height);
-    // this.physics.world.setBounds(0, 0, width, height);
   }
 
 }
@@ -369,6 +368,10 @@ export class OverworldScene extends BaseScene {
     this.zones.push(zone1);
 
     this.registerZones();
+
+    // Map is bigger than the canvas element so we need to resize the world and camera bounds
+    this.physics.world.setBounds(0, 0, 1920, 1088);
+    this.cameras.main.setBounds(0, 0, 1920, 1088);
   }
 
 }
