@@ -21,9 +21,11 @@ class BaseScene extends Phaser.Scene {
     const tileset = map.addTilesetImage(tilesetImageName, tilesetKey);
 
     // Map layers (defined in Tiled)
-    const belowLayer = map.createLayer("Below Player", tileset, 0, 0);
-    const worldLayer = map.createLayer("World", tileset, 0, 0);
-    const aboveLayer = map.createLayer("Above Player", tileset, 0, 0);
+    const ground1Layer = map.createLayer("Ground1", tileset, 0, 0);
+    const ground2Layer = map.createLayer("Ground2", tileset, 0, 0);
+    const collision1Layer = map.createLayer("Collision1", tileset, 0, 0);
+    const collision2Layer = map.createLayer("Collision2", tileset, 0, 0);
+    const aboveLayer = map.createLayer("Above", tileset, 0, 0);
     // To have "Above Player" layer to sit on top of the player, we give it a depth.
     aboveLayer.setDepth(10);
 
@@ -107,17 +109,25 @@ class BaseScene extends Phaser.Scene {
       // Turn on physics debugging to show player's hitbox
       this.physics.world.createDebugGraphic();
 
-      // Create worldLayer collision graphic above the player, but below the help text
+      // Create world layers collision graphic above the player, but below the help text
       const graphics = this.add
-        .graphics()
+        .graphics({lineStyle: {width: 4, color: 0xaa0000}})
         .setAlpha(0.75)
         .setDepth(20);
 
-      worldLayer.renderDebug(graphics, {
-        tileColor: null, // Color of non-colliding tiles
-        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-      });
+      // collision1Layer.renderDebug(graphics, {
+      //   tileColor: null, // Color of non-colliding tiles
+      //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+      //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+      // });
+      // collision2Layer.renderDebug(graphics, {
+      //   tileColor: null, // Color of non-colliding tiles
+      //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+      //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+      // });
+
+      let rect = Phaser.Geom.Rectangle.Clone(this.physics.world.bounds);
+      graphics.strokeRectShape(rect);
     });
 
     // Resize behavior
@@ -159,7 +169,7 @@ class BaseScene extends Phaser.Scene {
         (player, door) => {
           if (player.body.touching.up && !player.body.wasTouching.up) {
             console.log('collision with', door.data.list.destination);
-            this.scene.switch(door.data.list.destination);
+            // this.scene.switch(door.data.list.destination);
           }
         }
     );
@@ -169,10 +179,15 @@ class BaseScene extends Phaser.Scene {
     // let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
     // Call registerZones after this coded executes once you've added them in your inherited class
 
-    // Collision with the worldLayer
+    // Collision with the world layers
     // Has to come after the rest of the colliders in order for them to detect
-    worldLayer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, worldLayer);
+    collision1Layer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, collision1Layer);
+    collision2Layer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, collision2Layer);
+
+    //this.player.setCollideWorldBounds(true);
+    //this.player.onWorldBounds = true;
   }
 
   registerZones() {
@@ -313,6 +328,7 @@ class BaseScene extends Phaser.Scene {
     var height = gameSize.height;
 
     this.cameras.resize(width, height);
+    // this.physics.world.setBounds(0, 0, width, height);
   }
 
 }
@@ -322,6 +338,46 @@ class BaseScene extends Phaser.Scene {
 // OVERWORLD SCENE
 
 export class OverworldScene extends BaseScene {
+
+  constructor() {
+    super('OverworldScene');
+  }
+
+  preload() {
+    // The keys have to be unique! Otherwise they will not be preloaded again
+    // Instead, the asset will be taken from the other scene
+    // Assets used in more than one scene can be preloaded only once (in the starting scene)
+
+    this.load.image("OverworldTiles", "./assets/prod/poke_converted.png");
+    this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/overworld.json");
+    this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
+
+    // Already loaded before...
+    // this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
+    // this.load.image("sign", "./assets/test/sign.png");
+    // this.load.image("door", "./assets/test/door.png");
+  }
+
+  create() {
+    super.create("OverworldMap", "OverworldTiles", "poke");
+
+    // ZONE DEFINITIONS
+    // CUANDO LO ARMEMOS BIEN, LA ZONA TIENE QUE CUBRIR LA MITAD SUPERIOR DEL CUADRADO DE COLOR
+    // ASI DETECTA EL OVERLAP SOLO CUANDO LOS PIES (NO LA CABEZA) ENTRAN
+    let zone1 = new Phaser.GameObjects.Zone(this, 200, 1000, 64, 64)
+    zone1.displayText = "Zone 1"
+    this.zones.push(zone1);
+
+    this.registerZones();
+  }
+
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// TEST SCENES
+
+export class TestOverworldScene extends BaseScene {
 
   constructor() {
     super('OverworldScene');
