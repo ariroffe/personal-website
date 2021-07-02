@@ -10,6 +10,7 @@ class BaseScene extends Phaser.Scene {
     super(key);
     this.zones = [];
     this.resetSigns = true;
+    this.signText = undefined;
   }
 
   // --------------------------------------------------------------------------------------------------
@@ -145,7 +146,16 @@ class BaseScene extends Phaser.Scene {
     this.physics.add.collider(this.player, signs,
         (player, sign) => {
           if (this.resetSigns && player.body.touching.up && !player.body.wasTouching.up) {
-            console.log('Choque con', sign.data.list.text);
+            this.signText = this.add.text(
+                Math.round(sign.x), Math.round(sign.y-60), sign.data.list.text,
+                { fontFamily: 'Courier New',
+                  fontSize: '17px',
+                  padding: { x: 6, y: 5 },
+                  color: '#000000',
+                  backgroundColor: "#ffffff",
+                  resolution: 3,
+                }).setDepth(30);
+            this.signText.x = (this.signText.x) - Math.round(this.signText.width/2);  // center horizontally
             this.resetSigns = false;
           }
         }
@@ -303,6 +313,7 @@ class BaseScene extends Phaser.Scene {
 
     if (!this.resetSigns && (moveleft || moveright || movedown)) {
       this.resetSigns = true;
+      this.signText.destroy();
     }
 
     // Zone interaction
@@ -350,9 +361,8 @@ export class OverworldScene extends BaseScene {
   }
 
   preload() {
-    // The keys have to be unique! Otherwise they will not be preloaded again
-    // Instead, the asset will be taken from the other scene
-    // Assets used in more than one scene can be preloaded only once (in the starting scene)
+    // The keys have to be unique! Otherwise they will not be preloaded again. Instead, the asset will be taken from the
+    // other scene. Assets used in more than one scene can be preloaded only once (in the starting scene)
 
     this.load.image("OverworldTiles", "./assets/prod/poke_converted.png");
     this.load.image("empty_tile", "./assets/prod/empty_tile.png");
@@ -407,81 +417,6 @@ export class ResearchScene extends BaseScene {
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);
     this.cameras.main.setBounds(0, 0, 960, 768);
-  }
-
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// TEST SCENES
-
-export class TestOverworldScene extends BaseScene {
-
-  constructor() {
-    super('OverworldScene');
-  }
-
-  preload() {
-    // The keys have to be unique! Otherwise they will not be preloaded again
-    // Instead, the asset will be taken from the other scene
-    // Assets used in more than one scene can be preloaded only once (in the starting scene)
-
-    this.load.image("OverworldTiles", "./assets/test/tuxmon-sample-32px-extruded.png");
-    this.load.tilemapTiledJSON("OverworldMap", "./assets/test/tuxemon-town.json");
-
-    // Already loaded before...
-    // this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-    // this.load.image("sign", "./assets/test/sign.png");
-    // this.load.image("door", "./assets/test/door.png");
-  }
-
-  create() {
-    super.create("OverworldMap", "OverworldTiles", "tuxmon-sample-32px-extruded");
-
-    // ZONE DEFINITIONS
-
-    // DEFINIR EL x E y EN TILED CON LANDMARKS?!
-    // CUANDO LO ARMEMOS BIEN, LA ZONA TIENE QUE CUBRIR LA MITAD SUPERIOR DEL CUADRADO DE COLOR
-    // ASI DETECTA EL OVERLAP SOLO CUANDO LOS PIES (NO LA CABEZA) ENTRAN
-    let zone1 = new Phaser.GameObjects.Zone(this, 200, 1000, 64, 64)
-    zone1.displayText = "Zone 1"
-    this.zones.push(zone1);
-
-    let zone2 = new Phaser.GameObjects.Zone(this, 500, 1000, 64, 64)
-    zone2.displayText = "Zone 2"
-    this.zones.push(zone2);
-
-    this.registerZones();
-  }
-
-}
-
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// TEST SCENE
-
-export class TestScene extends BaseScene {
-
-  constructor() {
-    super('TestScene');
-  }
-
-  preload() {
-    this.load.image("TestTiles", "./assets/test/tuxmon-sample-32px.png");
-    this.load.tilemapTiledJSON("TestMap", "./assets/test/acantilado-prueba2.json");
-
-    this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-    this.load.image("sign", "./assets/test/sign.png");
-    this.load.image("door", "./assets/test/door.png");
-  }
-
-  create() {
-    super.create("TestMap", "TestTiles", "tuxmon-sample-32px");
-    let zone1 = new Phaser.GameObjects.Zone(this, 800, 910, 64, 32)
-    zone1.displayText = "Test zone 1"
-    this.zones.push(zone1);
-    super.registerZones();
   }
 
 }
