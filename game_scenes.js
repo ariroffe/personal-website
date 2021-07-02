@@ -167,9 +167,16 @@ class BaseScene extends Phaser.Scene {
     // Collision handling for doors, scene switch
     this.physics.add.collider(this.player, doors,
         (player, door) => {
-          if (player.body.touching.up && !player.body.wasTouching.up) {
-            console.log('collision with', door.data.list.destination);
-            this.scene.switch(door.data.list.destination);
+          // if (player.body.touching.up && !player.body.wasTouching.up) {
+          if (!player.body.touching.none && player.body.wasTouching.none) {
+            // If the door has the link property it leads to a redirect
+            if (door.data.list.hasOwnProperty('link')) {
+			  window.location.href = door.data.list.destination + ".html";
+            }
+            // Otherwise it leads to another scene
+            else {
+              this.scene.switch(door.data.list.destination);
+            }
           }
         }
     );
@@ -392,7 +399,7 @@ export class ResearchScene extends BaseScene {
 
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);
-    this.cameras.main.setBounds(0, 0, 960, 1088);
+    this.cameras.main.setBounds(0, 0, 960, 768);
   }
 
 }
