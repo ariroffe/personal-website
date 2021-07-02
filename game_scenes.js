@@ -115,16 +115,16 @@ class BaseScene extends Phaser.Scene {
         .setAlpha(0.75)
         .setDepth(20);
 
-      // collision1Layer.renderDebug(graphics, {
-      //   tileColor: null, // Color of non-colliding tiles
-      //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-      //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-      // });
-      // collision2Layer.renderDebug(graphics, {
-      //   tileColor: null, // Color of non-colliding tiles
-      //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-      //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-      // });
+      collision1Layer.renderDebug(graphics, {
+        tileColor: null, // Color of non-colliding tiles
+        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+      });
+      collision2Layer.renderDebug(graphics, {
+        tileColor: null, // Color of non-colliding tiles
+        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+      });
 
       let rect = Phaser.Geom.Rectangle.Clone(this.physics.world.bounds);
       graphics.strokeRectShape(rect);
@@ -169,7 +169,7 @@ class BaseScene extends Phaser.Scene {
         (player, door) => {
           if (player.body.touching.up && !player.body.wasTouching.up) {
             console.log('collision with', door.data.list.destination);
-            // this.scene.switch(door.data.list.destination);
+            this.scene.switch(door.data.list.destination);
           }
         }
     );
@@ -261,7 +261,7 @@ class BaseScene extends Phaser.Scene {
       movedown = true;
     }
 
-    // Update the animation and give left/right animations precedence over up/down animations
+    // Update the animation and give left/right animations precedence over up/down animations in diagonal movement
     if (moveleft) {
       this.player.body.setVelocityX(-speed);
       this.player.anims.play("misa-left-walk", true);
@@ -351,11 +351,6 @@ export class OverworldScene extends BaseScene {
     this.load.image("empty_tile", "./assets/prod/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/overworld.json");
     this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-
-    // Already loaded before...
-    // this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-    // this.load.image("sign", "./assets/test/sign.png");
-    // this.load.image("door", "./assets/test/door.png");
   }
 
   create() {
@@ -370,9 +365,34 @@ export class OverworldScene extends BaseScene {
 
     this.registerZones();
 
-    // Map is bigger than the canvas element so we need to resize the world and camera bounds
+    // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 1920, 1088);
     this.cameras.main.setBounds(0, 0, 1920, 1088);
+  }
+
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+// RESEARCH SCENE
+
+export class ResearchScene extends BaseScene {
+
+  constructor() {
+    super('ResearchScene');
+  }
+
+  preload() {
+    this.load.image("InsideTiles", "./assets/prod/poke_inside_converted.png");
+    this.load.tilemapTiledJSON("ResearchMap", "./assets/prod/research.json");
+  }
+
+  create() {
+    super.create("ResearchMap", "InsideTiles", "poke_inside");
+
+    // Resize the world and camera bounds
+    this.physics.world.setBounds(0, 0, 960, 768);
+    this.cameras.main.setBounds(0, 0, 960, 1088);
   }
 
 }
