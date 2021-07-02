@@ -372,6 +372,9 @@ export class OverworldScene extends BaseScene {
 
     this.registerZones();
 
+    // On scene switch (after entering a door) display the walking down animation
+    this.events.on('wake', () => {this.player.anims.play("misa-front-walk", true)}, this);
+
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 1920, 1088);
     this.cameras.main.setBounds(0, 0, 1920, 1088);
@@ -396,6 +399,10 @@ export class ResearchScene extends BaseScene {
 
   create() {
     super.create("ResearchMap", "InsideTiles", "poke_inside");
+
+    // On scene switch (after entering a door) display the walking up animation
+    this.events.on('create', () => {this.player.anims.play("misa-back-walk", true)}, this);
+    this.events.on('wake', () => {this.player.anims.play("misa-back-walk", true)}, this);
 
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);
