@@ -278,12 +278,12 @@ export class OverworldScene extends BaseScene {
     // The keys have to be unique! Otherwise they will not be preloaded again. Instead, the asset will be taken from the
     // other scene. Assets used in more than one scene can be preloaded only once (in the starting scene)
 
-    this.load.image("OverworldTiles", "./assets/prod/poke_converted.png");
-    this.load.image("empty_tile", "./assets/prod/empty_tile.png");
-    this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/overworld.json");
+    this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
+    this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
+    this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");
     this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
-	this.load.bitmapFont('pixelop', 'assets/test/pixel_operator/pixelop.png', 'assets/test/pixel_operator/pixelop.xml');
-	this.load.bitmapFont('pixelopmono', 'assets/test/pixel_operator/pixelopmono.png', 'assets/test/pixel_operator/pixelopmono.xml');
+	this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
+	this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
   }
 
   create() {
@@ -326,7 +326,7 @@ export class OverworldScene extends BaseScene {
 
 	this.physics.add.overlap(this.player, welcomeTile,
         (player, door) => {
-	      if (this.resetWelcome && !this.isMoving) {
+	      if (this.resetWelcome) {
 	        this.welcomeText.visible = true;
 	        this.welcomeRect.visible = true;
 	        this.resetWelcome = false;
@@ -344,13 +344,13 @@ export class OverworldScene extends BaseScene {
     this.physics.add.collider(this.player, signs, (player, sign) => {
       if (this.resetSigns && player.body.touching.up && !player.body.wasTouching.up) {
 
-        this.signText = this.add.bitmapText(Math.round(sign.x), Math.round(sign.y-45), 'pixelopmono', sign.data.list.text, 16)
-          .setOrigin(0.5, 0)
+        this.signText = this.add.bitmapText(Math.round(sign.x), Math.round(sign.y-45), 'pixelopmono', sign.data.list.text, 16, 1)
+          .setOrigin(0.5)
 		  //.setScale(0.75)
 		  .setDepth(101);
 		this.signRect = this.add.rectangle(this.signText.x, this.signText.y, this.signText.width+10, this.signText.height, 0xffffff)
 		  .setStrokeStyle(1, 0x000000)
-		  .setOrigin(0.5, 0)
+		  .setOrigin(0.5)
 		  .setDepth(100);
 
 		this.resetSigns = false;
@@ -388,25 +388,75 @@ export class ResearchScene extends BaseScene {
 
   constructor() {
     super('ResearchScene');
+    // So that the collision events fire only once
+    this.resetBook = true;
+
+    // The different sign text and rectangle objects will be created and destroyed with this single variable
+    this.bookText = undefined;
+    this.bookRect = undefined;
   }
 
   preload() {
-    this.load.image("InsideTiles", "./assets/prod/poke_inside_converted.png");
-    this.load.tilemapTiledJSON("ResearchMap", "./assets/prod/research.json");
+    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
+    this.load.tilemapTiledJSON("ResearchMap", "./assets/prod/tilesets_and_maps/research.json");
   }
 
   create() {
     super.create("ResearchMap", "InsideTiles", "poke_inside");
 
-    // On scene switch (after entering a door) display the walking up animation
-    this.events.on('create', () => {this.player.anims.play("misa-back-walk", true)}, this);
-    this.events.on('wake', () => {this.player.anims.play("misa-back-walk", true)}, this);
-
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);
     this.cameras.main.setBounds(0, 0, 960, 768);
 
+    // On scene switch (after entering a door) display the walking up animation
+    this.events.on('create', () => {this.player.anims.play("misa-back-walk", true)}, this);
+    this.events.on('wake', () => {this.player.anims.play("misa-back-walk", true)}, this);
+
+    // BOOK TEXT
+    let bookObj = this.map.createFromObjects("Objects", {
+      key: "empty_tile",  // the image to show
+      name: "book",
+      classType: Phaser.GameObjects.Image
+    });
+    const book = this.physics.add.staticGroup(bookObj);
+
+	const bookText = [
+	  "This is a multiline text",
+	  "About my research..."
+	]
+
+	// Scale acording to the user's screen size (mobile or desktop)!!!
+	this.bookText = this.add.bitmapText(500, 300, 'pixelop', bookText, 32)
+	  .setOrigin(0.5, 0)
+	  .setDepth(102);
+	this.bookRect = this.add.rectangle(this.bookText.x, this.bookText.y, this.bookText.width+10, this.bookText.height, 0xffffff)
+	  .setStrokeStyle(2, 0x000000)
+	  .setOrigin(0.5, 0)
+	  .setDepth(101);
+	this.bookText.visible = false;
+	this.bookRect.visible = false;
+
+	this.physics.add.collider(this.player, book, (player, book) => {
+      if (this.resetBook && player.body.touching.right && !player.body.wasTouching.right) {
+        this.bookText.visible = true;
+        this.bookRect.visible = true;
+        this.resetBook = false;
+      }
+	});
+
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
+  }
+
+  update(time, delta) {
+    super.update(time, delta);
+
+    // Hide the book text when the player moves everywhere but right
+    if (!this.resetBook && (this.player.body.velocity.x < 0 || this.player.body.velocity.y !== 0)) {
+      this.bookText.visible = false;
+      this.bookRect.visible = false;
+      this.resetBook = true;
+    }
+
   }
 
 }
