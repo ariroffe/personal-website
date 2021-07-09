@@ -8,9 +8,6 @@ class BaseScene extends Phaser.Scene {
 
   constructor(key) {
     super(key);
-    this.zones = [];
-    this.resetSigns = true;
-    this.signText = undefined;
   }
 
   // --------------------------------------------------------------------------------------------------
@@ -18,27 +15,27 @@ class BaseScene extends Phaser.Scene {
 
   create(tilemapKey, tilesetKey, tilesetImageName) {
     // Map and tileset
-    const map = this.make.tilemap({ key: tilemapKey });
-    const tileset = map.addTilesetImage(tilesetImageName, tilesetKey);
+    this.map = this.make.tilemap({key: tilemapKey});
+    const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey);
 
     // Map layers (defined in Tiled)
-    const ground1Layer = map.createLayer("Ground1", tileset, 0, 0);
-    const ground2Layer = map.createLayer("Ground2", tileset, 0, 0);
-    const collision1Layer = map.createLayer("Collision1", tileset, 0, 0);
-    const collision2Layer = map.createLayer("Collision2", tileset, 0, 0);
-    const aboveLayer = map.createLayer("Above", tileset, 0, 0);
+    const ground1Layer = this.map.createLayer("Ground1", tileset, 0, 0);
+    const ground2Layer = this.map.createLayer("Ground2", tileset, 0, 0);
+    this.collision1Layer = this.map.createLayer("Collision1", tileset, 0, 0);
+    this.collision2Layer = this.map.createLayer("Collision2", tileset, 0, 0);
+    const aboveLayer = this.map.createLayer("Above", tileset, 0, 0);
     // To have "Above Player" layer to sit on top of the player, we give it a depth.
     aboveLayer.setDepth(10);
 
     // Object layer of the tilemap
-    const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
+    const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
 
     // Create a sprite with physics enabled via the physics system. The image used for the sprite has
     // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
     this.player = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
-      .setSize(30, 40)
-      .setOffset(0, 24);
+        .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
+        .setSize(30, 40)
+        .setOffset(0, 24);
 
     // Create the player's walking animations from the texture atlas. These are stored in the global
     // animation manager so any sprite can access them.
@@ -90,20 +87,9 @@ class BaseScene extends Phaser.Scene {
 
     const camera = this.cameras.main;
     camera.startFollow(this.player);
-    camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    // Help text that has a "fixed" position on the screen
-    this.add
-      .text(16, 16, 'Movete, gato', {
-        font: "18px monospace",
-        fill: "#000000",
-        padding: { x: 20, y: 10 },
-        backgroundColor: "#ffffff"
-      })
-      .setScrollFactor(0)
-      .setDepth(30);
 
     // Debug graphics
     this.input.keyboard.once("keydown-D", event => {
@@ -112,16 +98,16 @@ class BaseScene extends Phaser.Scene {
 
       // Create world layers collision graphic above the player, but below the help text
       const graphics = this.add
-        .graphics({lineStyle: {width: 4, color: 0xaa0000}})
-        .setAlpha(0.75)
-        .setDepth(20);
+          .graphics({lineStyle: {width: 4, color: 0xaa0000}})
+          .setAlpha(0.75)
+          .setDepth(20);
 
-      collision1Layer.renderDebug(graphics, {
+      this.collision1Layer.renderDebug(graphics, {
         tileColor: null, // Color of non-colliding tiles
         collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
         faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
       });
-      collision2Layer.renderDebug(graphics, {
+      this.collision2Layer.renderDebug(graphics, {
         tileColor: null, // Color of non-colliding tiles
         collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
         faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
@@ -135,91 +121,42 @@ class BaseScene extends Phaser.Scene {
     this.scale.on('resize', this.resize, this);
 
     // INTERACTIVE OBJECTS
-    // SIGNS
-    const signObjects = map.createFromObjects("Objects", {
-      key: "empty_tile",  // the image to show
-      name: "sign",
-      classType: Phaser.GameObjects.Image
-    });
-    const signs = this.physics.add.staticGroup();
-    signs.addMultiple(signObjects, true);
-    this.physics.add.collider(this.player, signs,
-        (player, sign) => {
-          if (this.resetSigns && player.body.touching.up && !player.body.wasTouching.up) {
-            this.signText = this.add.text(
-                Math.round(sign.x), Math.round(sign.y-60), sign.data.list.text,
-                { fontFamily: 'Courier New',
-                  fontSize: '17px',
-                  padding: { x: 6, y: 5 },
-                  color: '#000000',
-                  backgroundColor: "#ffffff",
-                  resolution: 3,
-                }).setDepth(30);
-            this.signText.x = (this.signText.x) - Math.round(this.signText.width/2);  // center horizontally
-            this.resetSigns = false;
-          }
-        }
-    );
 
     // DOORS
-    const doorObjects = map.createFromObjects("Objects", {
+    const doorObjects = this.map.createFromObjects("Objects", {
       key: "empty_tile",  // the image to show
       name: "door",
       classType: Phaser.GameObjects.Image
     });
     const doors = this.physics.add.staticGroup();
     doors.addMultiple(doorObjects, true);
-    // // Make the hitbox smaller so that collisions with the door are not detected
-    // // too far away from it:
-    // doors.children.entries.forEach((door) => {
-    //   door.body.setSize(door.body.width - 24, door.body.height);
-    // });
+
     // Collision handling for doors, scene switch
-    this.physics.add.collider(this.player, doors,
-        (player, door) => {
-          // if (player.body.touching.up && !player.body.wasTouching.up) {
-          if (!player.body.touching.none && player.body.wasTouching.none) {
-            // If the door has the link property it leads to a redirect
-            if (door.data.list.hasOwnProperty('link')) {
-			  window.location.href = door.data.list.destination + ".html";
-            }
-            // Otherwise it leads to another scene
-            else {
-              this.scene.switch(door.data.list.destination);
-            }
-          }
+    this.physics.add.collider(this.player, doors, (player, door) => {
+      // if (player.body.touching.up && !player.body.wasTouching.up) {
+      if (!player.body.touching.none && player.body.wasTouching.none) {
+        // If the door has the link property it leads to a redirect
+        if (door.data.list.hasOwnProperty('link')) {
+          window.location.href = door.data.list.destination + ".html";
         }
-    );
+        // Otherwise it leads to another scene
+        else {
+          this.scene.switch(door.data.list.destination);
+        }
+      }
+    });
 
-    // ZONES
-    // Dialog plugin - SACAR ESTO?
-    // let dialogPlugin = this.plugins.install('dialogPlugin', DialogPlugin, true);
-    // Call registerZones after this coded executes once you've added them in your inherited class
-
-    // Collision with the world layers
-    // Has to come after the rest of the colliders in order for them to detect
-    collision1Layer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, collision1Layer);
-    collision2Layer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, collision2Layer);
-
-    this.player.setCollideWorldBounds(true);
-    this.player.onWorldBounds = true;
   }
 
-  registerZones() {
-    let scene = this;
-    // let dialogPlugin = this.plugins.get("dialogPlugin");
-    this.zones.forEach(function (zone, index) {
-      scene.add.existing(zone);
-      scene.physics.world.enable(zone, 0);  // (0) DYNAMIC (1) STATIC
-      // zone.on('enterzone', () => dialogPlugin.showDialog(zone.displayText, scene));
-      // zone.on('leavezone', () => dialogPlugin.hideDialog(scene));
-      zone.on('enterzone', () => console.log('Enter zone ', zone));
-      zone.on('leavezone', () => console.log('Leave zone ', zone));
-      zone.wasEmbedded = false;
-    });
-    scene.physics.add.overlap(scene.player, scene.zones);
+  collide_with_world() {
+    // Collision with the world layers
+    // Has to come after the rest of the colliders in order for them to detect, call from the children creates
+    this.collision1Layer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, this.collision1Layer);
+    this.collision2Layer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, this.collision2Layer);
+    this.player.setCollideWorldBounds(true);
+    this.player.onWorldBounds = true;
   }
 
   // --------------------------------------------------------------------------------------------------
@@ -237,7 +174,7 @@ class BaseScene extends Phaser.Scene {
     let moveup = false;
     let movedown = false;
 
-    // Mouse movement
+    // MOUSE MOVEMENT
     let pointer = this.input.activePointer;
     if (pointer.primaryDown) {
       //let pointerPosition = pointer.position;
@@ -263,7 +200,7 @@ class BaseScene extends Phaser.Scene {
       }
     }
 
-    // Keyboard movement
+    // KEYBOARD MOVEMENT
     // Horizontal movement
     if (this.cursors.left.isDown) {
       moveleft = true;
@@ -298,10 +235,9 @@ class BaseScene extends Phaser.Scene {
       }
     }
 
-    let isMoving = moveleft || moveright || moveup || movedown;
-    if (!isMoving) {
+    // If not moving, pick and idle frame to use
+    if (!(moveleft || moveright || moveup || movedown)) {
       this.player.anims.stop();
-      // If we were moving, pick and idle frame to use
       if (prevVelocity.x < 0) this.player.setTexture("atlas", "misa-left");
       else if (prevVelocity.x > 0) this.player.setTexture("atlas", "misa-right");
       else if (prevVelocity.y < 0) this.player.setTexture("atlas", "misa-back");
@@ -310,35 +246,6 @@ class BaseScene extends Phaser.Scene {
 
     // Normalize and scale the velocity so that player can't move faster along a diagonal
     this.player.body.velocity.normalize().scale(speed);
-
-    if (!this.resetSigns && (moveleft || moveright || movedown)) {
-      this.resetSigns = true;
-      this.signText.destroy();
-    }
-
-    // Zone interaction
-    // (for some reason, .embedded alone does not detect diagonal movement, so check touching as well
-    this.zones.forEach(function (item, index) {
-      let touching = !item.body.touching.none;
-      let isEmbedded = item.body.embedded;
-
-      if (!item.wasEmbedded) {
-        // If the player was not in the zone and is now embedded and not moving
-        if (isEmbedded && !isMoving) {
-          item.emit('enterzone');
-          item.wasEmbedded = true;
-        }
-      }
-      else {
-        // Leavezone is only called when the player exits the square, movement within does not count
-        if (!isEmbedded && !touching) {
-          item.emit('leavezone');
-          item.wasEmbedded = false;
-        }
-      }
-      item.body.debugBodyColor = item.body.embedded ? 0x00ffff : 0xffff00;
-    });
-
   }
 
   resize (gameSize, baseSize, displaySize, resolution) {
@@ -358,6 +265,13 @@ export class OverworldScene extends BaseScene {
 
   constructor() {
     super('OverworldScene');
+    // So that the collision and overlap events fire only once
+    this.resetSigns = true;
+    this.resetWelcome = true;
+
+    // The different sign text and rectangle objects will be created and destroyed with this single variable
+    this.signText = undefined;
+    this.signRect = undefined;
   }
 
   preload() {
@@ -368,26 +282,100 @@ export class OverworldScene extends BaseScene {
     this.load.image("empty_tile", "./assets/prod/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/overworld.json");
     this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
+	this.load.bitmapFont('pixelop', 'assets/test/pixel_operator/pixelop.png', 'assets/test/pixel_operator/pixelop.xml');
+	this.load.bitmapFont('pixelopmono', 'assets/test/pixel_operator/pixelopmono.png', 'assets/test/pixel_operator/pixelopmono.xml');
   }
 
   create() {
     super.create("OverworldMap", "OverworldTiles", "poke");
 
-    // ZONE DEFINITIONS
-    // CUANDO LO ARMEMOS BIEN, LA ZONA TIENE QUE CUBRIR LA MITAD SUPERIOR DEL CUADRADO DE COLOR
-    // ASI DETECTA EL OVERLAP SOLO CUANDO LOS PIES (NO LA CABEZA) ENTRAN
-    let zone1 = new Phaser.GameObjects.Zone(this, 200, 1000, 64, 64)
-    zone1.displayText = "Zone 1"
-    this.zones.push(zone1);
-
-    this.registerZones();
-
-    // On scene switch (after entering a door) display the walking down animation
-    this.events.on('wake', () => {this.player.anims.play("misa-front-walk", true)}, this);
-
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 1920, 1088);
     this.cameras.main.setBounds(0, 0, 1920, 1088);
+
+    // On scene switch (after entering a door) display the walking DOWN animation
+    this.events.on('wake', () => {this.player.anims.play("misa-front-walk", true)}, this);
+
+    // WELCOME TEXT
+    let welcomeTileObj = this.map.createFromObjects("Objects", {
+      key: "empty_tile",  // the image to show
+      name: "welcome",
+      classType: Phaser.GameObjects.Image
+    });
+    const welcomeTile = this.physics.add.staticGroup(welcomeTileObj);
+
+	const welcomeText = [
+	  "Hi! Welcome to my site!", 
+	  "I'm Ariel Roffe. I'm a", 
+	  "philosophy researcher from", 
+	  "Argentina. Feel free to",
+	  "explore the map to know more", 
+	  "about me. Or use the menu in",
+	  "the top left to leave the game.",
+	]
+	
+	// Scale acording to the user's screen size (mobile or desktop)!!!
+	//let welcomeBitmapText = this.add.bitmapText(304, 700, 'pixelopmono', welcomeText, 16)
+	this.welcomeText = this.add.bitmapText(304, 700, 'pixelop', welcomeText, 32)
+	  .setOrigin(0.5, 0)
+	  .setDepth(102);
+	this.welcomeRect = this.add.rectangle(this.welcomeText.x, this.welcomeText.y, this.welcomeText.width+10, this.welcomeText.height, 0xffffff)
+	  .setStrokeStyle(2, 0x000000)
+	  .setOrigin(0.5, 0)
+	  .setDepth(101);
+
+	this.physics.add.overlap(this.player, welcomeTile,
+        (player, door) => {
+	      if (this.resetWelcome && !this.isMoving) {
+	        this.welcomeText.visible = true;
+	        this.welcomeRect.visible = true;
+	        this.resetWelcome = false;
+          }
+        });
+
+	// SIGNS
+    const signObjects = this.map.createFromObjects("Objects", {
+      key: "empty_tile",  // the image to show
+      name: "sign",
+      classType: Phaser.GameObjects.Image
+    });
+    const signs = this.physics.add.staticGroup();
+    signs.addMultiple(signObjects, true);
+    this.physics.add.collider(this.player, signs, (player, sign) => {
+      if (this.resetSigns && player.body.touching.up && !player.body.wasTouching.up) {
+
+        this.signText = this.add.bitmapText(Math.round(sign.x), Math.round(sign.y-45), 'pixelopmono', sign.data.list.text, 16)
+          .setOrigin(0.5, 0)
+		  //.setScale(0.75)
+		  .setDepth(101);
+		this.signRect = this.add.rectangle(this.signText.x, this.signText.y, this.signText.width+10, this.signText.height, 0xffffff)
+		  .setStrokeStyle(1, 0x000000)
+		  .setOrigin(0.5, 0)
+		  .setDepth(100);
+
+		this.resetSigns = false;
+      }
+    });
+
+    this.collide_with_world();  // Has to be called after the rest of the colliders are defined
+  }
+
+  update(time, delta) {
+    super.update(time, delta);
+
+    // Hide the welcome text when the player moves
+    if (!this.resetWelcome && (this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0)) {
+      this.welcomeText.visible = false;
+      this.welcomeRect.visible = false;
+      this.resetWelcome = true;
+    }
+
+    // Hide the sign text when the user moves anywhere but up
+    if (!this.resetSigns && (this.player.body.velocity.x !== 0 || this.player.body.velocity.y > 0)) {
+      this.resetSigns = true;
+      this.signText.destroy();
+      this.signRect.destroy();
+    }
   }
 
 }
@@ -417,6 +405,8 @@ export class ResearchScene extends BaseScene {
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);
     this.cameras.main.setBounds(0, 0, 960, 768);
+
+    this.collide_with_world();  // Has to be called after the rest of the colliders are defined
   }
 
 }

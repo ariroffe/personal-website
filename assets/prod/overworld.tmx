@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="15">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="18">
  <editorsettings>
   <export target="overworld.json" format="json"/>
  </editorsettings>
@@ -105225,5 +105225,8 @@
     <property name="destination" value="UniversityScene"/>
    </properties>
   </object>
+  <object id="15" gid="1" x="320" y="1056" width="32" height="32"/>
+  <object id="16" gid="1" x="285.5" y="1028" width="32" height="32"/>
+  <object id="17" name="welcome" type="welcome" gid="1" x="297.818" y="1008.18" width="12" height="16.1818"/>
  </objectgroup>
 </map>

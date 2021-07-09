@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"research.json"
-        }
-    },
  "height":24,
  "infinite":false,
  "layers":[
@@ -84,8 +76,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":192,
-                 "y":739.667
+                 "x":191,
+                 "y":725.667
                 }, 
                 {
                  "gid":11,

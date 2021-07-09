@@ -8844,7 +8844,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="1" name="Spawn Point" x="192" y="739.667">
+  <object id="1" name="Spawn Point" x="191" y="725.667">
    <point/>
   </object>
   <object id="2" name="sign" type="sign" gid="11" x="768" y="416" width="32" height="32">
