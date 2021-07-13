@@ -1,4 +1,4 @@
-import {OverworldScene, ResearchScene} from "./game_scenes.js";
+import {OverworldScene, ResearchScene, UniversityScene} from "./game_scenes.js";
 
 
 // ------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ const config = {
       gravity: { y: 0 }
     }
   },
-  scene: [OverworldScene, ResearchScene]
+  scene: [OverworldScene, ResearchScene, UniversityScene]
 };
 
 const game = new Phaser.Game(config);
