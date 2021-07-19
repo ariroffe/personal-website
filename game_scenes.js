@@ -1,8 +1,5 @@
-import {DialogPlugin} from "./dialog_plugin.js";
-
 // ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// GENERAL GAME SCENE
+// BASE GAME SCENE
 
 class BaseScene extends Phaser.Scene {
 
@@ -33,17 +30,16 @@ class BaseScene extends Phaser.Scene {
     // Create a sprite with physics enabled via the physics system. The image used for the sprite has
     // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
     this.player = this.physics.add
-        .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
-        .setSize(30, 40)
-        .setOffset(0, 24);
+      .sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
+	  //.setSize(32, 41);
 
     // Create the player's walking animations from the texture atlas. These are stored in the global
     // animation manager so any sprite can access them.
     const anims = this.anims;
     anims.create({
-      key: "misa-left-walk",
+      key: "ariel-left-walk",
       frames: anims.generateFrameNames("atlas", {
-        prefix: "misa-left-walk.",
+        prefix: "ariel-left-walk.",
         start: 0,
         end: 3,
         zeroPad: 3
@@ -52,9 +48,9 @@ class BaseScene extends Phaser.Scene {
       repeat: -1
     });
     anims.create({
-      key: "misa-right-walk",
+      key: "ariel-right-walk",
       frames: anims.generateFrameNames("atlas", {
-        prefix: "misa-right-walk.",
+        prefix: "ariel-right-walk.",
         start: 0,
         end: 3,
         zeroPad: 3
@@ -63,9 +59,9 @@ class BaseScene extends Phaser.Scene {
       repeat: -1
     });
     anims.create({
-      key: "misa-front-walk",
+      key: "ariel-front-walk",
       frames: anims.generateFrameNames("atlas", {
-        prefix: "misa-front-walk.",
+        prefix: "ariel-front-walk.",
         start: 0,
         end: 3,
         zeroPad: 3
@@ -74,9 +70,9 @@ class BaseScene extends Phaser.Scene {
       repeat: -1
     });
     anims.create({
-      key: "misa-back-walk",
+      key: "ariel-back-walk",
       frames: anims.generateFrameNames("atlas", {
-        prefix: "misa-back-walk.",
+        prefix: "ariel-back-walk.",
         start: 0,
         end: 3,
         zeroPad: 3
@@ -118,7 +114,7 @@ class BaseScene extends Phaser.Scene {
     });
 
     // Resize behavior
-    this.scale.on('resize', this.resize, this);
+    //this.scale.on('resize', this.resize, this);
 
     // INTERACTIVE OBJECTS
 
@@ -218,30 +214,30 @@ class BaseScene extends Phaser.Scene {
     // Update the animation and give left/right animations precedence over up/down animations in diagonal movement
     if (moveleft) {
       this.player.body.setVelocityX(-speed);
-      this.player.anims.play("misa-left-walk", true);
+      this.player.anims.play("ariel-left-walk", true);
     } else if (moveright) {
       this.player.body.setVelocityX(speed);
-      this.player.anims.play("misa-right-walk", true);
+      this.player.anims.play("ariel-right-walk", true);
     }
     if (moveup) {
       this.player.body.setVelocityY(-speed);
       if (!(moveleft || moveright)) {    // When moving diagonally display the left / right animation
-        this.player.anims.play("misa-back-walk", true);
+        this.player.anims.play("ariel-back-walk", true);
       }
     } else if (movedown) {
       this.player.body.setVelocityY(speed);
       if (!(moveleft || moveright)) {    // When moving diagonally display the left / right animation
-        this.player.anims.play("misa-front-walk", true);
+        this.player.anims.play("ariel-front-walk", true);
       }
     }
 
     // If not moving, pick and idle frame to use
     if (!(moveleft || moveright || moveup || movedown)) {
       this.player.anims.stop();
-      if (prevVelocity.x < 0) this.player.setTexture("atlas", "misa-left");
-      else if (prevVelocity.x > 0) this.player.setTexture("atlas", "misa-right");
-      else if (prevVelocity.y < 0) this.player.setTexture("atlas", "misa-back");
-      else if (prevVelocity.y > 0) this.player.setTexture("atlas", "misa-front");
+      if (prevVelocity.x < 0) this.player.setTexture("atlas", "ariel-left");
+      else if (prevVelocity.x > 0) this.player.setTexture("atlas", "ariel-right");
+      else if (prevVelocity.y < 0) this.player.setTexture("atlas", "ariel-back");
+      else if (prevVelocity.y > 0) this.player.setTexture("atlas", "ariel-front");
     }
 
     // Normalize and scale the velocity so that player can't move faster along a diagonal
@@ -281,7 +277,7 @@ export class OverworldScene extends BaseScene {
     this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
     this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");
-    this.load.atlas("atlas", "./assets/test/atlas.png", "./assets/test/atlas.json");
+    this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
 	this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
 	this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
   }
@@ -294,7 +290,7 @@ export class OverworldScene extends BaseScene {
     this.cameras.main.setBounds(0, 0, 1920, 1088);
 
     // On scene switch (after entering a door) display the walking DOWN animation
-    this.events.on('wake', () => {this.player.anims.play("misa-front-walk", true)}, this);
+    this.events.on('wake', () => {this.player.anims.play("ariel-front-walk", true)}, this);
 
     // WELCOME TEXT
     let welcomeTileObj = this.map.createFromObjects("Objects", {
@@ -409,8 +405,8 @@ export class ResearchScene extends BaseScene {
     this.cameras.main.setBounds(0, 0, 960, 768);
 
     // On scene switch (after entering a door) display the walking up animation
-    this.events.on('create', () => {this.player.anims.play("misa-back-walk", true)}, this);
-    this.events.on('wake', () => {this.player.anims.play("misa-back-walk", true)}, this);
+    this.events.on('create', () => {this.player.anims.play("ariel-back-walk", true)}, this);
+    this.events.on('wake', () => {this.player.anims.play("ariel-back-walk", true)}, this);
 
     // BOOK TEXT
     let bookObj = this.map.createFromObjects("Objects", {
@@ -490,8 +486,8 @@ export class UniversityScene extends BaseScene {
     this.cameras.main.setBounds(0, 0, 1440, 768);
 
     // On scene switch (after entering a door) display the walking up animation
-    this.events.on('create', () => {this.player.anims.play("misa-back-walk", true)}, this);
-    this.events.on('wake', () => {this.player.anims.play("misa-back-walk", true)}, this);
+    this.events.on('create', () => {this.player.anims.play("ariel-back-walk", true)}, this);
+    this.events.on('wake', () => {this.player.anims.play("ariel-back-walk", true)}, this);
 
     // BOOK TEXT
     let blackboardObj = this.map.createFromObjects("Objects", {

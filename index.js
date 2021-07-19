@@ -6,22 +6,27 @@ import {OverworldScene, ResearchScene, UniversityScene} from "./game_scenes.js";
 
 const config = {
   type: Phaser.AUTO,
-  //width: 800,
-  //height: 600,
-  scale: {
-    mode: Phaser.Scale.RESIZE,
-    // mode: Phaser.Scale.ENVELOP,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
-    parent: "game-container",
-    // width: '100%',
-    // height: '100%'
-  },
-  parent: "game-container",
   pixelArt: true,
+  scale: {
+	mode: Phaser.Scale.NONE,
+    //mode: Phaser.Scale.RESIZE,
+	//mode: Phaser.Scale.FIT,
+    //mode: Phaser.Scale.ENVELOP,
+	//mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
+    autoRound: true,
+	autoCenter: Phaser.Scale.CENTER_BOTH,
+	parent: "game-container",
+    width: 640,
+    height: 480,
+    //width: '100%',
+    //height: '100%'
+  },
+  //	parent: "game-container",
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,  // SACAR EN PRODUCCION
+      debug: true,  // Remove in production
+	  //debug: false,
       gravity: { y: 0 }
     }
   },
