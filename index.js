@@ -9,19 +9,15 @@ const config = {
   pixelArt: true,
   scale: {
 	mode: Phaser.Scale.NONE,
-    //mode: Phaser.Scale.RESIZE,
-	//mode: Phaser.Scale.FIT,
-    //mode: Phaser.Scale.ENVELOP,
-	//mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
+	//mode: other options are .FIT, .NONE, .ENVELOP, .HEIGHT_CONTROLS_WIDTH
     autoRound: true,
+	autoFocus: true,
 	autoCenter: Phaser.Scale.CENTER_BOTH,
 	parent: "game-container",
-    width: 640,
-    height: 480,
-    //width: '100%',
-    //height: '100%'
+    width: window.innerWidth * window.devicePixelRatio,
+    height: window.innerHeight * window.devicePixelRatio,
+	zoom: 1 / window.devicePixelRatio,
   },
-  //	parent: "game-container",
   physics: {
     default: "arcade",
     arcade: {

@@ -2,7 +2,7 @@
 
 "ariel-front":
 {
-	"frame": {"x":33,"y":0,"w":32,"h":41},
+	"frame": {"x":32,"y":0,"w":32,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":41},
@@ -18,7 +18,7 @@
 },
 "ariel-front-walk.001":
 {
-	"frame": {"x":33,"y":0,"w":32,"h":41},
+	"frame": {"x":32,"y":0,"w":32,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":41},
@@ -26,7 +26,7 @@
 },
 "ariel-front-walk.002":
 {
-	"frame": {"x":65,"y":0,"w":32,"h":41},
+	"frame": {"x":64,"y":0,"w":32,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":41},
@@ -34,7 +34,7 @@
 },
 "ariel-front-walk.003":
 {
-	"frame": {"x":33,"y":0,"w":32,"h":41},
+	"frame": {"x":32,"y":0,"w":32,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":41},

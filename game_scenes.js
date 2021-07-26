@@ -21,20 +21,17 @@ class BaseScene extends Phaser.Scene {
     this.collision1Layer = this.map.createLayer("Collision1", tileset, 0, 0);
     this.collision2Layer = this.map.createLayer("Collision2", tileset, 0, 0);
     const aboveLayer = this.map.createLayer("Above", tileset, 0, 0);
-    // To have "Above Player" layer to sit on top of the player, we give it a depth.
+    // To have the "Above" layer sit on top of the player, we give it a depth.
     aboveLayer.setDepth(10);
 
     // Object layer of the tilemap
     const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
 
-    // Create a sprite with physics enabled via the physics system. The image used for the sprite has
-    // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
+    // Create a sprite with physics for the player
     this.player = this.physics.add
       .sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
-	  //.setSize(32, 41);
 
-    // Create the player's walking animations from the texture atlas. These are stored in the global
-    // animation manager so any sprite can access them.
+    // Create the player's walking animations from the texture atlas
     const anims = this.anims;
     anims.create({
       key: "ariel-left-walk",
@@ -82,12 +79,13 @@ class BaseScene extends Phaser.Scene {
     });
 
     const camera = this.cameras.main;
-    camera.startFollow(this.player);
+	camera.startFollow(this.player);
     camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // Debug graphics
+	// REMOVE IN PRODUCTION
     this.input.keyboard.once("keydown-D", event => {
       // Turn on physics debugging to show player's hitbox
       this.physics.world.createDebugGraphic();
@@ -114,10 +112,9 @@ class BaseScene extends Phaser.Scene {
     });
 
     // Resize behavior
-    //this.scale.on('resize', this.resize, this);
+    this.scale.on('resize', this.resize, this);
 
     // INTERACTIVE OBJECTS
-
     // DOORS
     const doorObjects = this.map.createFromObjects("Objects", {
       key: "empty_tile",  // the image to show
@@ -129,7 +126,6 @@ class BaseScene extends Phaser.Scene {
 
     // Collision handling for doors, scene switch
     this.physics.add.collider(this.player, doors, (player, door) => {
-      // if (player.body.touching.up && !player.body.wasTouching.up) {
       if (!player.body.touching.none && player.body.wasTouching.none) {
         // If the door has the link property it leads to a redirect
         if (door.data.list.hasOwnProperty('link')) {
@@ -146,7 +142,7 @@ class BaseScene extends Phaser.Scene {
 
   collide_with_world() {
     // Collision with the world layers
-    // Has to come after the rest of the colliders in order for them to detect, call from the children creates
+    // Has to come after the rest of the colliders in order for them to detect, call from the children's create
     this.collision1Layer.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.collision1Layer);
     this.collision2Layer.setCollisionByProperty({ collides: true });
@@ -173,11 +169,11 @@ class BaseScene extends Phaser.Scene {
     // MOUSE MOVEMENT
     let pointer = this.input.activePointer;
     if (pointer.primaryDown) {
-      //let pointerPosition = pointer.position;
+      // let pointerPosition = pointer.position;
       // So that the x and y update if the camera moves and the mouse does not
-      let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y)
-
-      // Horizontal movement
+	  let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
+	  
+	  // Horizontal movement
       if (Math.abs(pointerPosition.x - this.player.x) > 15) {  // To avoid glitching when the player hits the cursor
         if (pointerPosition.x > this.player.x) {
           moveright = true;
@@ -271,9 +267,7 @@ export class OverworldScene extends BaseScene {
   }
 
   preload() {
-    // The keys have to be unique! Otherwise they will not be preloaded again. Instead, the asset will be taken from the
-    // other scene. Assets used in more than one scene can be preloaded only once (in the starting scene)
-
+    // The keys have to be unique! Otherwise they will not be preloaded again. 
     this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
     this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");

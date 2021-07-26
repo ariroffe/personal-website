@@ -13,23 +13,21 @@
         margin: 0;
         padding: 0;
       }
+	  
+	  body {
+	    overflow: hidden;
+	  }
 
       #game-container {
-        width: 100% !important;
-        height: 100% !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #game-container > canvas {
-        /* border-radius: 5px; */
+        min-width: 100%;
+        min-height: 100%; 
       }
     </style>
   </head>
 
   <body>
     <div id="game-container"></div>
+	<script>//document.body.style.zoom = 1 / window.devicePixelRatio;</script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.js"></script>
     <script src="./index.js" type="module"></script>
   </body>
