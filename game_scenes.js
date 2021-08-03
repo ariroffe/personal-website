@@ -13,7 +13,8 @@ class BaseScene extends Phaser.Scene {
   create(tilemapKey, tilesetKey, tilesetImageName) {
     // Map and tileset
     this.map = this.make.tilemap({key: tilemapKey});
-    const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey);
+    // const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey);
+    const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey, 32, 32, 1, 2);
 
     // Map layers (defined in Tiled)
     const ground1Layer = this.map.createLayer("Ground1", tileset, 0, 0);
@@ -265,7 +266,8 @@ export class OverworldScene extends BaseScene {
 
   preload() {
     // The keys have to be unique! Otherwise they will not be preloaded again. 
-    this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
+    // this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
+    this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted_extruded.png");
     this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");
     this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
@@ -384,7 +386,8 @@ export class ResearchScene extends BaseScene {
   }
 
   preload() {
-    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
+    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
+    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
     this.load.tilemapTiledJSON("ResearchMap", "./assets/prod/tilesets_and_maps/research.json");
   }
 
@@ -465,7 +468,8 @@ export class UniversityScene extends BaseScene {
   }
 
   preload() {
-    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
+    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
+    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
     this.load.tilemapTiledJSON("UniversityMap", "./assets/prod/tilesets_and_maps/university.json");
   }
 

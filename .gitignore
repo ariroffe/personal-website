@@ -1,2 +1,5 @@
 venv/
 .idea/
+
+/assets/test/
+/assets/prod/tilesets_and_maps/extrusion_instructions.txt

@@ -14,7 +14,6 @@ const config = {
   pixelArt: true,
   scale: {
 	mode: Phaser.Scale.NONE,
-	//mode: other options are .FIT, .NONE, .ENVELOP, .HEIGHT_CONTROLS_WIDTH
     autoRound: true,
 	autoFocus: true,
 	autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -44,6 +43,6 @@ window.addEventListener('resize', function (event) {
     // Has to be done here instead of in the scene's resize event handler
 	// bc otherwise we get infinite recursion (game.scale.resize emits 'resize')
 	const newWidth = Math.floor(window.innerWidth * DPRscreen);
-    const newHeight = Math.floor(window.innerHeight * DPRscreen);
+        const newHeight = Math.floor(window.innerHeight * DPRscreen);
 	game.scale.resize(newWidth, newHeight);
   }, false);
