@@ -111,7 +111,7 @@ class BaseScene extends Phaser.Scene {
       graphics.strokeRectShape(rect);
     });
 
-    // Resize behavior
+    // Camera resize behavior
     this.scale.on('resize', this.resize, this);
 
     // INTERACTIVE OBJECTS
@@ -139,10 +139,14 @@ class BaseScene extends Phaser.Scene {
     });
 
   }
+  
+  resize (gameSize, baseSize, displaySize, resolution) {
+     this.cameras.resize(gameSize.width, gameSize.height);
+  }
 
   collide_with_world() {
-    // Collision with the world layers
-    // Has to come after the rest of the colliders in order for them to detect, call from the children's create
+    // Collision with the world layers. Has to come after the rest of the colliders 
+	// in order for them to detect. Call this from the children's create
     this.collision1Layer.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.collision1Layer);
     this.collision2Layer.setCollisionByProperty({ collides: true });
@@ -238,13 +242,6 @@ class BaseScene extends Phaser.Scene {
 
     // Normalize and scale the velocity so that player can't move faster along a diagonal
     this.player.body.velocity.normalize().scale(speed);
-  }
-
-  resize (gameSize, baseSize, displaySize, resolution) {
-    var width = gameSize.width;
-    var height = gameSize.height;
-
-    this.cameras.resize(width, height);
   }
 
 }
