@@ -14,6 +14,7 @@ class BaseScene extends Phaser.Scene {
     // Map and tileset
     this.map = this.make.tilemap({key: tilemapKey});
     // const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey);
+    // Add margin and spacing for the extruded image:
     const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey, 32, 32, 1, 2);
 
     // Map layers (defined in Tiled)
