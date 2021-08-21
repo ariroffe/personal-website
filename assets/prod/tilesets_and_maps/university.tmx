@@ -4,7 +4,7 @@
   <export target="university.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="poke_inside" tilewidth="32" tileheight="32" tilecount="1740" columns="58">
-  <image source="poke_inside_converted.png" width="1858" height="991"/>
+  <image source="poke_inside_converted.png" width="1856" height="960"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="false"/>
@@ -8848,15 +8848,15 @@
  </layer>
  <objectgroup id="6" name="Objects">
   <object id="2" name="blackboard" type="blackboard" gid="175" x="303.75" y="127.75" width="32" height="32"/>
-  <object id="3" name="door" type="door" gid="175" x="1174.67" y="768" width="50.6667" height="3.66667">
+  <object id="3" name="door" type="door" gid="175" x="1174.67" y="768" width="50.6667" height="15.1212">
    <properties>
     <property name="destination" value="OverworldScene"/>
    </properties>
   </object>
-  <object id="4" name="Spawn Point" x="1200.67" y="729.333">
+  <object id="4" name="Spawn Point" x="1200.67" y="704.333">
    <point/>
   </object>
-  <object id="7" name="door" type="door" gid="175" x="0.333333" y="504.333" width="6.33333" height="50.3333">
+  <object id="7" name="door" type="door" gid="175" x="0.333333" y="504.333" width="13.9697" height="50.3333">
    <properties>
     <property name="destination" value="teaching"/>
     <property name="link" type="bool" value="true"/>

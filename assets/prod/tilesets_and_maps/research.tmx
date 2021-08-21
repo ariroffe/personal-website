@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="6">
+ <editorsettings>
+  <export target="research.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="poke_inside" tilewidth="32" tileheight="32" tilecount="1740" columns="58">
-  <image source="poke_inside_converted.png" width="1858" height="991"/>
+  <image source="poke_inside_converted.png" width="1856" height="960"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="false"/>
@@ -8844,17 +8847,17 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="1" name="Spawn Point" x="191" y="725.667">
+  <object id="1" name="Spawn Point" x="191" y="704.667">
    <point/>
   </object>
   <object id="2" name="book" type="book" gid="11" x="768" y="404.75" width="32" height="8.75"/>
-  <object id="3" name="door" type="door" gid="175" x="159" y="768" width="65" height="6">
+  <object id="3" name="door" type="door" gid="175" x="159" y="768" width="65" height="16.6667">
    <properties>
     <property name="destination" value="OverworldScene"/>
    </properties>
   </object>
   <object id="4" gid="175" x="920" y="431" width="32" height="32"/>
-  <object id="5" name="door" type="door" gid="175" x="953" y="448" width="7" height="63">
+  <object id="5" name="door" type="door" gid="175" x="944" y="448" width="16" height="63">
    <properties>
     <property name="destination" value="research"/>
     <property name="link" type="bool" value="true"/>
