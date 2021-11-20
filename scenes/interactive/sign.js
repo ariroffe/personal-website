@@ -6,6 +6,7 @@ export class Sign extends Phaser.GameObjects.Image
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this).setOrigin(0, 1);
 		scene.physics.add.existing(this, true);  // true is for static body
+		// This assumes that the hitbox for the body is the same as the empty tile image (32 x 32), see door.js if not
 		scene.physics.add.collider(scene.player, this, () => this.showSignText(scene.player));
 
 		// Add the text and rectangle to the scene

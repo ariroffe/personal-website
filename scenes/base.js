@@ -91,25 +91,10 @@ export class BaseScene extends Phaser.Scene {
     // ----------------
     // INTERACTIVE OBJECTS
     // DOORS
-    const doorObjects = this.map.createFromObjects("Objects", {
-      key: "empty_tile",  // the image to show
-      name: "door",
-      classType: Phaser.GameObjects.Image
-    });
-    const doors = this.physics.add.staticGroup();
-    doors.addMultiple(doorObjects, true);
-
-    // Collision handling for doors, scene switch
-    this.physics.add.collider(this.player, doors, (player, door) => {
-      if (!player.body.touching.none && player.body.wasTouching.none) {
-        // If the door has the link property it leads to a redirect
-        if (door.data.list.hasOwnProperty('link')) {
-          window.location.href = "./scenes/" + door.data.list.destination + ".html";
-        }
-        // Otherwise it leads to another scene
-        else {
-          this.scene.switch(door.data.list.destination);
-        }
+    this.map.filterObjects("Objects", obj => {
+      if (obj.name === 'door') {
+        this.add.door(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, obj.properties[1].value);
+        // last 2: destination (str) and link (bool, if true leads to a redirect)
       }
     });
 

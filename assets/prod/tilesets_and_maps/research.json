@@ -93,7 +93,7 @@
                 }, 
                 {
                  "gid":175,
-                 "height":16.6666666666666,
+                 "height":16.6667,
                  "id":3,
                  "name":"door",
                  "properties":[
@@ -101,6 +101,11 @@
                          "name":"destination",
                          "type":"string",
                          "value":"OverworldScene"
+                        }, 
+                        {
+                         "name":"link",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"door",
@@ -154,7 +159,7 @@
  "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.6.0",
+ "tiledversion":"1.7.2",
  "tileheight":32,
  "tilesets":[
         {

@@ -63679,6 +63679,7 @@ Research</property>
   <object id="11" name="door" type="door" gid="1" x="143.5" y="576" width="32" height="32.5">
    <properties>
     <property name="destination" value="ResearchScene"/>
+    <property name="link" type="bool" value="false"/>
    </properties>
   </object>
   <object id="12" name="sign" type="sign" gid="1" x="1552" y="768" width="32" height="32">
@@ -63696,6 +63697,7 @@ Development</property>
   <object id="14" name="door" type="door" gid="1" x="1568" y="256" width="64" height="32">
    <properties>
     <property name="destination" value="UniversityScene"/>
+    <property name="link" type="bool" value="false"/>
    </properties>
   </object>
   <object id="15" gid="1" x="320" y="1056" width="32" height="32"/>

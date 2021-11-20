@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"university.json"
-        }
-    },
  "height":24,
  "infinite":false,
  "layers":[
@@ -89,7 +81,7 @@
                 }, 
                 {
                  "gid":175,
-                 "height":15.1212154545455,
+                 "height":15.1212,
                  "id":3,
                  "name":"door",
                  "properties":[
@@ -97,6 +89,11 @@
                          "name":"destination",
                          "type":"string",
                          "value":"OverworldScene"
+                        }, 
+                        {
+                         "name":"link",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"door",
@@ -136,7 +133,7 @@
                  "rotation":0,
                  "type":"door",
                  "visible":true,
-                 "width":13.9696936363636,
+                 "width":13.9697,
                  "x":0.333333,
                  "y":504.333
                 }],
@@ -150,7 +147,7 @@
  "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.6.0",
+ "tiledversion":"1.7.2",
  "tileheight":32,
  "tilesets":[
         {
