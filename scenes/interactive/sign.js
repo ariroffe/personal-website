@@ -29,7 +29,7 @@ export class Sign extends Phaser.GameObjects.Image
 		}
 	}
 
-	hideSignText(player) {
+	hideSignText() {
 		this.signRect.setVisible(false);
 		this.signText.setVisible(false);
 	}

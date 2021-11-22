@@ -98,6 +98,28 @@ export class BaseScene extends Phaser.Scene {
       }
     });
 
+    // BIGSIGNS (text that shows on the purple squares)
+    this.bigSigns = [];
+    this.map.filterObjects("Objects", obj => {
+      if (obj.name === 'bigSign') {
+        this.bigSigns.push(
+          this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, 
+						   obj.properties[1].value, obj.properties[2].value)
+          // last parameters are signX, signY, text
+        )
+      }
+    });
+
+    // SIGNS
+    this.signs = [];
+    this.map.filterObjects("Objects", obj => {
+      if (obj.name === 'sign') {
+        this.signs.push(
+          this.add.sign(obj.x, obj.y, obj.properties[0].value)  // last parameter is the text to show
+        )
+      }
+    });
+
   }
   
   resize (gameSize, baseSize, displaySize, resolution) {
@@ -206,6 +228,21 @@ export class BaseScene extends Phaser.Scene {
 
     // Normalize and scale the velocity so that player can't move faster along a diagonal
     this.player.body.velocity.normalize().scale(speed);
+
+    // ---------------------
+    // INTERACTIVE OBJECTS
+    // Hide the bigSigns when the player moves
+    if (moveleft || moveright || moveup || movedown) {
+      // Hide the bigSign text when the player moves
+      this.bigSigns.forEach((bigSign) => bigSign.hideSignText());
+    }
+
+    // Hide the normal signs when the player moves (anywhere but up)
+    // todo Si agregamos signs en otras direcciones, ver de pasarle la direcc del movimiento como param
+    if (moveleft || moveright || movedown) {
+      this.signs.forEach((sign) => sign.hideSignText());
+    }
+
   }
 
 }

@@ -83,12 +83,28 @@
                  "gid":11,
                  "height":8.75,
                  "id":2,
-                 "name":"book",
+                 "name":"bigSign",
+                 "properties":[
+                        {
+                         "name":"signX",
+                         "type":"int",
+                         "value":224
+                        }, 
+                        {
+                         "name":"signY",
+                         "type":"int",
+                         "value":512
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"I have a research position at CONICET.\nMy main research areas are the logic\nof science (especially within\nmetatheoretical structuralism) and\nthe philosophy of biology (especially\nof systematics).I have published more\nthan 20 articles, book chapters,\nreviews, theses, etc. To know more,\nexit through the door to your right."
+                        }],
                  "rotation":0,
-                 "type":"book",
+                 "type":"bigSign",
                  "visible":true,
                  "width":32,
-                 "x":768,
+                 "x":766,
                  "y":404.75
                 }, 
                 {
@@ -110,8 +126,8 @@
                  "rotation":0,
                  "type":"door",
                  "visible":true,
-                 "width":65,
-                 "x":159,
+                 "width":63.75,
+                 "x":160.25,
                  "y":768
                 }, 
                 {
@@ -128,7 +144,7 @@
                 }, 
                 {
                  "gid":175,
-                 "height":63,
+                 "height":60.6666666666667,
                  "id":5,
                  "name":"door",
                  "properties":[
@@ -147,7 +163,7 @@
                  "visible":true,
                  "width":16,
                  "x":944,
-                 "y":448
+                 "y":445.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",

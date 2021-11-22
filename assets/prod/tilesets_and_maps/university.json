@@ -69,15 +69,31 @@
          "objects":[
                 {
                  "gid":175,
-                 "height":32,
+                 "height":23,
                  "id":2,
-                 "name":"blackboard",
+                 "name":"bigSign",
+                 "properties":[
+                        {
+                         "name":"signX",
+                         "type":"int",
+                         "value":48
+                        }, 
+                        {
+                         "name":"signY",
+                         "type":"int",
+                         "value":448
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"I received my PhD in Philosophy from\nthe University  of Buenos Aires in 2020.\nI have taught more than 20 courses at the\nundergrad and postgrad levels, with subjects\nranging from logic to philosophy of science,\nof biology and the methodology of science.\nTo know more, exit through the door\nat the left of this room."
+                        }],
                  "rotation":0,
-                 "type":"blackboard",
+                 "type":"bigSign",
                  "visible":true,
                  "width":32,
                  "x":303.75,
-                 "y":127.75
+                 "y":118.75
                 }, 
                 {
                  "gid":175,

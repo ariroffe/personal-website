@@ -8847,7 +8847,20 @@
 </data>
  </layer>
  <objectgroup id="6" name="Objects">
-  <object id="2" name="blackboard" type="blackboard" gid="175" x="303.75" y="127.75" width="32" height="32"/>
+  <object id="2" name="bigSign" type="bigSign" gid="175" x="303.75" y="118.75" width="32" height="23">
+   <properties>
+    <property name="signX" type="int" value="48"/>
+    <property name="signY" type="int" value="448"/>
+    <property name="text">I received my PhD in Philosophy from
+the University  of Buenos Aires in 2020.
+I have taught more than 20 courses at the
+undergrad and postgrad levels, with subjects
+ranging from logic to philosophy of science,
+of biology and the methodology of science.
+To know more, exit through the door
+at the left of this room.</property>
+   </properties>
+  </object>
   <object id="3" name="door" type="door" gid="175" x="1174.67" y="768" width="50.6667" height="15.1212">
    <properties>
     <property name="destination" value="OverworldScene"/>

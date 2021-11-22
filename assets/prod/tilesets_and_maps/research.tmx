@@ -8850,15 +8850,29 @@
   <object id="1" name="Spawn Point" x="191" y="704.667">
    <point/>
   </object>
-  <object id="2" name="book" type="book" gid="11" x="768" y="404.75" width="32" height="8.75"/>
-  <object id="3" name="door" type="door" gid="175" x="159" y="768" width="65" height="16.6667">
+  <object id="2" name="bigSign" type="bigSign" gid="11" x="766" y="404.75" width="32" height="8.75">
+   <properties>
+    <property name="signX" type="int" value="224"/>
+    <property name="signY" type="int" value="512"/>
+    <property name="text">I have a research position at CONICET.
+My main research areas are the logic
+of science (especially within
+metatheoretical structuralism) and
+the philosophy of biology (especially
+of systematics).I have published more
+than 20 articles, book chapters,
+reviews, theses, etc. To know more,
+exit through the door to your right.</property>
+   </properties>
+  </object>
+  <object id="3" name="door" type="door" gid="175" x="160.25" y="768" width="63.75" height="16.6667">
    <properties>
     <property name="destination" value="OverworldScene"/>
     <property name="link" type="bool" value="false"/>
    </properties>
   </object>
   <object id="4" gid="175" x="920" y="431" width="32" height="32"/>
-  <object id="5" name="door" type="door" gid="175" x="944" y="448" width="16" height="63">
+  <object id="5" name="door" type="door" gid="175" x="944" y="445.667" width="16" height="60.6667">
    <properties>
     <property name="destination" value="research"/>
     <property name="link" type="bool" value="true"/>

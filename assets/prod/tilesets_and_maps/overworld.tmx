@@ -63701,7 +63701,19 @@ Development</property>
    </properties>
   </object>
   <object id="15" gid="1" x="320" y="1056" width="32" height="32"/>
-  <object id="16" gid="1" x="285.5" y="1028" width="32" height="32"/>
-  <object id="17" name="welcome" type="welcome" gid="1" x="297.818" y="1008.18" width="12" height="16.1818"/>
+  <object id="16" gid="1" x="356.25" y="964.75" width="32" height="32"/>
+  <object id="17" name="bigSign" type="bigSign" gid="1" x="298.005" y="1001.82" width="12.0078" height="9.81328">
+   <properties>
+    <property name="signX" type="int" value="832"/>
+    <property name="signY" type="int" value="736"/>
+    <property name="text">Hi! Welcome to my site!
+I'm Ariel Roffe. I'm a
+philosophy researcher from
+Argentina. Feel free to
+explore the map to know more
+about me. Or use the menu in
+the top left to leave the game.</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

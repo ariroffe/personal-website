@@ -1,15 +1,11 @@
 import {BaseScene} from "./base.js";
-import './interactive/factory.js';
+import './interactive/factory.js';  // This has to run before the first scene in order to add the commands
+
 
 export class OverworldScene extends BaseScene {
 
   constructor() {
     super('OverworldScene');
-    // So that the collision and overlap events fire only once
-    this.resetWelcome = true;
-
-    // The different sign text and rectangle objects will be created and destroyed with this single variable
-    this.signRect = undefined;
   }
 
   preload() {
@@ -33,70 +29,7 @@ export class OverworldScene extends BaseScene {
     // On scene switch (after entering a door) display the walking DOWN animation
     this.events.on('wake', () => {this.player.anims.play("ariel-front-walk", true)}, this);
 
-    // WELCOME TEXT
-    let welcomeTileObj = this.map.createFromObjects("Objects", {
-      key: "empty_tile",  // the image to show
-      name: "welcome",
-      classType: Phaser.GameObjects.Image
-    });
-    const welcomeTile = this.physics.add.staticGroup(welcomeTileObj);
-
-	const welcomeText = [
-	  "Hi! Welcome to my site!",
-	  "I'm Ariel Roffe. I'm a",
-	  "philosophy researcher from",
-	  "Argentina. Feel free to",
-	  "explore the map to know more",
-	  "about me. Or use the menu in",
-	  "the top left to leave the game.",
-	]
-
-	// todo Scale acording to the user's screen size (mobile or desktop)!
-	//let welcomeBitmapText = this.add.bitmapText(304, 700, 'pixelopmono', welcomeText, 16)
-	this.welcomeText = this.add.bitmapText(304, 700, 'pixelop', welcomeText, 32)
-	  .setOrigin(0.5, 0)
-	  .setDepth(102);
-	this.welcomeRect = this.add.rectangle(this.welcomeText.x, this.welcomeText.y, this.welcomeText.width+10, this.welcomeText.height, 0xffffff)
-	  .setStrokeStyle(2, 0x000000)
-	  .setOrigin(0.5, 0)
-	  .setDepth(101);
-
-	this.physics.add.overlap(this.player, welcomeTile,
-        (player, tile) => {
-	      if (this.resetWelcome) {
-	        this.welcomeText.visible = true;
-	        this.welcomeRect.visible = true;
-	        this.resetWelcome = false;
-          }
-        });
-
-	// SIGNS
-    this.signs = [];
-    this.map.filterObjects("Objects", obj => {
-      if (obj.name === 'sign') {
-        this.signs.push(
-          this.add.sign(obj.x, obj.y, obj.properties[0].value)  // last parameter is the text to show
-        )
-      }
-    });
-
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
-  }
-
-  update(time, delta) {
-    super.update(time, delta);
-
-    // Hide the welcome text when the player moves
-    if (!this.resetWelcome && (this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0)) {
-      this.welcomeText.visible = false;
-      this.welcomeRect.visible = false;
-      this.resetWelcome = true;
-    }
-
-    // Hide the sign text when the player moves (anywhere but up)
-    if (this.player.body.velocity.x !== 0 || this.player.body.velocity.y > 0) {
-      this.signs.forEach((sign) => sign.hideSignText());
-    }
   }
 
 }
