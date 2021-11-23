@@ -8,8 +8,8 @@ Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text, dire
 })
 
 // To be able to do scene.add.bigSign(...)
-Phaser.GameObjects.GameObjectFactory.register('bigSign', function (x, y, tileHeight, tileWidth, signX, signY, text) {
-	return new BigSign(this.scene, x, y, tileHeight, tileWidth, signX, signY, text);
+Phaser.GameObjects.GameObjectFactory.register('bigSign', function (x, y, tileHeight, tileWidth, signX, signY, sm_signX, sm_signY, text) {
+	return new BigSign(this.scene, x, y, tileHeight, tileWidth, signX, signY, sm_signX, sm_signY, text);
 })
 
 // To be able to do scene.add.door(...)

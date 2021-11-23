@@ -227,12 +227,22 @@
                         {
                          "name":"signX",
                          "type":"int",
-                         "value":832
+                         "value":756
                         }, 
                         {
                          "name":"signY",
                          "type":"int",
-                         "value":736
+                         "value":896
+                        }, 
+                        {
+                         "name":"sm_signX",
+                         "type":"int",
+                         "value":176
+                        }, 
+                        {
+                         "name":"sm_signY",
+                         "type":"int",
+                         "value":960
                         }, 
                         {
                          "name":"text",

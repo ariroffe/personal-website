@@ -8854,6 +8854,8 @@
    <properties>
     <property name="signX" type="int" value="224"/>
     <property name="signY" type="int" value="512"/>
+    <property name="sm_signX" type="int" value="608"/>
+    <property name="sm_signY" type="int" value="374"/>
     <property name="text">I have a research position at CONICET.
 My main research areas are the logic
 of science (especially within

@@ -1,4 +1,5 @@
 .gitignore
+to_dos.txt
 
 venv/
 .idea/

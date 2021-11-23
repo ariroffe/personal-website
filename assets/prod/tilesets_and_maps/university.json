@@ -76,17 +76,27 @@
                         {
                          "name":"signX",
                          "type":"int",
-                         "value":35
+                         "value":96
                         }, 
                         {
                          "name":"signY",
                          "type":"int",
-                         "value":448
+                         "value":514
+                        }, 
+                        {
+                         "name":"sm_signX",
+                         "type":"int",
+                         "value":180
+                        }, 
+                        {
+                         "name":"sm_signY",
+                         "type":"int",
+                         "value":336
                         }, 
                         {
                          "name":"text",
                          "type":"string",
-                         "value":"I received my PhD in Philosophy from\nthe University  of Buenos Aires in 2020.\nI have taught more than 20 courses at the\nundergrad and postgrad levels, with subjects\nranging from logic to philosophy of science,\nof biology and the methodology of science.\nTo know more, exit through the door\nat the left of this room."
+                         "value":"I received my PhD in Philosophy\nfrom the University  of Buenos\n Aires in 2020. I have taught\nmore than 20 courses at the\nundergrad and postgrad levels,\nwith subjects ranging from logic\nto philosophy of science, of\nbiology and the methodology of\nscience. To know more, exit through\nthe door at the left of this room."
                         }],
                  "rotation":0,
                  "type":"bigSign",
@@ -351,7 +361,7 @@
                         {
                          "name":"text",
                          "type":"string",
-                         "value":"If I fail the exam\nDo i get a\ndo-over?"
+                         "value":"If I fail the exam\nDo I get a do-over?"
                         }],
                  "rotation":0,
                  "type":"sign",

@@ -96,6 +96,16 @@
                          "value":512
                         }, 
                         {
+                         "name":"sm_signX",
+                         "type":"int",
+                         "value":608
+                        }, 
+                        {
+                         "name":"sm_signY",
+                         "type":"int",
+                         "value":374
+                        }, 
+                        {
                          "name":"text",
                          "type":"string",
                          "value":"I have a research position at CONICET.\nMy main research areas are the logic\nof science (especially within\nmetatheoretical structuralism) and\nthe philosophy of biology (especially\nof systematics).I have published more\nthan 20 articles, book chapters,\nreviews, theses, etc. To know more,\nexit through the door to your right."

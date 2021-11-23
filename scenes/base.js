@@ -104,8 +104,9 @@ export class BaseScene extends Phaser.Scene {
       if (obj.name === 'bigSign') {
         this.bigSigns.push(
           this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, 
-						   obj.properties[1].value, obj.properties[2].value)
-          // last parameters are signX, signY, text
+						   obj.properties[1].value, obj.properties[2].value, obj.properties[3].value,
+                           obj.properties[4].value)
+          // last parameters are signX, signY, sm_signX, sm_signY, text
         )
       }
     });
