@@ -144,7 +144,7 @@
                 }, 
                 {
                  "gid":175,
-                 "height":60.6666666666667,
+                 "height":60.6667,
                  "id":5,
                  "name":"door",
                  "properties":[
@@ -163,7 +163,30 @@
                  "visible":true,
                  "width":16,
                  "x":944,
-                 "y":445.666666666667
+                 "y":445.667
+                }, 
+                {
+                 "gid":175,
+                 "height":32,
+                 "id":6,
+                 "name":"sign",
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"center"
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"Please return the books\nyou borrow."
+                        }],
+                 "rotation":0,
+                 "type":"sign",
+                 "visible":true,
+                 "width":32,
+                 "x":832,
+                 "y":704
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -172,7 +195,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":6,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

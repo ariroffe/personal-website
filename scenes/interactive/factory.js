@@ -3,8 +3,8 @@ import {BigSign} from "./bigsign.js";
 import {Door} from "./door.js"
 
 // To be able to do scene.add.sign(...)
-Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text) {
-	return new Sign(this.scene, x, y, text);
+Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text, direction) {
+	return new Sign(this.scene, x, y, text, direction);
 })
 
 // To be able to do scene.add.bigSign(...)

@@ -63672,6 +63672,7 @@
   </object>
   <object id="10" name="sign" type="sign" gid="1" x="240" y="672" width="32" height="31">
    <properties>
+    <property name="direction" value="up"/>
     <property name="text">My
 Research</property>
    </properties>
@@ -63684,12 +63685,14 @@ Research</property>
   </object>
   <object id="12" name="sign" type="sign" gid="1" x="1552" y="768" width="32" height="32">
    <properties>
+    <property name="direction" value="up"/>
     <property name="text">Software
 Development</property>
    </properties>
   </object>
   <object id="13" name="sign" type="sign" gid="1" x="1712" y="320" width="32" height="32">
    <properties>
+    <property name="direction" value="up"/>
     <property name="text">Formation
 &amp; Teaching</property>
    </properties>

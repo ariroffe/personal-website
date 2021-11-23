@@ -115,7 +115,8 @@ export class BaseScene extends Phaser.Scene {
     this.map.filterObjects("Objects", obj => {
       if (obj.name === 'sign') {
         this.signs.push(
-          this.add.sign(obj.x, obj.y, obj.properties[0].value)  // last parameter is the text to show
+          this.add.sign(obj.x, obj.y, obj.properties[1].value, obj.properties[0].value)
+          // Last parameters are the text to show and the direction of the text in relation to the object
         )
       }
     });
@@ -239,8 +240,8 @@ export class BaseScene extends Phaser.Scene {
 
     // Hide the normal signs when the player moves (anywhere but up)
     // todo Si agregamos signs en otras direcciones, ver de pasarle la direcc del movimiento como param
-    if (moveleft || moveright || movedown) {
-      this.signs.forEach((sign) => sign.hideSignText());
+    if (moveleft || moveright || moveup || movedown) {
+      this.signs.forEach((sign) => sign.hideSignText(moveleft, moveright, moveup, movedown));
     }
 
   }

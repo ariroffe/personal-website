@@ -86,6 +86,11 @@
                  "name":"sign",
                  "properties":[
                         {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"up"
+                        }, 
+                        {
                          "name":"text",
                          "type":"string",
                          "value":"My\nResearch"
@@ -127,6 +132,11 @@
                  "name":"sign",
                  "properties":[
                         {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"up"
+                        }, 
+                        {
                          "name":"text",
                          "type":"string",
                          "value":"Software\nDevelopment"
@@ -144,6 +154,11 @@
                  "id":13,
                  "name":"sign",
                  "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"up"
+                        }, 
                         {
                          "name":"text",
                          "type":"string",
@@ -205,7 +220,7 @@
                 }, 
                 {
                  "gid":1,
-                 "height":9.81328181818185,
+                 "height":9.81328,
                  "id":17,
                  "name":"bigSign",
                  "properties":[
@@ -229,7 +244,7 @@
                  "visible":true,
                  "width":12.0078,
                  "x":298.005,
-                 "y":1001.81818181818
+                 "y":1001.82
                 }],
          "opacity":1,
          "type":"objectgroup",

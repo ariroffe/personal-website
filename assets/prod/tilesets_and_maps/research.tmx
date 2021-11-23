@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="6">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="8">
  <editorsettings>
   <export target="research.json" format="json"/>
  </editorsettings>
@@ -8876,6 +8876,13 @@ exit through the door to your right.</property>
    <properties>
     <property name="destination" value="research"/>
     <property name="link" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="6" name="sign" type="sign" gid="175" x="832" y="704" width="32" height="32">
+   <properties>
+    <property name="direction" value="center"/>
+    <property name="text">Please return the books
+you borrow.</property>
    </properties>
   </object>
  </objectgroup>

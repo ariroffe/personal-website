@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="45" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="8">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="45" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="25">
  <editorsettings>
   <export target="university.json" format="json"/>
  </editorsettings>
@@ -8849,7 +8849,7 @@
  <objectgroup id="6" name="Objects">
   <object id="2" name="bigSign" type="bigSign" gid="175" x="303.75" y="118.75" width="32" height="23">
    <properties>
-    <property name="signX" type="int" value="48"/>
+    <property name="signX" type="int" value="35"/>
     <property name="signY" type="int" value="448"/>
     <property name="text">I received my PhD in Philosophy from
 the University  of Buenos Aires in 2020.
@@ -8874,6 +8874,112 @@ at the left of this room.</property>
    <properties>
     <property name="destination" value="teaching"/>
     <property name="link" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" name="sign" type="sign" gid="175" x="832" y="704" width="32" height="32">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="text">Shhhhh...
+Hahahahaha</property>
+   </properties>
+  </object>
+  <object id="10" name="sign" type="sign" gid="175" x="256" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="12" name="sign" type="sign" gid="175" x="800" y="288" width="32" height="32">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="text">How cool
+is my hat?</property>
+   </properties>
+  </object>
+  <object id="13" name="sign" type="sign" gid="175" x="128" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="14" name="sign" type="sign" gid="175" x="384" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Teacher, what will
+be on the exam?</property>
+   </properties>
+  </object>
+  <object id="15" name="sign" type="sign" gid="175" x="512" y="256" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="16" name="sign" type="sign" gid="175" x="192" y="352" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Will the exam
+be difficult?</property>
+   </properties>
+  </object>
+  <object id="17" name="sign" type="sign" gid="175" x="320" y="352" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="18" name="sign" type="sign" gid="175" x="128" y="448" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">If I fail the exam
+Do i get a
+do-over?</property>
+   </properties>
+  </object>
+  <object id="19" name="sign" type="sign" gid="175" x="384" y="448" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="20" name="sign" type="sign" gid="175" x="512" y="448" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="21" name="sign" type="sign" gid="175" x="192" y="544" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">What course
+is this?</property>
+   </properties>
+  </object>
+  <object id="22" name="sign" type="sign" gid="175" x="320" y="544" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Hi teacher,
+when is the exam?</property>
+   </properties>
+  </object>
+  <object id="23" name="sign" type="sign" gid="175" x="448" y="544" width="32" height="32">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="text">Will the exam
+be written?</property>
+   </properties>
+  </object>
+  <object id="24" name="sign" type="sign" gid="175" x="1312" y="160" width="32" height="32">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="text">Caritoooo
+suelta tu pena</property>
    </properties>
   </object>
  </objectgroup>
