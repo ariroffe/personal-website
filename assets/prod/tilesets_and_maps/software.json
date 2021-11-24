@@ -127,7 +127,7 @@
                         {
                          "name":"text",
                          "type":"string",
-                         "value":"Gosh! Why won't this compile?\nCome on, borrow checker!"
+                         "value":"Why won't this compile?\nCome on, borrow checker!"
                         }],
                  "rotation":0,
                  "type":"sign",
@@ -161,7 +161,7 @@
                 }, 
                 {
                  "gid":175,
-                 "height":17.8182,
+                 "height":21.8182,
                  "id":5,
                  "name":"bigSign",
                  "properties":[
@@ -183,7 +183,7 @@
                         {
                          "name":"sm_signY",
                          "type":"int",
-                         "value":320
+                         "value":316
                         }, 
                         {
                          "name":"text",
@@ -195,7 +195,7 @@
                  "visible":true,
                  "width":32,
                  "x":464.455,
-                 "y":145.909
+                 "y":149.909
                 }, 
                 {
                  "gid":175,

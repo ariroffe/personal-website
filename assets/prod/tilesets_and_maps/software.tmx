@@ -8864,7 +8864,7 @@ my killer robots.</property>
   <object id="3" name="sign" type="sign" gid="175" x="832" y="224" width="32" height="32">
    <properties>
     <property name="direction" value="up"/>
-    <property name="text">Gosh! Why won't this compile?
+    <property name="text">Why won't this compile?
 Come on, borrow checker!</property>
    </properties>
   </object>
@@ -8875,12 +8875,12 @@ Come on, borrow checker!</property>
 hooray!</property>
    </properties>
   </object>
-  <object id="5" name="bigSign" type="bigSign" gid="175" x="464.455" y="145.909" width="32" height="17.8182">
+  <object id="5" name="bigSign" type="bigSign" gid="175" x="464.455" y="149.909" width="32" height="21.8182">
    <properties>
     <property name="signX" type="int" value="240"/>
     <property name="signY" type="int" value="512"/>
     <property name="sm_signX" type="int" value="320"/>
-    <property name="sm_signY" type="int" value="320"/>
+    <property name="sm_signY" type="int" value="316"/>
     <property name="text">I develop computational applications
 for philosophers (for example, for
 logic teaching and research). I also
