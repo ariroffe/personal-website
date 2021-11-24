@@ -255,6 +255,29 @@
                  "width":12.0078,
                  "x":298.005,
                  "y":1001.82
+                }, 
+                {
+                 "gid":1,
+                 "height":24.3333333333334,
+                 "id":18,
+                 "name":"door",
+                 "properties":[
+                        {
+                         "name":"destination",
+                         "type":"string",
+                         "value":"SoftwareScene"
+                        }, 
+                        {
+                         "name":"link",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"door",
+                 "visible":true,
+                 "width":64,
+                 "x":1728,
+                 "y":820
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -263,7 +286,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":18,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

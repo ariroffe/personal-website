@@ -38,7 +38,7 @@ export class BigSign extends Phaser.GameObjects.Image
 	showSignText(self, player) {
 		if (!self.isVisible) {
 			self.isVisible = true;
-			if (window.innerWidth < 768) {
+			if (window.innerWidth < 900) {
 				self.sm_signRect.setVisible(true);
 				self.sm_signText.setVisible(true);
 			} else {

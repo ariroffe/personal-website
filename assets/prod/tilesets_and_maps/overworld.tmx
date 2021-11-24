@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="18">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="19">
  <editorsettings>
   <export target="overworld.json" format="json"/>
  </editorsettings>
@@ -63718,6 +63718,12 @@ Argentina. Feel free to
 explore the map to know more
 about me. Or use the menu in
 the top left to leave the game.</property>
+   </properties>
+  </object>
+  <object id="18" name="door" type="door" gid="1" x="1728" y="820" width="64" height="24.3333">
+   <properties>
+    <property name="destination" value="SoftwareScene"/>
+    <property name="link" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

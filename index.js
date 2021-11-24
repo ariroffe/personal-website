@@ -1,6 +1,7 @@
 import {OverworldScene} from "./scenes/overworld.js";
 import {ResearchScene} from "./scenes/research.js";
 import {UniversityScene} from "./scenes/university.js";
+import {SoftwareScene} from "./scenes/software.js";
 
 // ------------------------------------------------------------------------------------
 // DevicePixelRatio handling
@@ -54,7 +55,7 @@ const config = {
       gravity: { y: 0 }
     }
   },
-  scene: [OverworldScene, ResearchScene, UniversityScene]
+  scene: [OverworldScene, ResearchScene, UniversityScene, SoftwareScene]
 };
 
 
