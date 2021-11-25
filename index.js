@@ -50,8 +50,8 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,  // Remove in production
-	  // debug: false,
+      // debug: true,  // Remove in production
+	  debug: false,
       gravity: { y: 0 }
     }
   },

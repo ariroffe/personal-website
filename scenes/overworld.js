@@ -17,6 +17,7 @@ export class OverworldScene extends BaseScene {
     this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
 	this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
 	this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
+	this.load.image("fullscreen", "./assets/prod/other/fullscreen.png");
   }
 
   create() {

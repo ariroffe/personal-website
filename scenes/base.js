@@ -121,7 +121,12 @@ export class BaseScene extends Phaser.Scene {
         )
       }
     });
-
+	
+	// Fullscreen button
+	let fullscreen = this.add.image(160, 32, 'fullscreen').setScrollFactor(0).setDepth(105);
+	fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', () => this.scale.toggleFullscreen());
+	fullscreen.on('pointerover', () => fullscreen.setTint(0x6699ff));
+	fullscreen.on('pointerout', () => fullscreen.clearTint());
   }
   
   resize (gameSize, baseSize, displaySize, resolution) {
