@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="8">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="9">
  <editorsettings>
   <export target="research.json" format="json"/>
  </editorsettings>
@@ -6702,7 +6702,7 @@
   </tile>
   <tile id="1339">
    <properties>
-    <property name="collides" type="bool" value="false"/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="1340">
@@ -8768,7 +8768,7 @@
 74,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,75,76,
 132,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,134,
 190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,192,
-190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,192,
+190,0,0,0,0,0,0,0,0,0,0,0,0,1340,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,192,
 190,232,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,192,
 190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,231,192,
 190,0,0,1251,0,0,0,0,1427,1428,1427,1428,1422,0,0,1251,0,0,1654,1655,1656,1657,0,0,0,1251,0,0,0,192,
@@ -8823,7 +8823,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,114,0,
 0,0,0,0,0,0,0,0,48,49,0,0,0,0,0,287,0,0,0,0,0,48,49,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1282,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,174,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,1135,0,0,0,0,0,0,0,0,0,0,0,1135,0,0,0,0,0,0,0,0,0,1135,0,0,173,0,
 0,0,0,1193,0,0,0,0,1369,1370,1369,1370,1364,0,0,1193,0,0,1596,1597,1598,1599,0,0,0,1193,0,0,0,0,
@@ -8885,6 +8885,14 @@ exit through the door to your right.</property>
     <property name="direction" value="center"/>
     <property name="text">Please return the books
 you borrow.</property>
+   </properties>
+  </object>
+  <object id="8" name="sign" type="sign" gid="175" x="416" y="160" width="32" height="32">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="text">Did you know that
+Kuhn uses 'paradigm'
+in 327 senses?</property>
    </properties>
   </object>
  </objectgroup>
