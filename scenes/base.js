@@ -123,8 +123,12 @@ export class BaseScene extends Phaser.Scene {
     });
 	
 	// Fullscreen button
-	let fullscreen = this.add.image(160, 32, 'fullscreen').setScrollFactor(0).setDepth(105);
-	fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', () => this.scale.toggleFullscreen());
+	let fullscreen = this.add.image(130, 53, 'fullscreen').setScrollFactor(0).setDepth(105);
+	fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+      if (!window.mouseOverMenu) {
+        this.scene.scale.toggleFullscreen()
+      }
+    });
 	fullscreen.on('pointerover', () => fullscreen.setTint(0x6699ff));
 	fullscreen.on('pointerout', () => fullscreen.clearTint());
   }
@@ -162,7 +166,8 @@ export class BaseScene extends Phaser.Scene {
     // ----------------
     // MOUSE MOVEMENT
     let pointer = this.input.activePointer;
-    if (pointer.primaryDown) {
+    if (pointer.primaryDown && !window.mouseOverMenu) {
+      document.getElementById("game-menu").style.display = 'none';
       // let pointerPosition = pointer.position;
       // So that the x and y update if the camera moves and the mouse does not
 	  let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
