@@ -123,7 +123,7 @@ export class BaseScene extends Phaser.Scene {
     });
 	
 	// Fullscreen button
-	let fullscreen = this.add.image(130, 53, 'fullscreen').setScrollFactor(0).setDepth(105);
+	let fullscreen = this.add.image(152, 53, 'fullscreen').setScrollFactor(0).setDepth(105);
 	fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
       if (!window.mouseOverMenu) {
         this.scene.scale.toggleFullscreen()

@@ -1,4 +1,4 @@
-{
+{	
 	"meta": {
 		"image": "atlas.png",
 		"format": "RGBA8888",
@@ -9,6 +9,8 @@
 		"scale": 1
 	},
 	"frames": {
+		
+		
 		"ariel-back":
 		{
 			"rotated": false,
@@ -219,7 +221,7 @@
 				"h": 41
 			}
 		},
-		"ariel-left":
+		"ariel-left": 
 		{
 			"rotated": false,
 			"trimmed": false,
@@ -261,7 +263,7 @@
 				"h": 41
 			}
 		},
-		"ariel-left-walk.001":
+		"ariel-left-walk.001": 
 		{
 			"rotated": false,
 			"trimmed": false,
@@ -282,7 +284,7 @@
 				"h": 41
 			}
 		},
-		"ariel-left-walk.002":
+		"ariel-left-walk.002": 
 		{
 			"rotated": false,
 			"trimmed": false,
@@ -303,7 +305,7 @@
 				"h": 41
 			}
 		},
-		"ariel-left-walk.003":
+		"ariel-left-walk.003": 
 		{
 			"rotated": false,
 			"trimmed": false,
