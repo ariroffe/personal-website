@@ -23,7 +23,7 @@ body {
     border-radius: 50%;
     border: 1px solid #666;
     object-fit: cover;
-    width: 75px;
+    width: 58px;
     transition: all .2s ease-in-out;
 }
 #pic-circ:hover {
@@ -39,9 +39,20 @@ body {
     background-color: white;
     list-style-type: none;
     border-radius: 5px;
+    transform: translateY(-5px);
 }
-#game-menu li:first-child {
+#game-menu li {
+    border-radius: 4px;
+    transition: background-color 0.2s ease-out;
+}
+#game-menu li.active-link {
     background-color: lightgray;
+}
+#game-menu li.active-link a {
+    cursor: default;
+}
+#game-menu li:not(:first-child) {
+    margin-top: 3px;
 }
 #game-menu a {
     text-decoration: none;
@@ -51,12 +62,10 @@ body {
     font-family: sans-serif;
     font-weight: bold;
     display: block;
-    transition: all 0.2s ease;
     padding: 3px 7px;
 }
-#game-menu li:not(:first-child) a:hover {
-    color: cadetblue;
-    transform: translateX(2px);
+#game-menu li:not(.active-link):hover {
+    background-color: #E5E4E2;
 }
 
 #game-container {

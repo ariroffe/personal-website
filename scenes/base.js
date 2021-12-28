@@ -122,15 +122,27 @@ export class BaseScene extends Phaser.Scene {
       }
     });
 	
-	// Fullscreen button
-	let fullscreen = this.add.image(152, 53, 'fullscreen').setScrollFactor(0).setDepth(105);
-	fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+	// Fullscreen buttons
+	let fullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
+	let fullscreen2 = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
+
+    fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
       if (!window.mouseOverMenu) {
-        this.scene.scale.toggleFullscreen()
+        fullscreen.setVisible(false);
+        fullscreen2.setVisible(true);
+        this.scene.scale.toggleFullscreen();
       }
     });
 	fullscreen.on('pointerover', () => fullscreen.setTint(0x6699ff));
 	fullscreen.on('pointerout', () => fullscreen.clearTint());
+
+    fullscreen2.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+      fullscreen.setVisible(true);
+      fullscreen2.setVisible(false);
+      this.scene.scale.toggleFullscreen();
+    });
+	fullscreen2.on('pointerover', () => fullscreen2.setTint(0x6699ff));
+	fullscreen2.on('pointerout', () => fullscreen2.clearTint());
   }
   
   resize (gameSize, baseSize, displaySize, resolution) {
