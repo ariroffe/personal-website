@@ -90,35 +90,30 @@ export class BaseScene extends Phaser.Scene {
 
     // ----------------
     // INTERACTIVE OBJECTS
-    // DOORS
+    this.signs = [];
+    this.bigSigns = [];
     this.map.filterObjects("Objects", obj => {
+
+      // DOORS
       if (obj.name === 'door') {
         this.add.door(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, obj.properties[1].value);
         // last 2: destination (str) and link (bool, if true leads to a redirect)
       }
-    });
 
-    // BIGSIGNS (text that shows on the purple squares)
-    this.bigSigns = [];
-    this.map.filterObjects("Objects", obj => {
-      if (obj.name === 'bigSign') {
+      // BIGSIGNS (text that shows on the purple squares)
+      else if (obj.name === 'bigSign') {
         this.bigSigns.push(
-          this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, 
+          this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value,
 						   obj.properties[1].value, obj.properties[2].value, obj.properties[3].value,
                            obj.properties[4].value)
           // last parameters are signX, signY, sm_signX, sm_signY, text
         )
       }
-    });
 
-    // SIGNS
-    this.signs = [];
-    this.map.filterObjects("Objects", obj => {
-      if (obj.name === 'sign') {
-        this.signs.push(
-          this.add.sign(obj.x, obj.y, obj.properties[1].value, obj.properties[0].value)
-          // Last parameters are the text to show and the direction of the text in relation to the object
-        )
+      // SIGNS
+      else if (obj.name === 'sign') {
+        this.signs.push(this.add.sign(obj.x, obj.y, obj.properties[1].value, obj.properties[0].value))
+        // Last parameters are the text to show and the direction of the text in relation to the object
       }
     });
 	
@@ -255,18 +250,12 @@ export class BaseScene extends Phaser.Scene {
 
     // ---------------------
     // INTERACTIVE OBJECTS
-    // Hide the bigSigns when the player moves
+    // Hide the bigSigns and signs when the player moves
     if (moveleft || moveright || moveup || movedown) {
       // Hide the bigSign text when the player moves
       this.bigSigns.forEach((bigSign) => bigSign.hideSignText());
+      this.signs.forEach((sign) => sign.playerMovement(moveleft, moveright, moveup, movedown));
     }
-
-    // Hide the normal signs when the player moves (anywhere but up)
-    // todo Si agregamos signs en otras direcciones, ver de pasarle la direcc del movimiento como param
-    if (moveleft || moveright || moveup || movedown) {
-      this.signs.forEach((sign) => sign.hideSignText(moveleft, moveright, moveup, movedown));
-    }
-
   }
 
 }

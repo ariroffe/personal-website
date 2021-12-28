@@ -33,36 +33,61 @@ export class Sign extends Phaser.GameObjects.Image
 			.setVisible(false);
 			
 		// This assumes that the hitbox for the body is the same as the empty tile image (32 x 32), see door.js if not
-		scene.physics.add.collider(scene.player, this, () => this.showSignText(scene.player));
+		scene.physics.add.collider(scene.player, this, () => this.collideSign(scene.player));
+
+		// By click or touch it activates within a given distance (clickRadius)
+		this.setInteractive().on('pointerdown', this.clickSign);
+		this.clickRadius = 100;
+		this.showByClick = false;
 	}
 
-	showSignText(player) {
+	collideSign(player) {
 		if (this.direction === 'center') {
 			// Center hits from every direction
-			this.signRect.setVisible(true);
-			this.signText.setVisible(true);
+			this.showSignText();
 		} else if (this.direction === 'up' && player.body.touching.up) {
-			this.signRect.setVisible(true);
-			this.signText.setVisible(true);
+			this.showSignText();
 		} else if (this.direction === 'down' && player.body.touching.down) {
-			this.signRect.setVisible(true);
-			this.signText.setVisible(true);
+			this.showSignText();
 		}
 	}
 
-	hideSignText(moveleft, moveright, moveup, movedown) {
-		// For now, center is cancelling as down (librarian is the only one... modify for this if necessary)
-		if (moveleft || moveright) {  // || this.direction === 'center') {
-			this.signRect.setVisible(false);
-			this.signText.setVisible(false);
+	clickSign() {
+		// getCenter necessary bc signs have setOrigin(0,1)
+		let distance = Phaser.Math.Distance.BetweenPoints(this.getCenter(), this.scene.player);
+		if (distance < this.clickRadius) {
+			this.scene.signs.forEach((other_sign) => other_sign.hideSignText());  // So there is no clutter
+			this.showSignText();
+			this.showByClick = true;
 		}
-		if (this.direction === 'up' &&  movedown) {
-			this.signRect.setVisible(false);
-			this.signText.setVisible(false);
-		} else if ((this.direction === 'down' || this.direction === 'center') && moveup) {
-			this.signRect.setVisible(false);
-			this.signText.setVisible(false);
+	}
+
+	showSignText() {
+		this.signRect.setVisible(true);
+		this.signText.setVisible(true);
+	}
+
+	playerMovement(moveleft, moveright, moveup, movedown) {
+		if (this.showByClick) {
+			// If the player activated the sign via pointerdown, then remove it only when she goes away
+			if (Phaser.Math.Distance.BetweenPoints(this.getCenter(), this.scene.player) > this.clickRadius) {
+				this.hideSignText();
+			}
+		} else {  // Otherwise, the player activated the sign via collision
+			if (moveleft || moveright) {
+				this.hideSignText();
+			} else if (this.direction === 'up' &&  movedown) {
+				this.hideSignText();
+			} else if ((this.direction === 'down' || this.direction === 'center') && !movedown) {
+				this.hideSignText();
+			}
 		}
+	}
+
+	hideSignText() {
+		this.signRect.setVisible(false);
+		this.signText.setVisible(false);
+		this.showByClick = false;
 	}
 
 }
