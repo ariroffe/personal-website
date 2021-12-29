@@ -78,6 +78,17 @@ export class BaseScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     });
+	anims.create({
+      key: "ariel-wave",
+      frames: anims.generateFrameNames("atlas", {
+        prefix: "ariel-wave.",
+        start: 0,
+        end: 4,
+        zeroPad: 3
+      }),
+      frameRate: 10,
+      repeat: -1
+    });
 
     // ----------------
     // CAMERA
@@ -236,8 +247,14 @@ export class BaseScene extends Phaser.Scene {
       }
     }
 
-    // If not moving, pick and idle frame to use
-    if (!(moveleft || moveright || moveup || movedown)) {
+    // If not moving (and not waving or at the start of the game), stop animations and pick and idle frame
+    //if (this.checkStopAnimations(moveleft, moveright, moveup, movedown)) {
+	if (!(moveleft || moveright || moveup || movedown) &&
+		// This next part is so that it doesn't stop the waving animation in the overworld
+		// Second disjunct is if it was already playing it (from prev iteration of Overworld's update)
+		// First disjunct is bc at the start of the game currentAnim is null, comparing with .key gives an error
+	    !(this.player.anims.currentAnim == null || this.player.anims.currentAnim.key === 'ariel-wave')) 
+	{
       this.player.anims.stop();
       if (prevVelocity.x < 0) this.player.setTexture("atlas", "ariel-left");
       else if (prevVelocity.x > 0) this.player.setTexture("atlas", "ariel-right");
