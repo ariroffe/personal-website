@@ -9,6 +9,40 @@ body {
     position: relative;
 }
 
+/*LOADING OVERLAY*/
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 101;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#loading-wrapper {
+    position: relative;
+    top: -10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#loading-wrapper img {
+    height: 82px;
+    margin-bottom: 27px;
+	background-color: gray;
+	padding: 10px;
+}
+
+
+/* GAME MENU */
 #game-menu-container {
     position: absolute;
     top: 15px;
@@ -18,7 +52,6 @@ body {
     flex-direction: row;
     align-items: flex-start;
 }
-
 #pic-circ {
     border-radius: 50%;
     border: 1px solid #666;

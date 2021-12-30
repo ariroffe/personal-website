@@ -7,6 +7,7 @@ export class UniversityScene extends BaseScene {
   }
 
   preload() {
+    document.getElementById('loading').style.display = 'flex';
     // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
     this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
     this.load.spritesheet('fountain', 'assets/prod/anims/fountain.png', { frameWidth: 64, frameHeight: 64 });
@@ -39,6 +40,7 @@ export class UniversityScene extends BaseScene {
     // this.physics.add.collider(this.player, fountain);
 
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
+    document.getElementById('loading').style.display = 'none';
   }
 
 }

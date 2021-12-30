@@ -32,6 +32,8 @@ export class OverworldScene extends BaseScene {
     this.events.on('wake', () => {this.player.anims.play("ariel-front-walk", true)}, this);
 
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
+
+    document.getElementById('loading').style.display = 'none';
   }
   
   update(time, delta) {

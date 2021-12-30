@@ -7,6 +7,7 @@ export class SoftwareScene extends BaseScene {
   }
 
   preload() {
+    document.getElementById('loading').style.display = 'flex';
     // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
     this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
 	this.load.spritesheet('computer', 'assets/prod/anims/computer.png', { frameWidth: 32, frameHeight: 64 });
@@ -48,6 +49,7 @@ export class SoftwareScene extends BaseScene {
     bigcomputer.play("bigcomputer-anim");
 
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
+    document.getElementById('loading').style.display = 'none';
   }
 
 }
