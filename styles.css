@@ -1,6 +1,12 @@
 /* ---------------- GLOBAL CONFIG ------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=PT+Sans&display=swap');
 
+:root {
+    --teal-light: #74a4cb;
+    --teal-dark: #4585ba;
+}
+
+
 html,
 body,
 #game-container {
@@ -20,26 +26,27 @@ body {
 }
 
 a {
-  text-decoration: none;
+    color: var(--teal-dark);
+    text-decoration: none;
 }
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 p {
-  color: #333;
-  text-align: justify;
+    color: #333;
+    text-align: justify;
 }
 
 *::selection {
-  background: teal;
-  color: white;
-  text-shadow: none;
+    background: var(--teal-light);
+    color: white;
+    text-shadow: none;
 }
 
 *, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* ----------------------------------------- */
@@ -155,7 +162,13 @@ p {
     justify-content: center;
     align-items: center;
     margin-top: 70px;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+}
+img {
+    transition: filter 0.2s ease;
+}
+img:hover {
+    filter: brightness(1.05);
 }
 .hero {
     font-family: 'Dosis', sans-serif;
@@ -163,12 +176,25 @@ p {
     font-size: 8.2rem;
     margin-top: -10px;
     text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.2;
 }
-img {
-    transition: filter 0.2s ease;
+.hero-wrapper::after {
+    content: '';
+    width: 210px;
+    height: 11px;
+    background-color: var(--teal-light);
 }
-img:hover {
-    filter: brightness(1.05);
+
+@media screen and (max-width:767px) {
+    img {
+        height: 200px;
+    }
+    .hero {
+        font-size: 6rem;
+        margin-top: 10px;
+    }
 }
 
 
@@ -184,4 +210,24 @@ img:hover {
 
 .home-description p {
     padding: 12px 0;
+}
+
+@media screen and (max-width:767px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+        /*grid-row-gap: 50px;*/
+    }
+
+    .grid-2 > div:first-child::after {
+        content: '';
+        width: 140px;
+        height: 11px;
+        background-color: var(--teal-light);
+        display: block;
+        margin: 40px auto;
+    }
+
+    .home-description p {
+        padding: 9px 0;
+    }
 }
