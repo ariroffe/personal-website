@@ -1,3 +1,6 @@
+/* ---------------- GLOBAL CONFIG ------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=PT+Sans&display=swap');
+
 html,
 body,
 #game-container {
@@ -5,9 +8,43 @@ body,
     padding: 0;
 }
 
+html {
+    font-size: 10px;
+}
+
 body {
     position: relative;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.9rem;
+    line-height: 1.5;
 }
+
+a {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+p {
+  color: #333;
+  text-align: justify;
+}
+
+*::selection {
+  background: teal;
+  color: white;
+  text-shadow: none;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------- */
+/* ---------------- GAME ------------------- */
+/* ----------------------------------------- */
 
 /*LOADING OVERLAY*/
 #loading {
@@ -41,8 +78,7 @@ body {
 	padding: 10px;
 }
 
-
-/* GAME MENU */
+/* ----------GAME MENU---------- */
 #game-menu-container {
     position: absolute;
     top: 15px;
@@ -103,4 +139,49 @@ body {
 
 #game-container {
     z-index: 1;
+}
+
+/* ----------------------------------------- */
+/* ---------------- SITE ------------------- */
+/* ----------------------------------------- */
+
+/* ---------NAVBAR--------- */
+
+
+/* ---------HERO--------- */
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+.hero {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    font-size: 8.2rem;
+    margin-top: -10px;
+    text-transform: uppercase;
+}
+img {
+    transition: filter 0.2s ease;
+}
+img:hover {
+    filter: brightness(1.05);
+}
+
+
+/* ---------HOME DESCRIPTION--------- */
+.grid-2 {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 60px;
+}
+
+.home-description p {
+    padding: 12px 0;
 }
