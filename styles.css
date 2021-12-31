@@ -95,14 +95,15 @@ p {
     flex-direction: row;
     align-items: flex-start;
 }
-#pic-circ {
+#game-menu-container #pic-circ {
     border-radius: 50%;
     border: 1px solid #666;
     object-fit: cover;
     width: 58px;
     transition: all .2s ease-in-out;
 }
-#pic-circ:hover {
+#game-menu-container #pic-circ:hover {
+    filter: brightness(1.1);
     transform: scale(1.1);
     transform-origin: center center;
     cursor: pointer;
@@ -164,10 +165,10 @@ p {
     margin-top: 70px;
     margin-bottom: 60px;
 }
-img {
+.hero-wrapper img {
     transition: filter 0.2s ease;
 }
-img:hover {
+.hero-wrapper img:hover {
     filter: brightness(1.05);
 }
 .hero {
@@ -188,7 +189,7 @@ img:hover {
 }
 
 @media screen and (max-width:767px) {
-    img {
+    .hero-wrapper img {
         height: 200px;
     }
     .hero {
