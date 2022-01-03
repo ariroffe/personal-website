@@ -1,11 +1,14 @@
 /* ---------------- GLOBAL CONFIG ------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 
 :root {
-    --teal-light: #74a4cb;
-    --teal-dark: #4585ba;
+	--background-gray-color: #A9A9A9;
+	--text-color: #000;
+	--character-hair-color: #C48000;
+	--emphasis-color: #724E91;
+	--emphasis-color: #861388;
 }
-
 
 html,
 body,
@@ -20,25 +23,24 @@ html {
 
 body {
     position: relative;
-    font-family: 'PT Sans', sans-serif;
-    font-size: 1.9rem;
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.5rem;
     line-height: 1.5;
+	background-color: var(--background-gray-color);
 }
 
 a {
-    color: var(--teal-dark);
+    color: var(--emphasis-color);
     text-decoration: none;
 }
-ul {
-    list-style-type: none;
-}
 p {
-    color: #333;
+    color: var(--text-color);
     text-align: justify;
+	padding-bottom: 5px;
 }
 
 *::selection {
-    background: var(--teal-light);
+    background: var(--emphasis-color);
     color: white;
     text-shadow: none;
 }
@@ -103,7 +105,6 @@ p {
     transition: all .2s ease-in-out;
 }
 #game-menu-container #pic-circ:hover {
-    filter: brightness(1.1);
     transform: scale(1.1);
     transform-origin: center center;
     cursor: pointer;
@@ -149,11 +150,22 @@ p {
     z-index: 1;
 }
 
+
 /* ----------------------------------------- */
 /* ---------------- SITE ------------------- */
 /* ----------------------------------------- */
 
 /* ---------NAVBAR--------- */
+nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.2);
+	padding: 10px 15px;
+}
+nav ul {
+	list-style-type: none;
+}
 
 
 /* ---------HERO--------- */
@@ -164,11 +176,9 @@ p {
     align-items: center;
     margin-top: 70px;
     margin-bottom: 60px;
-}
-.hero-wrapper img {
-    transition: filter 0.2s ease;
-}
-.hero-wrapper img:hover {
+} 	
+.hero-wrapper > img {
+	height: 170px;
     filter: brightness(1.05);
 }
 .hero {
@@ -177,58 +187,36 @@ p {
     font-size: 8.2rem;
     margin-top: -10px;
     text-transform: uppercase;
-    margin-bottom: 20px;
     text-align: center;
     line-height: 1.2;
 }
-.hero-wrapper::after {
-    content: '';
-    width: 210px;
-    height: 11px;
-    background-color: var(--teal-light);
+
+
+/* ---------SECTIONS--------- */
+section {
+	width: 90%;
+	max-width: 1300px;
+	padding: 35px;
+	margin: 30px auto 60px;
+	border: 2px dashed var(--emphasis-color);
+	border-radius: 20px;
 }
 
-@media screen and (max-width:767px) {
-    .hero-wrapper img {
-        height: 200px;
-    }
-    .hero {
-        font-size: 6rem;
-        margin-top: 10px;
-    }
+section img {
+	margin: 5px 0;
 }
 
-
-/* ---------HOME DESCRIPTION--------- */
-.grid-2 {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 60px;
+section ul {
+	margin-left: 20px;
 }
 
-.home-description p {
-    padding: 12px 0;
+section .subtitle {
+	margin-bottom: 10px;
 }
 
-@media screen and (max-width:767px) {
-    .grid-2 {
-        grid-template-columns: 1fr;
-        /*grid-row-gap: 50px;*/
-    }
-
-    .grid-2 > div:first-child::after {
-        content: '';
-        width: 140px;
-        height: 11px;
-        background-color: var(--teal-light);
-        display: block;
-        margin: 40px auto;
-    }
-
-    .home-description p {
-        padding: 9px 0;
-    }
+section .seemore {
+	display: block;
+	color: var(--emphasis-color);
+	margin-top: 20px;
+	cursor: pointer;
 }
