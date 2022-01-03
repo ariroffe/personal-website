@@ -269,10 +269,9 @@ export class BaseScene extends Phaser.Scene {
 
     // ---------------------
     // INTERACTIVE OBJECTS
-    // Hide the bigSigns and signs when the player moves
+    // Hide the bigSigns and signs
+    this.bigSigns.forEach((bigSign) => bigSign.hideSignText(bigSign, this.player));
     if (moveleft || moveright || moveup || movedown) {
-      // Hide the bigSign text when the player moves
-      this.bigSigns.forEach((bigSign) => bigSign.hideSignText());
       this.signs.forEach((sign) => sign.playerMovement(moveleft, moveright, moveup, movedown));
     }
   }
