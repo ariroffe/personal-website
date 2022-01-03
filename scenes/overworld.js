@@ -35,14 +35,5 @@ export class OverworldScene extends BaseScene {
 
     document.getElementById('loading').style.display = 'none';
   }
-  
-  update(time, delta) {
-	  super.update(time, delta);
-	  // Play the waving animation. Sort of hacky bc the initial square is the only place in the overworld where there
-	  // is a physics overlap (and hence, the only place where player.body.embedded is true)
-	  if (this.player.body.embedded && this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0) {
-		this.player.anims.play("ariel-wave", true);
-	  }
-  }
 
 }

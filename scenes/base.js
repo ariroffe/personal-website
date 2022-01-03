@@ -29,8 +29,8 @@ export class BaseScene extends Phaser.Scene {
     const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
     // Create a sprite with physics for the player
 
-    this.player = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
+    this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
+    this.player.body.setSize(26, 41);
 
     // Create the player's walking animations from the texture atlas
     const anims = this.anims;
@@ -185,6 +185,8 @@ export class BaseScene extends Phaser.Scene {
     // MOUSE MOVEMENT
     let pointer = this.input.activePointer;
     if (pointer.primaryDown && !window.mouseOverMenu) {
+      // If you press the pointer outside the menu, hide it... Done here bc otherwise takes till after movement
+      // to execute this command
       document.getElementById("game-menu").style.display = 'none';
       // let pointerPosition = pointer.position;
       // So that the x and y update if the camera moves and the mouse does not
@@ -248,8 +250,7 @@ export class BaseScene extends Phaser.Scene {
     }
 
     // If not moving (and not waving or at the start of the game), stop animations and pick and idle frame
-    //if (this.checkStopAnimations(moveleft, moveright, moveup, movedown)) {
-	if (!(moveleft || moveright || moveup || movedown) &&
+    if (!(moveleft || moveright || moveup || movedown) &&
 		// This next part is so that it doesn't stop the waving animation in the overworld
 		// Second disjunct is if it was already playing it (from prev iteration of Overworld's update)
 		// First disjunct is bc at the start of the game currentAnim is null, comparing with .key gives an error

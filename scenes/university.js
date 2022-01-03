@@ -36,8 +36,6 @@ export class UniversityScene extends BaseScene {
     let fountain = this.add.sprite(928, 608, "fountain");
     fountain.playReverse("fountain-anim");
     // It is sitting exactly on top of the Tiled (fixed) fountain, so no need for a collider
-    // this.physics.add.existing(fountain, true);
-    // this.physics.add.collider(this.player, fountain);
 
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined
     document.getElementById('loading').style.display = 'none';

@@ -69,7 +69,7 @@
          "objects":[
                 {
                  "gid":175,
-                 "height":23,
+                 "height":64,
                  "id":2,
                  "name":"bigSign",
                  "properties":[
@@ -101,9 +101,9 @@
                  "rotation":0,
                  "type":"bigSign",
                  "visible":true,
-                 "width":32,
-                 "x":303.75,
-                 "y":118.75
+                 "width":48,
+                 "x":296,
+                 "y":160
                 }, 
                 {
                  "gid":175,

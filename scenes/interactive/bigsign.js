@@ -36,16 +36,24 @@ export class BigSign extends Phaser.GameObjects.Image
 	}
 
 	showSignText(self, player) {
-		if (!self.isVisible) {
-			self.isVisible = true;
-			if (window.innerWidth < 900) {
-				self.sm_signRect.setVisible(true);
-				self.sm_signText.setVisible(true);
-			} else {
-				self.signRect.setVisible(true);
-				self.signText.setVisible(true);
+		// This conditional is so that the overlap is not detected if the players feet are
+		// outside the tile. +20 is bc player.y is at the middle of the sprite, but self.y is at the bottom,
+		// bc we did .setOrigin(..., 1)
+		if (player.y+20 <= self.y) {	
+			if (!self.isVisible) {
+				self.isVisible = true;
+				if (window.innerWidth < 900) {
+					self.sm_signRect.setVisible(true);
+					self.sm_signText.setVisible(true);
+				} else {
+					self.signRect.setVisible(true);
+					self.signText.setVisible(true);
+				}
 			}
-
+			// A bit hacky, but if in the Overworld, play the waving animation
+			if (self.scene.scene.key === 'OverworldScene' && player.body.velocity.x === 0 && player.body.velocity.y === 0) {
+				player.anims.play("ariel-wave", true);
+			}
 		}
 	}
 

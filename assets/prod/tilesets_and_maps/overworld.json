@@ -220,7 +220,7 @@
                 }, 
                 {
                  "gid":1,
-                 "height":9.81328,
+                 "height":32,
                  "id":17,
                  "name":"bigSign",
                  "properties":[
@@ -252,9 +252,9 @@
                  "rotation":0,
                  "type":"bigSign",
                  "visible":true,
-                 "width":12.0078,
-                 "x":298.005,
-                 "y":1001.82
+                 "width":16,
+                 "x":296,
+                 "y":1024
                 }, 
                 {
                  "gid":1,

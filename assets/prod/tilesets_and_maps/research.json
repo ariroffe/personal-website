@@ -81,7 +81,7 @@
                 }, 
                 {
                  "gid":11,
-                 "height":8.75,
+                 "height":32,
                  "id":2,
                  "name":"bigSign",
                  "properties":[
@@ -115,7 +115,7 @@
                  "visible":true,
                  "width":32,
                  "x":766,
-                 "y":404.75
+                 "y":426
                 }, 
                 {
                  "gid":175,

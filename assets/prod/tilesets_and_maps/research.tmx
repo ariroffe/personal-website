@@ -8850,7 +8850,7 @@
   <object id="1" name="Spawn Point" x="191" y="704.667">
    <point/>
   </object>
-  <object id="2" name="bigSign" type="bigSign" gid="11" x="766" y="404.75" width="32" height="8.75">
+  <object id="2" name="bigSign" type="bigSign" gid="11" x="766" y="426" width="32" height="32">
    <properties>
     <property name="signX" type="int" value="224"/>
     <property name="signY" type="int" value="512"/>

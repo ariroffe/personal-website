@@ -8875,7 +8875,7 @@ Come on, borrow checker!</property>
 hooray!</property>
    </properties>
   </object>
-  <object id="5" name="bigSign" type="bigSign" gid="175" x="464.455" y="149.909" width="32" height="21.8182">
+  <object id="5" name="bigSign" type="bigSign" gid="175" x="456" y="192" width="48" height="64">
    <properties>
     <property name="signX" type="int" value="240"/>
     <property name="signY" type="int" value="512"/>
