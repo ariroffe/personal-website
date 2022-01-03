@@ -34,7 +34,7 @@ export class SoftwareScene extends BaseScene {
       yoyo: false,
       repeat: -1
     });
-    let computer = this.add.sprite(880, 64, "computer");
+    const computer = this.add.sprite(880, 64, "computer");
     computer.play("computer-anim");
 	
 	// Big computer animation
@@ -45,7 +45,7 @@ export class SoftwareScene extends BaseScene {
       yoyo: false,
       repeat: -1
     });
-    let bigcomputer = this.add.sprite(480, 48, "bigcomputer");
+    const bigcomputer = this.add.sprite(480, 48, "bigcomputer");
     bigcomputer.play("bigcomputer-anim");
 
     this.collide_with_world();  // Has to be called after the rest of the colliders are defined

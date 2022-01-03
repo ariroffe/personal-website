@@ -33,6 +33,33 @@ export class BigSign extends Phaser.GameObjects.Image
 			.setVisible(false);
 
 		this.isVisible = false;
+
+		// Add the animations to the scene
+		scene.anims.create({
+		  key: "purple-tile-anim",
+		  frameRate: 6,
+		  frames: scene.anims.generateFrameNumbers("purple_tile", { start: 0, end: 2 }),
+		  yoyo: true,
+		  repeatDelay: 500,
+		  repeat: -1
+		});
+		if (scene.scene.key === 'ResearchScene') {
+			const purple_tile = scene.add.sprite(x - 30, y - 10, "purple_tile").setOrigin(0, 1);
+			purple_tile.setDepth(2).play("purple-tile-anim");
+		}
+		else {
+			const purple_tile = scene.add.sprite(x - 8, y, "purple_tile").setOrigin(0, 1);
+			purple_tile.setDepth(2).play("purple-tile-anim");
+			// If the tile height is more than 1 tile, then the bigSign has 4 tiles
+			if (tileHeight > 32) {
+				const purple_tile2 = scene.add.sprite(x - 8, y - 32, "purple_tile").setOrigin(0, 1);
+				purple_tile2.setDepth(2).play("purple-tile-anim");
+				const purple_tile3 = scene.add.sprite(x - 8 + 32, y, "purple_tile").setOrigin(0, 1);
+				purple_tile3.setDepth(2).play("purple-tile-anim");
+				const purple_tile = scene.add.sprite(x - 8 + 32, y - 32, "purple_tile").setOrigin(0, 1);
+				purple_tile.setDepth(2).play("purple-tile-anim");
+			}
+		}
 	}
 
 	showSignText(self, player) {

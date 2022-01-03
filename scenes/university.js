@@ -33,7 +33,7 @@ export class UniversityScene extends BaseScene {
       yoyo: false,
       repeat: -1
     });
-    let fountain = this.add.sprite(928, 608, "fountain");
+    const fountain = this.add.sprite(928, 608, "fountain");
     fountain.playReverse("fountain-anim");
     // It is sitting exactly on top of the Tiled (fixed) fountain, so no need for a collider
 

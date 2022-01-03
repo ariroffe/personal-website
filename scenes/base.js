@@ -30,6 +30,7 @@ export class BaseScene extends Phaser.Scene {
     // Create a sprite with physics for the player
 
     this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
+	this.player.setDepth(5);
     this.player.body.setSize(26, 41);
 
     // Create the player's walking animations from the texture atlas
