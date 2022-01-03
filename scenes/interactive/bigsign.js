@@ -34,12 +34,13 @@ export class BigSign extends Phaser.GameObjects.Image
 
 		// Add the animations to the scene
 		scene.anims.create({
-		  key: "purple-tile-anim",
-		  frameRate: 6,
-		  frames: scene.anims.generateFrameNumbers("purple_tile", { start: 0, end: 2 }),
-		  yoyo: true,
-		  repeatDelay: 800,
-		  repeat: -1
+		  	key: "purple-tile-anim",
+		  	frameRate: 6,
+		  	frames: scene.anims.generateFrameNumbers("purple_tile", { start: 0, end: 2 }),
+		  	yoyo: true,
+		  	delay: 400,
+			repeatDelay: 800,
+			repeat: -1
 		});
 		this.purple_tiles = [];
 		if (scene.scene.key === 'ResearchScene') {
@@ -55,6 +56,8 @@ export class BigSign extends Phaser.GameObjects.Image
 			}
 			this.purple_tiles.forEach((purple_tile) => purple_tile.setDepth(2).play("purple-tile-anim"));
 		}
+
+		this.prevActivated = false  // It will only show the shining animation if you have not stood on it before
 	}
 
 	showSignText(self, player) {
@@ -63,6 +66,7 @@ export class BigSign extends Phaser.GameObjects.Image
 		// bc we did .setOrigin(..., 1)
 		if (Math.ceil(player.y+20) <= self.y) {
 			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.pause().setTint(0xffff00));
+			this.prevActivated = true;
 			if (window.innerWidth < 900) {
 				self.sm_signRect.setVisible(true);
 				self.sm_signText.setVisible(true);
@@ -84,7 +88,10 @@ export class BigSign extends Phaser.GameObjects.Image
 			this.signText.setVisible(false);
 			this.sm_signRect.setVisible(false);
 			this.sm_signText.setVisible(false);
-			this.purple_tiles.forEach((purple_tile) => purple_tile.play("purple-tile-anim", true).clearTint());
+			this.purple_tiles.forEach((purple_tile) => {
+				purple_tile.clearTint();
+				if (!this.prevActivated) purple_tile.play("purple-tile-anim", true);
+			});
 		}
 	}
 
