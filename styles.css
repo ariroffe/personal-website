@@ -1,6 +1,5 @@
 /* ---------------- GLOBAL CONFIG ------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=PT+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Inconsolata&display=swap');
 
 :root {
 	--background-gray-color: #A9A9A9;
@@ -24,7 +23,7 @@ html {
 body {
     position: relative;
     font-family: 'Inconsolata', monospace;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     line-height: 1.5;
 	background-color: var(--background-gray-color);
 }
@@ -156,15 +155,125 @@ p {
 /* ----------------------------------------- */
 
 /* ---------NAVBAR--------- */
-nav {
+#navbar {
 	position: fixed;
 	top: 0;
 	right: 0;
 	background-color: rgba(0,0,0,0.2);
-	padding: 10px 15px;
+	max-height: 50px;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
 }
-nav ul {
+#navbar:hover {
+    max-height: 100%;
+}
+#navbar ul {
 	list-style-type: none;
+    transform: translateY(-43px);
+    transition: transform 0.5s ease;
+    /*height: 100%;*/
+    width: 100%;
+    padding: 10px 35px 15px;
+}
+#navbar ul:hover {
+    transform: translateY(0);
+}
+#navbar ul li {
+    height: 35px;
+    min-height: 35px;
+    max-height: 35px;
+    margin: 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#navbar ul a {
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    transition: color 0.2s ease-in-out;
+}
+#navbar ul a:hover {
+    color: white;
+}
+
+
+/* ---------LEFT ASIDE--------- */
+#tools {
+    position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.2);
+    border-bottom-right-radius: 5px;
+}
+#tools ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    font-size: 2.6rem;
+}
+#tools ul li {
+    width: 75%;
+    height: 34px;
+    margin: 4px 5px;
+    padding: 0 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-out;
+}
+#tools #lang-select {
+    color: black;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+#tools #github {
+    color: #333;
+}
+#tools #researchgate {
+    color: #0cb;
+}
+#tools #scholar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    background-color: #4285F4;
+    color: white;
+}
+#tools #philpapers {
+    position: relative;
+    color: #074ba9;
+}
+#tools #philpapers::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 3px;
+    height: 20px;
+    width: 4.2px;
+    background-color: green;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 2px;
+}
+#tools #orcid {
+    color: #a9c518;
+}
+#tools .outside-link:hover {
+    background-color: white;
+}
+#tools #light-mode {
+    color: wheat;
+}
+#tools #dark-mode {
+    color: lightcyan;
+}
+#tools #light-mode-li {
+    display: none;
 }
 
 

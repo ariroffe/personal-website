@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="stylesheet" href="styles.css">
-
-	<link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="favicon.png" />
     <title>Ariel Roffé | Home</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
   </head>
   
@@ -16,17 +18,33 @@
   
 	<nav id="navbar">
 	  <ul>
-	    <li><a href="#">Game</a></li>
-		<li><a href="#">Intro</a></li>
-		<li><a href="#">Research</a></li>
+	    <li><a href="./index.html">Game</a></li>
+		<li><a href="#intro">Intro</a></li>
+		<li><a href="#research">Research</a></li>
+        <li><a href="#">Teaching</a></li>
+        <li><a href="#">Software</a></li>
+      </ul>
 	</nav>
+
+    <aside id="tools">
+      <ul>
+        <li class="outside-link"><a target="_blank" id="github" title="GitHub" href="https://github.com/ariroffe"><i class="bi bi-github"></i></a></li>
+        <li class="outside-link"><a target="_blank" id="researchgate" title="ResearchGate" href="https://www.researchgate.net/profile/Ariel-Roffe"><i class="ai ai-researchgate"></i></a></li>
+        <li class="outside-link"><a target="_blank" id="scholar" title="Google Scholar" href="https://scholar.google.com/citations?user=jv4RHn0AAAAJ"><i class="ai ai-google-scholar"></i></a></li>
+        <li class="outside-link"><a target="_blank" id="philpapers" title="PhilPeople" href="https://philpeople.org/profiles/ariel-jonathan-roffe"><i class="ai ai-philpapers"></i></a></li>
+        <li class="outside-link"><a target="_blank" id="orcid" title="ORCiD" href="https://orcid.org/0000-0002-0051-2028"><i class="ai ai-orcid"></i></a></li>
+        <li id="dark-mode-li"><a id="dark-mode" href="#"><i class="bi bi-moon"></i></a></li>
+        <li id="light-mode-li"><a id="light-mode" href="#"><i class="bi bi-sun"></i></a></li>
+        <li><a id="lang-select" href="#">EN</a></li>
+      </ul>
+    </aside>
 	
 	<header class="hero-wrapper">
       <img src="assets/home/Recib2d.png" alt="">
       <h1 class="hero">Ariel Jonathan Roffé</h1>
     </header>
 	
-	<section>
+	<section id="intro">
 	
 	  <img src="assets/prod/atlas/frames/wave-000.png" alt="Hi">
       <div>
@@ -47,23 +65,25 @@
       </div>
 	</section>
 	
-	<section>
-		<img src="assets/prod/atlas/frames/right-000.png" alt="Research">
-		
-		<p class='subtitle'>The following are my most recent publications:</p>
+	<section id="research">
+	  <img src="assets/prod/atlas/frames/right-000.png" alt="Research">
 
-        <ul>
-		  <li>Roffé, A. J. & Toranzo Calderón, J. S. (2021). Random Formula Generators. Arxiv. [LINK] [PDF]</li>
-          <li>León, M., Gimenez, I., Roffé, A. J., Bernabé F. N., y Ginnobili, S. (in press). ¿Hay un programa de investigación científica en memética? — El caso de los cantos de aves. Disputatio.</li>
-          <li>Roffé, A. J. & Pailos, F. (in press). Translating Metainferences Into Formulae: Satisfaction Operators and Sequent Calculi. Australasian Journal of Logic.</li>
-          <li>Blanco, D., Roffé, A. J. & Ginnobili, S. (2020). The Key Role of Underlying Theories for Scientific Explanations. A Darwinian Case Study. Principia. [LINK] [PDF]</li>
-          <li>Roffé, A. J. (2020). El estatus fáctico de la cladística: aportes desde una reconstrucción estructuralista. Metatheoria. [LINK] [PDF]</li>
-          <li>Roffé, A. J. (2020). Dynamic Homology and Circularity in Cladistic Analysis. Biology & Philosophy. [preprint] [LINK]</li>
-          <li>Roffé, A. J. & Ginnobili, S. (2020). Optimality Models and the Propensity Interpretation of Fitness. Acta Biotheoretica. [preprint] [LINK]</li>
-		</ul>
-		<span class="seemore">See more...</span>
+      <p class='subtitle'>The following are my most recent publications:</p>
+
+      <ul>
+        <li>Roffé, A. J. & Toranzo Calderón, J. S. (2021). Random Formula Generators. Arxiv. [LINK] [PDF]</li>
+        <li>León, M., Gimenez, I., Roffé, A. J., Bernabé F. N., y Ginnobili, S. (in press). ¿Hay un programa de investigación científica en memética? — El caso de los cantos de aves. Disputatio.</li>
+        <li>Roffé, A. J. & Pailos, F. (in press). Translating Metainferences Into Formulae: Satisfaction Operators and Sequent Calculi. Australasian Journal of Logic.</li>
+        <li>Blanco, D., Roffé, A. J. & Ginnobili, S. (2020). The Key Role of Underlying Theories for Scientific Explanations. A Darwinian Case Study. Principia. [LINK] [PDF]</li>
+        <li>Roffé, A. J. (2020). El estatus fáctico de la cladística: aportes desde una reconstrucción estructuralista. Metatheoria. [LINK] [PDF]</li>
+        <li>Roffé, A. J. (2020). Dynamic Homology and Circularity in Cladistic Analysis. Biology & Philosophy. [preprint] [LINK]</li>
+         <li>Roffé, A. J. & Ginnobili, S. (2020). Optimality Models and the Propensity Interpretation of Fitness. Acta Biotheoretica. [preprint] [LINK]</li>
+	  </ul>
+	  <span class="seemore">See more...</span>
 	</section>
   
+    <script src="./home.js"></script>
+
   </body>
   
 </html>
