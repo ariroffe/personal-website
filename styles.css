@@ -216,11 +216,14 @@ p {
 
 @media screen and (max-width:768px) {
     #navbar {
-        top: 45px;
+        top: 44px;
         border-bottom-left-radius: 5px;
     }
     #navbar ul {
         padding: 10px 12px 15px;
+    }
+    #navbar ul a {
+        font-size: 1.8rem;
     }
 }
 
@@ -352,7 +355,8 @@ p {
         margin-top: 90px;
     }
     .hero {
-        font-size: 6.2rem;
+        font-size: 5rem;
+        margin-top: 0;
     }
 }
 
@@ -360,7 +364,7 @@ p {
 /* ---------SECTIONS--------- */
 section {
 	position: relative;
-    width: 83%;
+    width: 90%;
 	max-width: 1380px;
 	padding: 35px;
 	margin: 30px auto 60px;
@@ -409,6 +413,7 @@ section .seemore {
 
 @media screen and (max-width:768px) {
     section {
-        transform: translateX(15px);
+        width: auto;
+        margin: 32px 25px 60px 50px;
     }
 }
