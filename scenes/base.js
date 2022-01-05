@@ -24,7 +24,7 @@ export class BaseScene extends Phaser.Scene {
     aboveLayer.setDepth(10);
 
     // ----------------
-    // PLAYER
+    // CREATE THE PLAYER AND THE ANIMATIONS
     // Get the spawn point
     const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
     // Create a sprite with physics for the player
@@ -128,30 +128,93 @@ export class BaseScene extends Phaser.Scene {
         // Last parameters are the text to show and the direction of the text in relation to the object
       }
     });
-	
-	// Fullscreen buttons
-	let fullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
-	let fullscreen2 = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
 
-    fullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+	// ----------------
+    // TOP BUTTONS (PLAY MUSIC AND FULLSCREEN)
+    // MUSIC
+    const self = this;
+    const playmusic = this.add.image(240, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
+    const stopmusic = this.add.image(240, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
+
+    // If the music already exists and is playing (e.g. after a scene switch), display the pause animation
+    function checkDisplayPause(self) {
+      const prevMusic = self.sound.get('music')
+      if (prevMusic !== null && prevMusic.isPlaying) {
+        stopmusic.setVisible(true);
+        playmusic.setVisible(false);
+      } else {
+        stopmusic.setVisible(false);
+        playmusic.setVisible(true);
+      }
+    }
+    checkDisplayPause(self);  // Run it once in the create method
+    this.events.on('wake', () => checkDisplayPause(self))  // And again after each wake event
+
+    // Music will load asyncronously, once the player hits the play button, bc it is a large file
+    // If we put the loading in preload it will take longer to init the game
+    playmusic.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+      if (!self.load.isLoading()) {  // Music will load on click, check that it not loading from prev click
+        const music = self.sound.get('music');  // null if the key does not exist yet (i.e. audio not loaded)
+        if (music !== null) {  // The key exists (was loaded from prev file)
+          music.resume();
+          stopmusic.setVisible(true);
+          playmusic.setVisible(false);
+        } else {  // The audio is not loaded, load it now
+          self.load.audio('music', '/assets/prod/audio/music.mp3');
+          self.load.once('complete', function() {
+            self.sound.play('music');
+            stopmusic.setVisible(true);
+            playmusic.setVisible(false);
+          });
+          self.load.start();
+        }
+      }
+    });
+    stopmusic.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+      stopmusic.setVisible(false);
+      playmusic.setVisible(true);
+      const music = self.sound.get('music');
+      if (music !== null) music.pause();  // The conditional should always be true here but I leave it just in case
+    });
+
+    // FULLSCREEN
+	const enterfullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
+	const leavefullscreen = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
+
+    // If we are already in fullscreen, show the exit button
+    function checkDisplayFullscreen(self) {
+      if (self.scale.isFullscreen) {
+        enterfullscreen.setVisible(false);
+        leavefullscreen.setVisible(true);
+      } else {
+        enterfullscreen.setVisible(true);
+        leavefullscreen.setVisible(false);
+      }
+    }
+    checkDisplayFullscreen(self);  // Run it once in the create method
+    this.events.on('wake', () => checkDisplayFullscreen(self))  // And again after each wake event
+
+    enterfullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
       if (!window.mouseOverMenu) {
-        fullscreen.setVisible(false);
-        fullscreen2.setVisible(true);
+        enterfullscreen.setVisible(false);
+        leavefullscreen.setVisible(true);
         this.scene.scale.toggleFullscreen();
       }
     });
-	fullscreen.on('pointerover', () => fullscreen.setTint(0x6699ff));
-	fullscreen.on('pointerout', () => fullscreen.clearTint());
+	enterfullscreen.on('pointerover', () => enterfullscreen.setTint(0x6699ff));
+	enterfullscreen.on('pointerout', () => enterfullscreen.clearTint());
 
-    fullscreen2.setInteractive({useHandCursor: true}).on('pointerdown', function () {
-      fullscreen.setVisible(true);
-      fullscreen2.setVisible(false);
+    leavefullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
+      enterfullscreen.setVisible(true);
+      leavefullscreen.setVisible(false);
       this.scene.scale.toggleFullscreen();
     });
-	fullscreen2.on('pointerover', () => fullscreen2.setTint(0x6699ff));
-	fullscreen2.on('pointerout', () => fullscreen2.clearTint());
+	leavefullscreen.on('pointerover', () => leavefullscreen.setTint(0x6699ff));
+	leavefullscreen.on('pointerout', () => leavefullscreen.clearTint());
   }
-  
+
+  // -----------------
+
   resize (gameSize, baseSize, displaySize, resolution) {
      this.cameras.resize(gameSize.width, gameSize.height);
   }

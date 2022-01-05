@@ -63703,8 +63703,6 @@ Development</property>
     <property name="link" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="15" gid="1" x="320" y="1056" width="32" height="32"/>
-  <object id="16" gid="1" x="356.25" y="964.75" width="32" height="32"/>
   <object id="17" name="bigSign" type="bigSign" gid="1" x="296" y="1024" width="16" height="32">
    <properties>
     <property name="signX" type="int" value="756"/>
