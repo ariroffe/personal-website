@@ -11,8 +11,8 @@ export class OverworldScene extends BaseScene {
   preload() {
     // The keys have to be unique! Otherwise they will not be preloaded again.
     // this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted.png");
+    // this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
     this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted_extruded.png");
-    this.load.image("empty_tile", "./assets/prod/tilesets_and_maps/empty_tile.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");
     this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
 	this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');

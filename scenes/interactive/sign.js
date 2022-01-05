@@ -1,7 +1,8 @@
 export class Sign extends Phaser.GameObjects.Image
 {
 	constructor(scene, x, y, text, direction) {
-		super(scene, x, y, 'empty_tile');
+		// super(scene, x, y, 'empty_tile');  // no need to do this, just give it null as a texture
+		super(scene, x, y);
 
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this).setOrigin(0, 1);

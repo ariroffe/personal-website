@@ -1,7 +1,8 @@
 export class Door extends Phaser.GameObjects.Image
 {
 	constructor(scene, x, y, height, width, destination, link) {
-		super(scene, x, y, 'empty_tile');
+		// super(scene, x, y, 'empty_tile');  // no need to do this, just give it null as a texture
+		super(scene, x, y);
 
 		// Tiled coordinate is of the bottom left of the object
 		this.setOrigin(0, 1);
