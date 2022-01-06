@@ -15,7 +15,7 @@ export class OverworldScene extends BaseScene {
     // this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/poke_converted_extruded.png");
     // this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld.json");
     // this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/tileset.png");
-    this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/tileset_extruded.png");
+    this.load.image("TilesetImage", "./assets/prod/tilesets_and_maps/tileset_extruded.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld-new.json");
     this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
 	this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
@@ -27,7 +27,7 @@ export class OverworldScene extends BaseScene {
 
   create() {
     // super.create("OverworldMap", "OverworldTiles", "poke");
-    super.create("OverworldMap", "OverworldTiles", "tileset");
+    super.create("OverworldMap");
 
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 1920, 1088);

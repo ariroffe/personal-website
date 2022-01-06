@@ -9,14 +9,14 @@ export class SoftwareScene extends BaseScene {
   preload() {
     document.getElementById('loading').style.display = 'flex';
     // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
-    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
+    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
 	this.load.spritesheet('computer', 'assets/prod/anims/computer.png', { frameWidth: 32, frameHeight: 64 });
 	this.load.spritesheet('bigcomputer', 'assets/prod/anims/bigcomputer.png', { frameWidth: 128, frameHeight: 96 });
-    this.load.tilemapTiledJSON("SoftwareMap", "./assets/prod/tilesets_and_maps/software.json");
+    this.load.tilemapTiledJSON("SoftwareMap", "./assets/prod/tilesets_and_maps/software-new.json");
   }
 
   create() {
-    super.create("SoftwareMap", "InsideTiles", "poke_inside");
+    super.create("SoftwareMap");
 
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 960, 768);

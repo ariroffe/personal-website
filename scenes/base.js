@@ -7,12 +7,12 @@ export class BaseScene extends Phaser.Scene {
   // --------------------------------------------------------------------------------------------------
   // CREATE
 
-  create(tilemapKey, tilesetKey, tilesetImageName) {
+  create(tilemapKey) {
     // ----------------
     // MAP AND TILESET
     this.map = this.make.tilemap({key: tilemapKey});
-    // const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey);
-    const tileset = this.map.addTilesetImage(tilesetImageName, tilesetKey, 32, 32, 1, 2);  // Add margin and spacing for the extruded image:
+    // const tileset = this.map.addTilesetImage("tileset", "TilesetImage");
+    const tileset = this.map.addTilesetImage("tileset", "TilesetImage", 32, 32, 1, 2);  // Add margin and spacing for the extruded image:
 
     // Map layers (defined in Tiled)
     const ground1Layer = this.map.createLayer("Ground1", tileset, 0, 0);
