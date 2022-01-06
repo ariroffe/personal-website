@@ -59,15 +59,17 @@ export class BigSign extends Phaser.GameObjects.Image
 		}
 
 		this.prevActivated = false  // It will only show the shining animation if you have not stood on it before
+		this.overlapping = true  // Needed because embedded is not true when movement on both axes
 	}
 
 	showSignText(self, player) {
-		// Second conjunct is so that the overlap is not detected if the players feet are
+		// So that the overlap is not detected if the players feet are
 		// outside the tile. +20 is bc player.y is at the middle of the sprite, but self.y is at the bottom,
 		// bc we did .setOrigin(..., 1)
 		if (Math.ceil(player.y+20) <= self.y) {
 			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.pause().setTint(0xffff00));
 			this.prevActivated = true;
+			this.overlapping = true;
 			if (window.innerWidth < 900) {
 				self.sm_signRect.setVisible(true);
 				self.sm_signText.setVisible(true);
@@ -76,7 +78,7 @@ export class BigSign extends Phaser.GameObjects.Image
 				self.signText.setVisible(true);
 			}
 			// A bit hacky, but if in the Overworld, play the waving animation
-			if (self.scene.scene.key === 'OverworldScene') { // && player.body.velocity.x === 0 && player.body.velocity.y === 0) {
+			if (self.scene.scene.key === 'OverworldScene' && player.body.velocity.x === 0 && player.body.velocity.y === 0) {
 				player.anims.play("ariel-wave", true);
 			}
 		}
@@ -84,16 +86,17 @@ export class BigSign extends Phaser.GameObjects.Image
 
 	hideSignText(self, player) {
 		// Runs at every scene's update. Checks that the player is either not embedded or (embedded & with feet outside)
-		if (!player.body.embedded || Math.ceil(player.y+20) > self.y) {
+		if (!this.overlapping || Math.ceil(player.y+20) > self.y) {
 			this.signRect.setVisible(false);
 			this.signText.setVisible(false);
 			this.sm_signRect.setVisible(false);
 			this.sm_signText.setVisible(false);
 			this.purple_tiles.forEach((purple_tile) => {
-				purple_tile.clearTint();
-				if (!this.prevActivated) purple_tile.play("purple-tile-anim", true);
+				purple_tile.clearTint();  // Remove the tint
+				if (!this.prevActivated) purple_tile.play("purple-tile-anim", true);  // Don't play the anim again
 			});
 		}
+		this.overlapping = false; // This runs at every frame after the first method, so in the next frame it might be true again
 	}
 
 }

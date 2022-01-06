@@ -224,11 +224,6 @@ export class BaseScene extends Phaser.Scene {
   collide_with_world() {
     // Collision with the world layers. Has to come after the rest of the colliders in order for them to detect.
     // We need to call this at the end of the children's create
-    // this.collision1Layer.setCollisionByProperty({ collides: true });
-    // this.physics.add.collider(this.player, this.collision1Layer);
-    // this.collision2Layer.setCollisionByProperty({ collides: true });
-    // this.physics.add.collider(this.player, this.collision2Layer);
-
     this.physics.add.collider(this.player, this.LayerToCollide);
     this.LayerToCollide.setCollisionBetween(40, 41);
 
