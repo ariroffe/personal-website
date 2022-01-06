@@ -17,11 +17,13 @@ export class BaseScene extends Phaser.Scene {
     // Map layers (defined in Tiled)
     const ground1Layer = this.map.createLayer("Ground1", tileset, 0, 0);
     const ground2Layer = this.map.createLayer("Ground2", tileset, 0, 0);
-    this.collision1Layer = this.map.createLayer("Collision1", tileset, 0, 0);
-    this.collision2Layer = this.map.createLayer("Collision2", tileset, 0, 0);
+    const collision1Layer = this.map.createLayer("Collision1", tileset, 0, 0);
+    const collision2Layer = this.map.createLayer("Collision2", tileset, 0, 0);
     const aboveLayer = this.map.createLayer("Above", tileset, 0, 0);
-    // To have the "Above" layer sit on top of the player, we give it a depth.
-    aboveLayer.setDepth(10);
+    aboveLayer.setDepth(10);  // To have the "Above" layer sit on top of the player, we give it a depth.
+    // The layer with wich the player will collide
+    this.LayerToCollide = this.map.createLayer("CollisionLayer", tileset, 0, 0);
+    this.LayerToCollide.setVisible(false);  // Comment out this line if you wish to see which objects the player will collide with
 
     // ----------------
     // CREATE THE PLAYER AND THE ANIMATIONS
@@ -222,10 +224,14 @@ export class BaseScene extends Phaser.Scene {
   collide_with_world() {
     // Collision with the world layers. Has to come after the rest of the colliders in order for them to detect.
     // We need to call this at the end of the children's create
-    this.collision1Layer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, this.collision1Layer);
-    this.collision2Layer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, this.collision2Layer);
+    // this.collision1Layer.setCollisionByProperty({ collides: true });
+    // this.physics.add.collider(this.player, this.collision1Layer);
+    // this.collision2Layer.setCollisionByProperty({ collides: true });
+    // this.physics.add.collider(this.player, this.collision2Layer);
+
+    this.physics.add.collider(this.player, this.LayerToCollide);
+    this.LayerToCollide.setCollisionBetween(40, 41);
+
     this.player.setCollideWorldBounds(true);
     this.player.onWorldBounds = true;
   }
