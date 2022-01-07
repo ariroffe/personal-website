@@ -135,8 +135,8 @@ export class BaseScene extends Phaser.Scene {
     // TOP BUTTONS (PLAY MUSIC AND FULLSCREEN)
     // MUSIC
     const self = this;
-    const playmusic = this.add.image(240, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
-    const stopmusic = this.add.image(240, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
+    const playmusic = this.add.image(240, 45, 'play').setScrollFactor(0).setDepth(105);
+    const stopmusic = this.add.image(240, 45, 'mute').setScrollFactor(0).setDepth(105).setVisible(false);
 
     // If the music already exists and is playing (e.g. after a scene switch), display the pause animation
     function checkDisplayPause(self) {
