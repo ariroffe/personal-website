@@ -8,9 +8,7 @@ export class SoftwareScene extends BaseScene {
 
   preload() {
     document.getElementById('loading').style.display = 'flex';
-    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
-    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
-	this.load.spritesheet('computer', 'assets/prod/anims/computer.png', { frameWidth: 32, frameHeight: 64 });
+    this.load.spritesheet('computer', 'assets/prod/anims/computer.png', { frameWidth: 32, frameHeight: 64 });
 	this.load.spritesheet('bigcomputer', 'assets/prod/anims/bigcomputer.png', { frameWidth: 128, frameHeight: 96 });
     this.load.tilemapTiledJSON("SoftwareMap", "./assets/prod/tilesets_and_maps/software-new.json");
   }
@@ -22,9 +20,9 @@ export class SoftwareScene extends BaseScene {
     this.physics.world.setBounds(0, 0, 960, 768);
     this.cameras.main.setBounds(0, 0, 960, 768);
 
-    // On scene switch (after entering through the door) display the walking UP animation
-    this.events.on('create', () => {this.player.anims.play("ariel-back-walk", true)}, this);
-    this.events.on('wake', () => {this.player.anims.play("ariel-back-walk", true)}, this);
+    // On scene switch (after entering through the door) display the walking UP texture
+    this.events.on('create', () => {this.player.setTexture("atlas", "ariel-back")}, this);
+    this.events.on('wake', () => {this.player.setTexture("atlas", "ariel-back")}, this);
 	
 	// Small computer animation
     this.anims.create({

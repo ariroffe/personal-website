@@ -59,7 +59,6 @@ export class BigSign extends Phaser.GameObjects.Image
 		}
 
 		this.prevActivated = false  // It will only show the shining animation if you have not stood on it before
-		this.overlapping = true  // Needed because embedded is not true when movement on both axes
 	}
 
 	showSignText(self, player) {
@@ -69,7 +68,6 @@ export class BigSign extends Phaser.GameObjects.Image
 		if (Math.ceil(player.y+20) <= self.y) {
 			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.pause().setTint(0xffff00));
 			this.prevActivated = true;
-			this.overlapping = true;
 			if (window.innerWidth < 900) {
 				self.sm_signRect.setVisible(true);
 				self.sm_signText.setVisible(true);
@@ -86,7 +84,7 @@ export class BigSign extends Phaser.GameObjects.Image
 
 	hideSignText(self, player) {
 		// Runs at every scene's update. Checks that the player is either not embedded or (embedded & with feet outside)
-		if (!this.overlapping || Math.ceil(player.y+20) > self.y) {
+		if (!player.body.embedded || Math.ceil(player.y+20) > self.y) {
 			this.signRect.setVisible(false);
 			this.signText.setVisible(false);
 			this.sm_signRect.setVisible(false);
@@ -96,7 +94,6 @@ export class BigSign extends Phaser.GameObjects.Image
 				if (!this.prevActivated) purple_tile.play("purple-tile-anim", true);  // Don't play the anim again
 			});
 		}
-		this.overlapping = false; // This runs at every frame after the first method, so in the next frame it might be true again
 	}
 
 }

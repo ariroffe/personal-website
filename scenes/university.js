@@ -8,22 +8,20 @@ export class UniversityScene extends BaseScene {
 
   preload() {
     document.getElementById('loading').style.display = 'flex';
-    // this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted.png");
-    this.load.image("InsideTiles", "./assets/prod/tilesets_and_maps/poke_inside_converted_extruded.png");
     this.load.spritesheet('fountain', 'assets/prod/anims/fountain.png', { frameWidth: 64, frameHeight: 64 });
-    this.load.tilemapTiledJSON("UniversityMap", "./assets/prod/tilesets_and_maps/university.json");
+    this.load.tilemapTiledJSON("UniversityMap", "./assets/prod/tilesets_and_maps/university-new.json");
   }
 
   create() {
-    super.create("UniversityMap", "InsideTiles", "poke_inside");
+    super.create("UniversityMap");
 
     // Resize the world and camera bounds
     this.physics.world.setBounds(0, 0, 1440, 768);
     this.cameras.main.setBounds(0, 0, 1440, 768);
 
-    // On scene switch (after entering a door) display the walking up animation
-    this.events.on('create', () => {this.player.anims.play("ariel-back-walk", true)}, this);
-    this.events.on('wake', () => {this.player.anims.play("ariel-back-walk", true)}, this);
+    // On scene switch (after entering through the door) display the walking UP texture
+    this.events.on('create', () => {this.player.setTexture("atlas", "ariel-back")}, this);
+    this.events.on('wake', () => {this.player.setTexture("atlas", "ariel-back")}, this);
 
     // Fountain animation
     this.anims.create({
