@@ -24,13 +24,13 @@ export class Sign extends Phaser.GameObjects.Image
 		}
 		
 		this.signText = scene.add.bitmapText(Math.round(x+offsetX), Math.round(y+offsetY), 'pixelopmono', text, 16, 1)
-            .setOrigin(0.5, 1)
-		    .setDepth(101)
+			.setOrigin(0.5, 1)
+			.setDepth(101)
 			.setVisible(false);
 		this.signRect = scene.add.rectangle(Math.round(x+offsetX), Math.round(y+offsetY), this.signText.width+10, this.signText.height, 0xffffff)
-		    .setStrokeStyle(1, 0x000000)
-		    .setOrigin(0.5, 1)
-		    .setDepth(100)
+			.setStrokeStyle(1, 0x000000)
+			.setOrigin(0.5, 1)
+			.setDepth(100)
 			.setVisible(false);
 			
 		// This assumes that the hitbox for the body is the same as the empty tile image (32 x 32), see door.js if not

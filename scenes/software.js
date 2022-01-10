@@ -9,7 +9,7 @@ export class SoftwareScene extends BaseScene {
   preload() {
     document.getElementById('loading').style.display = 'flex';
     this.load.spritesheet('computer', 'assets/prod/anims/computer.png', { frameWidth: 32, frameHeight: 64 });
-	this.load.spritesheet('bigcomputer', 'assets/prod/anims/bigcomputer.png', { frameWidth: 128, frameHeight: 96 });
+	  this.load.spritesheet('bigcomputer', 'assets/prod/anims/bigcomputer.png', { frameWidth: 128, frameHeight: 96 });
     this.load.tilemapTiledJSON("SoftwareMap", "./assets/prod/tilesets_and_maps/software-new.json");
   }
 

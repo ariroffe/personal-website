@@ -4,6 +4,39 @@ import {UniversityScene} from "./scenes/university.js";
 import {SoftwareScene} from "./scenes/software.js";
 
 // ------------------------------------------------------------------------------------
+// GAME OBJECT
+
+const config = {
+  type: Phaser.AUTO,
+  pixelArt: true,
+  scale: {
+	mode: Phaser.Scale.NONE,
+    autoRound: true,
+	autoFocus: true,
+	autoCenter: Phaser.Scale.NO_CENTER,
+	parent: "game-container",
+    // e.g. innerWidth * 1.25 for my laptop screen
+    width: getWidth(),
+	height: getHeight(),
+    // e.g. 1 / 1.25 = 0.8 for my laptop screen (compensates for the larger size)
+	zoom: (resizeDPR() ? Math.floor(window.devicePixelRatio) / window.devicePixelRatio : 1)
+  },
+  physics: {
+    default: "arcade",
+    arcade: {
+      // debug: true,  // Remove in production
+	    debug: false,
+      gravity: { y: 0 }
+    }
+  },
+  scene: [OverworldScene, ResearchScene, UniversityScene, SoftwareScene]
+};
+
+
+const game = new Phaser.Game(config);
+
+
+// ------------------------------------------------------------------------------------
 // DevicePixelRatio handling
 function mobileOrTablet() {
   let check = false;
@@ -28,38 +61,6 @@ function getWidth() {
 function getHeight() {
   return (resizeDPR() ? window.innerHeight * window.devicePixelRatio : window.innerHeight)
 }
-
-// ------------------------------------------------------------------------------------
-// GAME OBJECT
-
-const config = {
-  type: Phaser.AUTO,
-  pixelArt: true,
-  scale: {
-	mode: Phaser.Scale.NONE,
-    autoRound: true,
-	autoFocus: true,
-	autoCenter: Phaser.Scale.NO_CENTER,
-	parent: "game-container",
-    // e.g. innerWidth * 1.25 for my laptop screen
-    width: getWidth(),
-	height: getHeight(),
-    // e.g. 1 / 1.25 = 0.8 for my laptop screen (compensates for the larger size)
-	zoom: (resizeDPR() ? Math.floor(window.devicePixelRatio) / window.devicePixelRatio : 1)
-  },
-  physics: {
-    default: "arcade",
-    arcade: {
-      // debug: true,  // Remove in production
-	  debug: false,
-      gravity: { y: 0 }
-    }
-  },
-  scene: [OverworldScene, ResearchScene, UniversityScene, SoftwareScene]
-};
-
-
-const game = new Phaser.Game(config);
 
 
 // ------------------------------------------------------------------------------------
@@ -86,21 +87,21 @@ menu.addEventListener("mouseenter", () => mouseOverMenu = true);
 menu.addEventListener("mouseleave", () => mouseOverMenu = false);
 // For mobile/touch devices mouseenter and mouseleave will not work
 document.addEventListener('touchstart', (ev) => {
-    if (ev.target.id === 'pic-circ' || ev.target.className === 'game-menu-link') {
-        window.mouseOverMenu = true;
-    } else {
-        window.mouseOverMenu = false;
-        pic_circ.style.transform = 'scale(1)';
-    }
+  if (ev.target.id === 'pic-circ' || ev.target.className === 'game-menu-link') {
+    window.mouseOverMenu = true;
+  } else {
+    window.mouseOverMenu = false;
+    pic_circ.style.transform = 'scale(1)';
+  }
 });
 
 // Clicking on the picture toggles the display of the menu
 pic_circ.addEventListener("click", () => {
-    if (menu.style.display === 'none') {
-        menu.style.display = 'block';
-        if (mobileOrTablet()) pic_circ.style.transform = 'scale(1.1)';  // No hover effect in mobile
-    } else {
-        menu.style.display = 'none';
-        if (mobileOrTablet()) pic_circ.style.transform = 'scale(1)';  // No hover effect in mobile
-    }});
+  if (menu.style.display === 'none') {
+    menu.style.display = 'block';
+    if (mobileOrTablet()) pic_circ.style.transform = 'scale(1.1)';  // No hover effect in mobile
+  } else {
+    menu.style.display = 'none';
+    if (mobileOrTablet()) pic_circ.style.transform = 'scale(1)';  // No hover effect in mobile
+  }});
 // Hiding the menu is done in base.js, in the update method (otherwise first does update and then does this)

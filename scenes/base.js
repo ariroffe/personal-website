@@ -26,79 +26,20 @@ export class BaseScene extends Phaser.Scene {
     this.LayerToCollide.setVisible(false);  // Comment out this line if you wish to see which objects the player will collide with
 
     // ----------------
-    // CREATE THE PLAYER AND THE ANIMATIONS
+    // PLAYER
     // Get the spawn point
     const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
-    // Create a sprite with physics for the player
-
-    this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front");
-	this.player.setDepth(5);
-    this.player.body.setSize(26, 41);
-
-    // Create the player's walking animations from the texture atlas
-    const anims = this.anims;
-    anims.create({
-      key: "ariel-left-walk",
-      frames: anims.generateFrameNames("atlas", {
-        prefix: "ariel-left-walk.",
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-    anims.create({
-      key: "ariel-right-walk",
-      frames: anims.generateFrameNames("atlas", {
-        prefix: "ariel-right-walk.",
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-    anims.create({
-      key: "ariel-front-walk",
-      frames: anims.generateFrameNames("atlas", {
-        prefix: "ariel-front-walk.",
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-    anims.create({
-      key: "ariel-back-walk",
-      frames: anims.generateFrameNames("atlas", {
-        prefix: "ariel-back-walk.",
-        start: 0,
-        end: 3,
-        zeroPad: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-	anims.create({
-      key: "ariel-wave",
-      frames: anims.generateFrameNames("atlas", {
-        prefix: "ariel-wave.",
-        start: 0,
-        end: 4,
-        zeroPad: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
+    
+    // Create the player and the player animations
+    this.player = this.add.player(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front")
 
     // ----------------
     // CAMERA
     const camera = this.cameras.main;
-	camera.startFollow(this.player);
+    camera.startFollow(this.player);
     camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.cursors = this.input.keyboard.createCursorKeys();
+
     // Camera resize behavior
     this.scale.on('resize', this.resize, this);
 
@@ -118,8 +59,7 @@ export class BaseScene extends Phaser.Scene {
       else if (obj.name === 'bigSign') {
         this.bigSigns.push(
           this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value,
-						   obj.properties[1].value, obj.properties[2].value, obj.properties[3].value,
-                           obj.properties[4].value)
+            obj.properties[1].value, obj.properties[2].value, obj.properties[3].value, obj.properties[4].value)
           // last parameters are signX, signY, sm_signX, sm_signY, text
         )
       }
@@ -131,8 +71,8 @@ export class BaseScene extends Phaser.Scene {
       }
     });
 
-	// ----------------
-    // TOP BUTTONS (PLAY MUSIC AND FULLSCREEN)
+    // ----------------
+    // UI BUTTONS (PLAY MUSIC AND FULLSCREEN)
     // MUSIC
     const self = this;
     const playmusic = this.add.image(240, 45, 'play').setScrollFactor(0).setDepth(105);
@@ -180,8 +120,8 @@ export class BaseScene extends Phaser.Scene {
     });
 
     // FULLSCREEN
-	const enterfullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
-	const leavefullscreen = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
+    const enterfullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
+    const leavefullscreen = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
 
     // If we are already in fullscreen, show the exit button
     function checkDisplayFullscreen(self) {
@@ -203,16 +143,16 @@ export class BaseScene extends Phaser.Scene {
         this.scene.scale.toggleFullscreen();
       }
     });
-	enterfullscreen.on('pointerover', () => enterfullscreen.setTint(0x6699ff));
-	enterfullscreen.on('pointerout', () => enterfullscreen.clearTint());
+    enterfullscreen.on('pointerover', () => enterfullscreen.setTint(0x6699ff));
+    enterfullscreen.on('pointerout', () => enterfullscreen.clearTint());
 
     leavefullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
       enterfullscreen.setVisible(true);
       leavefullscreen.setVisible(false);
       this.scene.scale.toggleFullscreen();
     });
-	leavefullscreen.on('pointerover', () => leavefullscreen.setTint(0x6699ff));
-	leavefullscreen.on('pointerout', () => leavefullscreen.clearTint());
+    leavefullscreen.on('pointerover', () => leavefullscreen.setTint(0x6699ff));
+    leavefullscreen.on('pointerout', () => leavefullscreen.clearTint());
   }
 
   // -----------------
@@ -227,20 +167,15 @@ export class BaseScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.LayerToCollide);
     this.LayerToCollide.setCollisionBetween(40, 41);
 
-    this.player.setCollideWorldBounds(true);
-    this.player.onWorldBounds = true;
+    // Set the player to collide with the world bounds
+    this.player.body.setCollideWorldBounds(true);
+    this.player.body.onWorldBounds = true;
   }
 
   // --------------------------------------------------------------------------------------------------
   // UPDATE
 
   update(time, delta) {
-    const speed = 175;
-    const prevVelocity = this.player.body.velocity.clone();
-
-    // Stop any previous movement from the last frame
-    this.player.body.setVelocity(0);
-
     let moveleft = false;
     let moveright = false;
     let moveup = false;
@@ -255,9 +190,9 @@ export class BaseScene extends Phaser.Scene {
       document.getElementById("game-menu").style.display = 'none';
       // let pointerPosition = pointer.position;
       // So that the x and y update if the camera moves and the mouse does not
-	  let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
-	  
-	  // Horizontal movement
+      let pointerPosition = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
+
+      // Horizontal movement
       if (Math.abs(pointerPosition.x - this.player.x) > 15) {  // To avoid glitching when the player hits the cursor
         if (pointerPosition.x > this.player.x) {
           moveright = true;
@@ -291,45 +226,8 @@ export class BaseScene extends Phaser.Scene {
     } else if (this.cursors.down.isDown) {
       movedown = true;
     }
-
-    // ----------------
-    // MOVEMENT ANIMATIONS
-    // Update the animation and give left/right animations precedence over up/down animations in diagonal movement
-    if (moveleft) {
-      this.player.body.setVelocityX(-speed);
-      this.player.anims.play("ariel-left-walk", true);
-    } else if (moveright) {
-      this.player.body.setVelocityX(speed);
-      this.player.anims.play("ariel-right-walk", true);
-    }
-    if (moveup) {
-      this.player.body.setVelocityY(-speed);
-      if (!(moveleft || moveright)) {    // When moving diagonally display the left / right animation
-        this.player.anims.play("ariel-back-walk", true);
-      }
-    } else if (movedown) {
-      this.player.body.setVelocityY(speed);
-      if (!(moveleft || moveright)) {    // When moving diagonally display the left / right animation
-        this.player.anims.play("ariel-front-walk", true);
-      }
-    }
-
-    // If not moving (and not waving or at the start of the game), stop animations and pick and idle frame
-    if (!(moveleft || moveright || moveup || movedown) &&
-		// This next part is so that it doesn't stop the waving animation in the overworld
-		// Second disjunct is if it was already playing it (from prev iteration of Overworld's update)
-		// First disjunct is bc at the start of the game currentAnim is null, comparing with .key gives an error
-	    !(this.player.anims.currentAnim == null || this.player.anims.currentAnim.key === 'ariel-wave')) 
-	{
-      this.player.anims.stop();
-      if (prevVelocity.x < 0) this.player.setTexture("atlas", "ariel-left");
-      else if (prevVelocity.x > 0) this.player.setTexture("atlas", "ariel-right");
-      else if (prevVelocity.y < 0) this.player.setTexture("atlas", "ariel-back");
-      else if (prevVelocity.y > 0) this.player.setTexture("atlas", "ariel-front");
-    }
-
-    // Normalize and scale the velocity so that player can't move faster along a diagonal
-    this.player.body.velocity.normalize().scale(speed);
+    
+    this.player.update(moveleft, moveright, moveup, movedown);
 
     // ---------------------
     // INTERACTIVE OBJECTS
