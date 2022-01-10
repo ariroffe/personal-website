@@ -1,7 +1,8 @@
 import {Sign} from "./sign.js";
 import {BigSign} from "./bigsign.js";
 import {Door} from "./door.js"
-import {Player} from "./player.js"
+import {Player} from "./player.js";
+import {FullscreenButton, MusicButton} from "./UIButton.js"
 
 // To be able to do scene.add.sign(...)
 Phaser.GameObjects.GameObjectFactory.register('sign', function (x, y, text, direction) {
@@ -21,4 +22,12 @@ Phaser.GameObjects.GameObjectFactory.register('door', function (x, y, height, wi
 // To be able to do scene.add.player(...)
 Phaser.GameObjects.GameObjectFactory.register('player', function (x, y, texture, frame) {
 	return new Player(this.scene, x, y, texture, frame);
+})
+
+// Music and fullscreen buttons
+Phaser.GameObjects.GameObjectFactory.register('fullscreenButton', function (x, y, texture1, texture2) {
+	return new FullscreenButton(this.scene, x, y, texture1, texture2);
+})
+Phaser.GameObjects.GameObjectFactory.register('musicButton', function (x, y, texture1, texture2) {
+	return new MusicButton(this.scene, x, y, texture1, texture2);
 })

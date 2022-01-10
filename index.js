@@ -78,16 +78,12 @@ window.addEventListener('resize', function (event) {
 
 let pic_circ = document.getElementById("pic-circ");
 let menu = document.getElementById("game-menu");
-window.mouseOverMenu = false; // Must use this in order for the game not to register the click, event.stopPropagation not working
 
-// Check if you are clicking on the pic / menu or outside of it
-pic_circ.addEventListener("mouseenter", () => mouseOverMenu = true);
-pic_circ.addEventListener("mouseleave", () => mouseOverMenu = false);
-menu.addEventListener("mouseenter", () => mouseOverMenu = true);
-menu.addEventListener("mouseleave", () => mouseOverMenu = false);
-// For mobile/touch devices mouseenter and mouseleave will not work
-document.addEventListener('touchstart', (ev) => {
-  if (ev.target.id === 'pic-circ' || ev.target.className === 'game-menu-link') {
+// We use this trick in order for the player not to move when menus are clicked
+// (see also base.js's update and UIButton.js's clickButton)
+window.mouseOverMenu = false;
+document.addEventListener('pointerdown', (ev) => {
+  if (ev.target.id === 'pic-circ' || ev.target.id === 'game-menu' || ev.target.className === 'game-menu-link') {
     window.mouseOverMenu = true;
   } else {
     window.mouseOverMenu = false;

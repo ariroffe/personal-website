@@ -6,21 +6,20 @@ export class BaseScene extends Phaser.Scene {
 
   // --------------------------------------------------------------------------------------------------
   // CREATE
-
   create(tilemapKey) {
     // ----------------
     // MAP AND TILESET
     this.map = this.make.tilemap({key: tilemapKey});
     // const tileset = this.map.addTilesetImage("tileset", "TilesetImage");
-    const tileset = this.map.addTilesetImage("tileset", "TilesetImage", 32, 32, 1, 2);  // Add margin and spacing for the extruded image:
+    // With added margin and spacing for the extruded image:
+    const tileset = this.map.addTilesetImage("tileset", "TilesetImage", 32, 32, 1, 2);
 
     // Map layers (defined in Tiled)
-    const ground1Layer = this.map.createLayer("Ground1", tileset, 0, 0);
-    const ground2Layer = this.map.createLayer("Ground2", tileset, 0, 0);
-    const collision1Layer = this.map.createLayer("Collision1", tileset, 0, 0);
-    const collision2Layer = this.map.createLayer("Collision2", tileset, 0, 0);
-    const aboveLayer = this.map.createLayer("Above", tileset, 0, 0);
-    aboveLayer.setDepth(10);  // To have the "Above" layer sit on top of the player, we give it a depth.
+    this.map.createLayer("Ground1", tileset, 0, 0);
+    this.map.createLayer("Ground2", tileset, 0, 0);
+    this.map.createLayer("Collision1", tileset, 0, 0);
+    this.map.createLayer("Collision2", tileset, 0, 0);
+    this.map.createLayer("Above", tileset, 0, 0).setDepth(10);  // To have the "Above" layer sit on top of the player, we give it a depth.
     // The layer with wich the player will collide
     this.LayerToCollide = this.map.createLayer("CollisionLayer", tileset, 0, 0);
     this.LayerToCollide.setVisible(false);  // Comment out this line if you wish to see which objects the player will collide with
@@ -30,11 +29,11 @@ export class BaseScene extends Phaser.Scene {
     // Get the spawn point
     const spawnPoint = this.map.findObject("Objects", obj => obj.name === "Spawn Point");
     
-    // Create the player and the player animations
+    // Create the player and the player animations (see player.js)
     this.player = this.add.player(spawnPoint.x, spawnPoint.y, "atlas", "ariel-front")
 
     // ----------------
-    // CAMERA
+    // CAMERA AND CURSORS
     const camera = this.cameras.main;
     camera.startFollow(this.player);
     camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -73,90 +72,11 @@ export class BaseScene extends Phaser.Scene {
 
     // ----------------
     // UI BUTTONS (PLAY MUSIC AND FULLSCREEN)
-    // MUSIC
-    const self = this;
-    const playmusic = this.add.image(240, 45, 'play').setScrollFactor(0).setDepth(105);
-    const stopmusic = this.add.image(240, 45, 'mute').setScrollFactor(0).setDepth(105).setVisible(false);
-
-    // If the music already exists and is playing (e.g. after a scene switch), display the pause animation
-    function checkDisplayPause(self) {
-      const prevMusic = self.sound.get('music')
-      if (prevMusic !== null && prevMusic.isPlaying) {
-        stopmusic.setVisible(true);
-        playmusic.setVisible(false);
-      } else {
-        stopmusic.setVisible(false);
-        playmusic.setVisible(true);
-      }
-    }
-    checkDisplayPause(self);  // Run it once in the create method
-    this.events.on('wake', () => checkDisplayPause(self))  // And again after each wake event
-
-    // Music will load asyncronously, once the player hits the play button, bc it is a large file
-    // If we put the loading in preload it will take longer to init the game
-    playmusic.setInteractive({useHandCursor: true}).on('pointerdown', function () {
-      if (!self.load.isLoading()) {  // Music will load on click, check that it not loading from prev click
-        const music = self.sound.get('music');  // null if the key does not exist yet (i.e. audio not loaded)
-        if (music !== null) {  // The key exists (was loaded from prev file)
-          music.resume();
-          stopmusic.setVisible(true);
-          playmusic.setVisible(false);
-        } else {  // The audio is not loaded, load it now
-          self.load.audio('music', '/assets/prod/audio/music.mp3');
-          self.load.once('complete', function() {
-            self.sound.play('music');
-            stopmusic.setVisible(true);
-            playmusic.setVisible(false);
-          });
-          self.load.start();
-        }
-      }
-    });
-    stopmusic.setInteractive({useHandCursor: true}).on('pointerdown', function () {
-      stopmusic.setVisible(false);
-      playmusic.setVisible(true);
-      const music = self.sound.get('music');
-      if (music !== null) music.pause();  // The conditional should always be true here but I leave it just in case
-    });
-
-    // FULLSCREEN
-    const enterfullscreen = this.add.image(140, 45, 'fullscreen').setScrollFactor(0).setDepth(105);
-    const leavefullscreen = this.add.image(50, 45, 'fullscreen2').setScrollFactor(0).setDepth(105).setVisible(false);
-
-    // If we are already in fullscreen, show the exit button
-    function checkDisplayFullscreen(self) {
-      if (self.scale.isFullscreen) {
-        enterfullscreen.setVisible(false);
-        leavefullscreen.setVisible(true);
-      } else {
-        enterfullscreen.setVisible(true);
-        leavefullscreen.setVisible(false);
-      }
-    }
-    checkDisplayFullscreen(self);  // Run it once in the create method
-    this.events.on('wake', () => checkDisplayFullscreen(self))  // And again after each wake event
-
-    enterfullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
-      if (!window.mouseOverMenu) {
-        enterfullscreen.setVisible(false);
-        leavefullscreen.setVisible(true);
-        this.scene.scale.toggleFullscreen();
-      }
-    });
-    enterfullscreen.on('pointerover', () => enterfullscreen.setTint(0x6699ff));
-    enterfullscreen.on('pointerout', () => enterfullscreen.clearTint());
-
-    leavefullscreen.setInteractive({useHandCursor: true}).on('pointerdown', function () {
-      enterfullscreen.setVisible(true);
-      leavefullscreen.setVisible(false);
-      this.scene.scale.toggleFullscreen();
-    });
-    leavefullscreen.on('pointerover', () => leavefullscreen.setTint(0x6699ff));
-    leavefullscreen.on('pointerout', () => leavefullscreen.clearTint());
+    this.musicButton = this.add.musicButton(240, 45, 'play', 'mute');
+    this.fullscreenButton = this.add.fullscreenButton(140, 45, 'enterfullscreen', 'exitfullscreen');
   }
 
-  // -----------------
-
+  // ---------------------------------------------------
   resize (gameSize, baseSize, displaySize, resolution) {
      this.cameras.resize(gameSize.width, gameSize.height);
   }
@@ -174,7 +94,6 @@ export class BaseScene extends Phaser.Scene {
 
   // --------------------------------------------------------------------------------------------------
   // UPDATE
-
   update(time, delta) {
     let moveleft = false;
     let moveright = false;
@@ -226,14 +145,15 @@ export class BaseScene extends Phaser.Scene {
     } else if (this.cursors.down.isDown) {
       movedown = true;
     }
-    
+
+    // Update player velocity and animation
     this.player.update(moveleft, moveright, moveup, movedown);
 
     // ---------------------
     // INTERACTIVE OBJECTS
     // Hide the bigSigns and signs
-    this.bigSigns.forEach((bigSign) => bigSign.hideSignText(bigSign, this.player));
     if (moveleft || moveright || moveup || movedown) {
+      this.bigSigns.forEach((bigSign) => bigSign.hideSignText(bigSign, this.player));
       this.signs.forEach((sign) => sign.playerMovement(moveleft, moveright, moveup, movedown));
     }
   }

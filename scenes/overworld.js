@@ -16,8 +16,8 @@ export class OverworldScene extends BaseScene {
     this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
 	  this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
 	  this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
-	  this.load.image("fullscreen", "./assets/prod/other/fullscreen.png");
-    this.load.image("fullscreen2", "./assets/prod/other/fullscreen2.png");
+	  this.load.image("enterfullscreen", "./assets/prod/other/fullscreen.png");
+    this.load.image("exitfullscreen", "./assets/prod/other/fullscreen2.png");
 	  this.load.image("mute", "./assets/prod/other/sound.png");
     this.load.image("play", "./assets/prod/other/nosound.png");
 	  this.load.spritesheet('purple_tile', 'assets/prod/anims/purple_tile.png', { frameWidth: 32, frameHeight: 32 });
