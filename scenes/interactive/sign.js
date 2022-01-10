@@ -39,35 +39,44 @@ export class Sign extends Phaser.GameObjects.Zone
 		this.setInteractive().on('pointerdown', this.clickSign);
 		this.clickRadius = 100;
 		this.showByClick = false;
+
+		this.activated = false;
 	}
 
 	collideSign(player) {
-		if (this.direction === 'center') {
-			// Center hits from every direction
-			this.showSignText();
-		} else if (this.direction === 'up' && player.body.touching.up) {
-			this.showSignText();
-		} else if (this.direction === 'down' && player.body.touching.down) {
-			this.showSignText();
+		if (!this.activated) {
+			if (this.direction === 'center') {
+				// Center hits from every direction
+				this.showSignText();
+			} else if (this.direction === 'up' && player.body.touching.up) {
+				this.showSignText();
+			} else if (this.direction === 'down' && player.body.touching.down) {
+				this.showSignText();
+			}
 		}
 	}
 
 	clickSign() {
-		// getCenter necessary bc signs have setOrigin(0,1)
-		let distance = Phaser.Math.Distance.BetweenPoints(this.getCenter(), this.scene.player);
-		if (distance < this.clickRadius) {
-			this.scene.signs.forEach((other_sign) => other_sign.hideSignText());  // So there is no clutter
-			this.showSignText();
-			this.showByClick = true;
+		if (!this.activated) {
+			// getCenter necessary bc signs have setOrigin(0,1)
+			let distance = Phaser.Math.Distance.BetweenPoints(this.getCenter(), this.scene.player);
+			if (distance < this.clickRadius) {
+				if (this.scene.scene.key === 'UniversityScene') this.scene.signs.forEach((other_sign) => other_sign.hideSignText());  // So there is no clutter in the classroom
+				this.showSignText();
+				this.showByClick = true;
+			}
 		}
 	}
 
 	showSignText() {
 		this.signRect.setVisible(true);
 		this.signText.setVisible(true);
+		this.scene.showingSign = true;  // A property of the scene, see BaseScene's update
+		this.activated = true;
 	}
 
 	playerMovement(moveleft, moveright, moveup, movedown) {
+		// A check for activated is done in BaseScene before calling this
 		if (this.showByClick) {
 			// If the player activated the sign via pointerdown, then remove it only when she goes away
 			if (Phaser.Math.Distance.BetweenPoints(this.getCenter(), this.scene.player) > this.clickRadius) {
@@ -88,6 +97,8 @@ export class Sign extends Phaser.GameObjects.Zone
 		this.signRect.setVisible(false);
 		this.signText.setVisible(false);
 		this.showByClick = false;
+		this.scene.showingSign = false;  // A property of the scene, see BaseScene's update
+		this.activated = false;
 	}
 
 }

@@ -6,7 +6,7 @@ export class BigSign extends Phaser.GameObjects.Zone
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this).setOrigin(0, 1);
 		scene.physics.world.enable(this, 1);  // 1 is for static body
-		scene.physics.add.overlap(scene.player, this, () => this.showSignText(this, scene.player));
+		scene.physics.add.overlap(scene.player, this, () => this.showSignText(scene.player));
 
 		// Add the text and rectangle to the scene
 		// SMALL VERSION
@@ -59,31 +59,31 @@ export class BigSign extends Phaser.GameObjects.Zone
 		this.activated = false;     // So that the hideSignText code executes only if the bigSign was activated
 	}
 
-	showSignText(self, player) {
+	showSignText(player) {
 		// So that the overlap is not detected if the players feet are
-		// outside the tile. +20 is bc player.y is at the middle of the sprite, but self.y is at the bottom,
+		// outside the tile. +20 is bc player.y is at the middle of the sprite, but this.y is at the bottom,
 		// bc we did .setOrigin(..., 1)
-		if (Math.ceil(player.y+20) <= self.y) {
+		if (Math.ceil(player.y+20) <= this.y) {
 			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.stop().setTint(0xffff00));
 			this.activated = true;
 			if (window.innerWidth < 900) {
-				self.sm_signRect.setVisible(true);
-				self.sm_signText.setVisible(true);
+				this.sm_signRect.setVisible(true);
+				this.sm_signText.setVisible(true);
 			} else {
-				self.signRect.setVisible(true);
-				self.signText.setVisible(true);
+				this.signRect.setVisible(true);
+				this.signText.setVisible(true);
 			}
 			// A bit hacky, but if in the Overworld, play the waving animation
-			if (self.scene.scene.key === 'OverworldScene' && player.body.velocity.x === 0 && player.body.velocity.y === 0) {
+			if (this.scene.scene.key === 'OverworldScene' && player.body.velocity.x === 0 && player.body.velocity.y === 0) {
 				player.anims.play("ariel-wave", true);
 			}
 		}
 	}
 
-	hideSignText(self, player) {
+	hideSignText(player) {
 		if (this.activated) {  // So that the following code does not execute at every frame, but only once to hide the text
 			// Check that the player is either not embedded nor touching or with feet outside the square
-			if ((!player.body.embedded && player.body.touching.none) || Math.ceil(player.y+20) > self.y) {
+			if ((!player.body.embedded && player.body.touching.none) || Math.ceil(player.y+20) > this.y) {
 				this.signRect.setVisible(false);
 				this.signText.setVisible(false);
 				this.sm_signRect.setVisible(false);

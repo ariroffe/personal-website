@@ -45,6 +45,7 @@ export class BaseScene extends Phaser.Scene {
     // ----------------
     // INTERACTIVE OBJECTS
     this.signs = [];
+    this.showingSign = false;
     this.map.filterObjects("Objects", obj => {
 
       // DOORS
@@ -70,8 +71,8 @@ export class BaseScene extends Phaser.Scene {
 
     // ----------------
     // UI BUTTONS (PLAY MUSIC AND FULLSCREEN)
-    this.musicButton = this.add.musicButton(240, 45, 'play', 'mute');
-    this.fullscreenButton = this.add.fullscreenButton(140, 45, 'enterfullscreen', 'exitfullscreen');
+    this.musicButton = this.add.musicButton(130, 45, 'play', 'mute');
+    if (this.sys.game.device.fullscreen.available) this.fullscreenButton = this.add.fullscreenButton(200, 45, 'enterfullscreen', 'exitfullscreen');
   }
 
   // ---------------------------------------------------
@@ -149,11 +150,14 @@ export class BaseScene extends Phaser.Scene {
 
     // ---------------------
     // INTERACTIVE OBJECTS
-    // Hide the bigSign and signs
-    if (moveleft || moveright || moveup || movedown) {
-      this.signs.forEach((sign) => sign.playerMovement(moveleft, moveright, moveup, movedown));
+    // Hide the signs
+    if (this.showingSign && (moveleft || moveright || moveup || movedown)) {
+      this.signs.forEach((sign) => {
+        if (sign.activated) sign.playerMovement(moveleft, moveright, moveup, movedown)
+      });
     }
-    this.bigSign.hideSignText(this.bigSign, this.player);  // Needs to be outside the conitional in case the player goes out but stops moving
+    // Hide the bigSign
+    this.bigSign.hideSignText(this.player);  // Needs to be outside the conitional in case the player goes out and immediately stops moving
   }
 
 }

@@ -36,12 +36,19 @@ class UIButton extends Phaser.GameObjects.Image
 
 
 export class FullscreenButton extends UIButton {
+  constructor(scene, x, y, texture1, texture2) {
+    super(scene, x, y, texture1, texture2);
+
+    scene.scale.on('enterfullscreen', () => this.enterFullScreen(this))
+    scene.scale.on('leavefullscreen', () => this.leaveFullScreen(this))
+  }
+
   setInitialTexture(self) {
     if (self.scene.scale.isFullscreen) {
       // If we are already at fullscreen
       self.setTexture(self.texture2);  // set the exit fullscreen texture
-      self.x = self.initialX - 100;    // move buttons to the left
-      self.scene.musicButton.x = self.scene.musicButton.initialX - 100;
+      self.x = self.initialX - 90;    // move buttons to the left
+      self.scene.musicButton.x = self.scene.musicButton.initialX - 90;
     } else {
       // Otherwise, the enter fullscreen one, and return the buttons to orig place
       self.setTexture(self.texture1);
@@ -51,23 +58,33 @@ export class FullscreenButton extends UIButton {
   }
 
   activateButton(self, scene) {
-    self.scene.scale.startFullscreen();
+    console.log('activate')
+    self.scene.scale.startFullscreen();  // Will fire an event that calls the function below
+                                         // Done like this in case the user enters fullscreen without pressing the button
+  }
+
+  enterFullScreen(self) {
     self.setTexture(self.texture2);
 
     // Move the buttons to the left (since the menu disappears)
-    self.x = self.initialX - 100;
-    scene.musicButton.x = scene.musicButton.initialX - 100;
+    self.x = self.initialX - 90;
+    self.scene.musicButton.x = self.scene.musicButton.initialX - 90;
 
     self.activated = true;
   }
 
   deactivateButton(self, scene) {
-    self.scene.scale.stopFullscreen();
+    console.log('deactivate')
+    self.scene.scale.stopFullscreen();  // Will fire an event that calls the function below
+                                        // Done like this in case the user exits fullscreen mode without pressing the button
+  }
+
+  leaveFullScreen(self) {
     self.setTexture(self.texture1);
 
     // Move the buttons to the right (since the menu resappears)
     self.x = self.initialX;
-    scene.musicButton.x = scene.musicButton.initialX;
+    self.scene.musicButton.x = self.scene.musicButton.initialX;
 
     self.activated = false;
   }
