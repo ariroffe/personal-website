@@ -8,18 +8,16 @@ import {SoftwareScene} from "./scenes/software.js";
 
 const config = {
   type: Phaser.AUTO,
+  parent: "game-container",
   pixelArt: true,
+  autoRound: true,
+  autoFocus: true,
   scale: {
-	mode: Phaser.Scale.NONE,
-    autoRound: true,
-	autoFocus: true,
-	autoCenter: Phaser.Scale.NO_CENTER,
-	parent: "game-container",
-    // e.g. innerWidth * 1.25 for my laptop screen
-    width: getWidth(),
-	height: getHeight(),
-    // e.g. 1 / 1.25 = 0.8 for my laptop screen (compensates for the larger size)
-	zoom: (resizeDPR() ? Math.floor(window.devicePixelRatio) / window.devicePixelRatio : 1)
+	  mode: Phaser.Scale.NONE,
+    autoCenter: Phaser.Scale.NO_CENTER,
+    width: getWidth(),  // e.g. innerWidth * 1.25 for my laptop screen on Windows
+	  height: getHeight(),  // e.g. innerWidth * 1.25 for my laptop screen on Windows
+    zoom: (resizeDPR() ? Math.floor(window.devicePixelRatio) / window.devicePixelRatio : 1)  // e.g. 1 / 1.25 = 0.8 for my laptop screen (compensates for the larger size)
   },
   physics: {
     default: "arcade",
