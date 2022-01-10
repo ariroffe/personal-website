@@ -1,12 +1,11 @@
-export class Sign extends Phaser.GameObjects.Image
+export class Sign extends Phaser.GameObjects.Zone
 {
 	constructor(scene, x, y, text, direction) {
-		// super(scene, x, y, 'empty_tile');  // no need to do this, just give it null as a texture
-		super(scene, x, y);
+		super(scene, x, y, 32, 32);
 
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this).setOrigin(0, 1);
-		scene.physics.add.existing(this, true);  // true is for static body
+		scene.physics.world.enable(this, 1);  // 1 is for static body
 
 		// Direction
 		this.direction = direction;

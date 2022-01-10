@@ -1,13 +1,11 @@
-export class BigSign extends Phaser.GameObjects.Image
+export class BigSign extends Phaser.GameObjects.Zone
 {
-	constructor(scene, x, y, tileHeight, tileWidth, signX, signY, sm_signX, sm_signY, text) {
-		// super(scene, x, y, 'empty_tile');  // no need to do this, just give it null as a texture
-		super(scene, x, y);
+	constructor(scene, x, y, width, height, signX, signY, sm_signX, sm_signY, text) {
+		super(scene, x, y, width, height);
 
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this).setOrigin(0, 1);
-		scene.physics.add.existing(this, true);  // true is for static body
-		this.body.setSize(tileWidth, tileHeight).setOffset(0, 32-tileHeight);  // Resize hitbox
+		scene.physics.world.enable(this, 1);  // 1 is for static body
 		scene.physics.add.overlap(scene.player, this, () => this.showSignText(this, scene.player));
 
 		// Add the text and rectangle to the scene
@@ -33,7 +31,7 @@ export class BigSign extends Phaser.GameObjects.Image
 		    .setDepth(100)
 			.setVisible(false);
 
-		// Add the animations to the scene
+		// Add the glowing animations to the scene
 		scene.anims.create({
 		  	key: "purple-tile-anim",
 		  	frameRate: 6,
@@ -50,15 +48,15 @@ export class BigSign extends Phaser.GameObjects.Image
 		else {
 			this.purple_tiles.push(scene.add.sprite(x - 8, y, "purple_tile").setOrigin(0, 1));
 			// If the tile height is more than 1 tile, then the bigSign has 4 tiles
-			if (tileHeight > 32) {
+			if (height > 32) {
 				this.purple_tiles.push(scene.add.sprite(x - 8, y - 32, "purple_tile").setOrigin(0, 1));
 				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y, "purple_tile").setOrigin(0, 1));
 				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y - 32, "purple_tile").setOrigin(0, 1));
 			}
-			this.purple_tiles.forEach((purple_tile) => purple_tile.setDepth(2).play("purple-tile-anim"));
 		}
+		this.purple_tiles.forEach((purple_tile) => purple_tile.setDepth(2).play("purple-tile-anim", true));
 
-		this.prevActivated = false  // It will only show the shining animation if you have not stood on it before
+		this.activated = false;     // So that the hideSignText code executes only if the bigSign was activated
 	}
 
 	showSignText(self, player) {
@@ -66,8 +64,8 @@ export class BigSign extends Phaser.GameObjects.Image
 		// outside the tile. +20 is bc player.y is at the middle of the sprite, but self.y is at the bottom,
 		// bc we did .setOrigin(..., 1)
 		if (Math.ceil(player.y+20) <= self.y) {
-			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.pause().setTint(0xffff00));
-			this.prevActivated = true;
+			this.purple_tiles.forEach((purple_tile) => purple_tile.anims.stop().setTint(0xffff00));
+			this.activated = true;
 			if (window.innerWidth < 900) {
 				self.sm_signRect.setVisible(true);
 				self.sm_signText.setVisible(true);
@@ -83,17 +81,18 @@ export class BigSign extends Phaser.GameObjects.Image
 	}
 
 	hideSignText(self, player) {
-		// Runs at every scene's update. Checks that the player is either not embedded or (embedded & with feet outside)
-		if (!player.body.embedded || Math.ceil(player.y+20) > self.y) {
-			this.signRect.setVisible(false);
-			this.signText.setVisible(false);
-			this.sm_signRect.setVisible(false);
-			this.sm_signText.setVisible(false);
-			this.purple_tiles.forEach((purple_tile) => {
-				purple_tile.clearTint();  // Remove the tint
-				if (!this.prevActivated) purple_tile.play("purple-tile-anim", true);  // Don't play the anim again
-			});
+		if (this.activated) {  // So that the following code does not execute at every frame, but only once to hide the text
+			// Check that the player is either not embedded nor touching or with feet outside the square
+			if ((!player.body.embedded && player.body.touching.none) || Math.ceil(player.y+20) > self.y) {
+				this.signRect.setVisible(false);
+				this.signText.setVisible(false);
+				this.sm_signRect.setVisible(false);
+				this.sm_signText.setVisible(false);
+				this.purple_tiles.forEach((purple_tile) => {
+					purple_tile.clearTint();  // Remove the tint
+				});
+				this.activated = false;
+			}
 		}
 	}
-
 }

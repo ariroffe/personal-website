@@ -1,18 +1,14 @@
-export class Door extends Phaser.GameObjects.Image
+export class Door extends Phaser.GameObjects.Zone
 {
-	constructor(scene, x, y, height, width, destination, link) {
-		// super(scene, x, y, 'empty_tile');  // no need to do this, just give it null as a texture
-		super(scene, x, y);
+	constructor(scene, x, y, width, height, destination, link) {
+		super(scene, x, y, width, height);
 
 		// Tiled coordinate is of the bottom left of the object
 		this.setOrigin(0, 1);
 
 		// Add the GameObject and collider to the scene
 		scene.add.existing(this);
-		scene.physics.add.existing(this, true);  // true is for static body
-		this.body.setSize(width, height, false).setOffset(0, 32-height);
-		// The false is to make the body's top left coincide with the image's top left
-		// The offset is to move the y to the bottom (32 is the height of the image)
+		scene.physics.world.enable(this, 1);  // 1 is for static body
 
 		this.destination = destination;
 		this.link = link;

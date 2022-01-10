@@ -45,22 +45,20 @@ export class BaseScene extends Phaser.Scene {
     // ----------------
     // INTERACTIVE OBJECTS
     this.signs = [];
-    this.bigSigns = [];
     this.map.filterObjects("Objects", obj => {
 
       // DOORS
       if (obj.name === 'door') {
-        this.add.door(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value, obj.properties[1].value);
+        this.add.door(Math.round(obj.x), Math.round(obj.y), obj.width, obj.height, obj.properties[0].value, obj.properties[1].value);
         // last 2: destination (str) and link (bool, if true leads to a redirect)
       }
 
       // BIGSIGNS (text that shows on the purple squares)
       else if (obj.name === 'bigSign') {
-        this.bigSigns.push(
-          this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.height, obj.width, obj.properties[0].value,
-            obj.properties[1].value, obj.properties[2].value, obj.properties[3].value, obj.properties[4].value)
+        this.bigSign = this.add.bigSign(Math.round(obj.x), Math.round(obj.y), obj.width, obj.height,
+          obj.properties[0].value, obj.properties[1].value, obj.properties[2].value, obj.properties[3].value,
+          obj.properties[4].value)
           // last parameters are signX, signY, sm_signX, sm_signY, text
-        )
       }
 
       // SIGNS
@@ -151,11 +149,11 @@ export class BaseScene extends Phaser.Scene {
 
     // ---------------------
     // INTERACTIVE OBJECTS
-    // Hide the bigSigns and signs
+    // Hide the bigSign and signs
     if (moveleft || moveright || moveup || movedown) {
-      this.bigSigns.forEach((bigSign) => bigSign.hideSignText(bigSign, this.player));
       this.signs.forEach((sign) => sign.playerMovement(moveleft, moveright, moveup, movedown));
     }
+    this.bigSign.hideSignText(this.bigSign, this.player);  // Needs to be outside the conitional in case the player goes out but stops moving
   }
 
 }
