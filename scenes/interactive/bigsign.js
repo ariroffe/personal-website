@@ -33,25 +33,30 @@ export class BigSign extends Phaser.GameObjects.Zone
 
 		// Add the glowing animations to the scene
 		scene.anims.create({
-		  	key: "purple-tile-anim",
-		  	frameRate: 6,
-		  	frames: scene.anims.generateFrameNumbers("purple_tile", { start: 0, end: 2 }),
-		  	yoyo: true,
-		  	delay: 400,
+      key: "purple-tile-anim",
+      frames: scene.anims.generateFrameNames("anims_ui", {
+        prefix: "purple.",
+        start: 0,
+        end: 2,
+        zeroPad: 3
+      }),
+      frameRate: 6,
+      yoyo: true,
+			delay: 400,
 			repeatDelay: 800,
 			repeat: -1
-		});
+    });
 		this.purple_tiles = [];
 		if (scene.scene.key === 'ResearchScene') {
-			this.purple_tiles.push(scene.add.sprite(x - 30, y - 10, "purple_tile").setOrigin(0, 1));
+			this.purple_tiles.push(scene.add.sprite(x - 30, y - 10, "anims_ui", "purple.000").setOrigin(0, 1));
 		}
 		else {
-			this.purple_tiles.push(scene.add.sprite(x - 8, y, "purple_tile").setOrigin(0, 1));
+			this.purple_tiles.push(scene.add.sprite(x - 8, y, "anims_ui", "purple.000").setOrigin(0, 1));
 			// If the tile height is more than 1 tile, then the bigSign has 4 tiles
 			if (height > 32) {
-				this.purple_tiles.push(scene.add.sprite(x - 8, y - 32, "purple_tile").setOrigin(0, 1));
-				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y, "purple_tile").setOrigin(0, 1));
-				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y - 32, "purple_tile").setOrigin(0, 1));
+				this.purple_tiles.push(scene.add.sprite(x - 8, y - 32, "anims_ui", "purple.000").setOrigin(0, 1));
+				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y, "anims_ui", "purple.000").setOrigin(0, 1));
+				this.purple_tiles.push(scene.add.sprite(x - 8 + 32, y - 32, "anims_ui", "purple.000").setOrigin(0, 1));
 			}
 		}
 		this.purple_tiles.forEach((purple_tile) => purple_tile.setDepth(2).play("purple-tile-anim", true));

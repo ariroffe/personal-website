@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"image": "atlas.png",
+		"image": "player.png",
 		"format": "RGBA8888",
 		"size": {
 			"w": 510,

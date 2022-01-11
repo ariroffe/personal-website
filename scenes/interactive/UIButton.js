@@ -1,7 +1,7 @@
 class UIButton extends Phaser.GameObjects.Image
 {
   constructor(scene, x, y, texture1, texture2) {
-    super(scene, x, y, texture1);
+    super(scene, x, y, "anims_ui", texture1);
 
     // Add to scene
     scene.add.existing(this);
@@ -46,12 +46,12 @@ export class FullscreenButton extends UIButton {
   setInitialTexture(self) {
     if (self.scene.scale.isFullscreen) {
       // If we are already at fullscreen
-      self.setTexture(self.texture2);  // set the exit fullscreen texture
+      self.setTexture("anims_ui", self.texture2);  // set the exit fullscreen texture
       self.x = self.initialX - 70;    // move buttons to the left
       self.scene.musicButton.x = self.scene.musicButton.initialX - 70;
     } else {
       // Otherwise, the enter fullscreen one, and return the buttons to orig place
-      self.setTexture(self.texture1);
+      self.setTexture("anims_ui", self.texture1);
       self.x = self.initialX;
       self.scene.musicButton.x = self.scene.musicButton.initialX;
     }
@@ -63,7 +63,7 @@ export class FullscreenButton extends UIButton {
   }
 
   enterFullScreen(self) {
-    self.setTexture(self.texture2);
+    self.setTexture("anims_ui", self.texture2);
 
     // Move the buttons to the left (since the menu disappears)
     self.x = self.initialX - 70;
@@ -78,7 +78,7 @@ export class FullscreenButton extends UIButton {
   }
 
   leaveFullScreen(self) {
-    self.setTexture(self.texture1);
+    self.setTexture("anims_ui", self.texture1);
 
     // Move the buttons to the right (since the menu resappears)
     self.x = self.initialX;
@@ -94,9 +94,9 @@ export class MusicButton extends UIButton {
     const prevMusic = self.scene.sound.get('music')
     // If the 'music' key exists and it is playing, set the mute button;
     if (prevMusic !== null && prevMusic.isPlaying) {
-      self.setTexture(self.texture2);
+      self.setTexture("anims_ui", self.texture2);
     } else {
-      self.setTexture(self.texture1);  // Otherwise, the play music one
+      self.setTexture("anims_ui", self.texture1);  // Otherwise, the play music one
     }
   }
 
@@ -107,15 +107,15 @@ export class MusicButton extends UIButton {
       if (music !== null) {
         // The key exists (audio file was loaded in previous click or scene)
         music.resume();
-        self.setTexture(self.texture2);
+        self.setTexture("anims_ui", self.texture2);
         self.activated = true;
       } else {
         // The audio is not loaded, load it now
-		self.setTexture("dots");  // put the dots while loading
+        self.setTexture("anims_ui", "dots");  // put the dots while loading
         scene.load.audio('music', '/assets/prod/audio/music.mp3');
         scene.load.once('complete', function() {
           scene.sound.play('music');
-          self.setTexture(self.texture2);
+          self.setTexture("anims_ui", self.texture2);
           self.activated = true;
         });
         scene.load.start();
@@ -126,7 +126,7 @@ export class MusicButton extends UIButton {
   deactivateButton(self, scene) {
     const music = scene.sound.get('music');
     if (music !== null) music.pause();  // The conditional should always be true here but I leave it just in case
-    self.setTexture(self.texture1);
+    self.setTexture("anims_ui", self.texture1);
     self.activated = false;
   }
 }

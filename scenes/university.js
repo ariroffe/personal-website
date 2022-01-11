@@ -8,7 +8,6 @@ export class UniversityScene extends BaseScene {
 
   preload() {
     document.getElementById('loading').style.display = 'flex';
-    this.load.spritesheet('fountain', 'assets/prod/anims/fountain.png', { frameWidth: 64, frameHeight: 64 });
     this.load.tilemapTiledJSON("UniversityMap", "./assets/prod/tilesets_and_maps/university-new.json");
   }
 
@@ -26,12 +25,16 @@ export class UniversityScene extends BaseScene {
     // Fountain animation
     this.anims.create({
       key: "fountain-anim",
+      frames: this.anims.generateFrameNames("anims_ui", {
+        prefix: "fountain.",
+        start: 1,
+        end: 3,
+        zeroPad: 3
+      }),
       frameRate: 5,
-      frames: this.anims.generateFrameNumbers("fountain", { start: 1, end: 3 }),
-      yoyo: false,
       repeat: -1
     });
-    const fountain = this.add.sprite(928, 608, "fountain");
+    const fountain = this.add.sprite(928, 608, "anims_ui", "fountain.000");
     fountain.playReverse("fountain-anim");
     // It is sitting exactly on top of the Tiled (fixed) fountain, so no need for a collider
 
