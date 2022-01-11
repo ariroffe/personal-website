@@ -13,14 +13,15 @@ export class OverworldScene extends BaseScene {
     // this.load.image("OverworldTiles", "./assets/prod/tilesets_and_maps/tileset.png");
     this.load.image("TilesetImage", "./assets/prod/tilesets_and_maps/tileset_extruded.png");
     this.load.tilemapTiledJSON("OverworldMap", "./assets/prod/tilesets_and_maps/overworld-new.json");
-    this.load.atlas("atlas", "./assets/prod/atlas/atlas.png", "./assets/prod/atlas/atlas.json");
-	  this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
-	  this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
-	  this.load.image("enterfullscreen", "./assets/prod/other/fullscreen.png");
+    this.load.atlas("atlas", "./assets/prod/atlas/player.png", "./assets/prod/atlas/player.json");
+    this.load.bitmapFont('pixelop', 'assets/prod/fonts/pixelop.png', 'assets/prod/fonts/pixelop.xml');
+    // this.load.bitmapFont('pixelopmono', 'assets/prod/fonts/pixelopmono.png', 'assets/prod/fonts/pixelopmono.xml');
+    this.load.image("enterfullscreen", "./assets/prod/other/fullscreen.png");
     this.load.image("exitfullscreen", "./assets/prod/other/fullscreen2.png");
-	  this.load.image("mute", "./assets/prod/other/sound.png");
+    this.load.image("mute", "./assets/prod/other/sound.png");
     this.load.image("play", "./assets/prod/other/nosound.png");
-	  this.load.spritesheet('purple_tile', 'assets/prod/anims/purple_tile.png', { frameWidth: 32, frameHeight: 32 });
+	this.load.image("dots", "./assets/prod/other/dots.png");
+    this.load.spritesheet('purple_tile', 'assets/prod/anims/purple_tile.png', { frameWidth: 32, frameHeight: 32 });
   }
 
   create() {

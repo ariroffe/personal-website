@@ -1,0 +1,5 @@
+size 40
+padding 2
+rounded 2
+background #a9a9a9 transp 0.82
+foreground #861388

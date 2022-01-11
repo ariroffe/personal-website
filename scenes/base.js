@@ -71,8 +71,8 @@ export class BaseScene extends Phaser.Scene {
 
     // ----------------
     // UI BUTTONS (PLAY MUSIC AND FULLSCREEN)
-    this.musicButton = this.add.musicButton(130, 45, 'play', 'mute');
-    if (this.sys.game.device.fullscreen.available) this.fullscreenButton = this.add.fullscreenButton(200, 45, 'enterfullscreen', 'exitfullscreen');
+    this.musicButton = this.add.musicButton(120, 45, 'play', 'mute');
+    if (this.sys.game.device.fullscreen.available) this.fullscreenButton = this.add.fullscreenButton(180, 45, 'enterfullscreen', 'exitfullscreen');
   }
 
   // ---------------------------------------------------

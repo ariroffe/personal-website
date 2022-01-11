@@ -10,7 +10,7 @@ export class BigSign extends Phaser.GameObjects.Zone
 
 		// Add the text and rectangle to the scene
 		// SMALL VERSION
-		this.sm_signText = scene.add.bitmapText(sm_signX, sm_signY, 'pixelopmono', text, 16, 1)
+		this.sm_signText = scene.add.bitmapText(sm_signX, sm_signY, 'pixelop', text, 16, 1)
 			.setOrigin(0, 1)
 		    .setDepth(101)
 			.setVisible(false);

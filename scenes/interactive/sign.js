@@ -22,7 +22,7 @@ export class Sign extends Phaser.GameObjects.Zone
 			offsetY = 0;
 		}
 		
-		this.signText = scene.add.bitmapText(Math.round(x+offsetX), Math.round(y+offsetY), 'pixelopmono', text, 16, 1)
+		this.signText = scene.add.bitmapText(Math.round(x+offsetX), Math.round(y+offsetY), 'pixelop', text, 16, 1)
 			.setOrigin(0.5, 1)
 			.setDepth(101)
 			.setVisible(false);

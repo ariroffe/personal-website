@@ -47,8 +47,8 @@ export class FullscreenButton extends UIButton {
     if (self.scene.scale.isFullscreen) {
       // If we are already at fullscreen
       self.setTexture(self.texture2);  // set the exit fullscreen texture
-      self.x = self.initialX - 90;    // move buttons to the left
-      self.scene.musicButton.x = self.scene.musicButton.initialX - 90;
+      self.x = self.initialX - 70;    // move buttons to the left
+      self.scene.musicButton.x = self.scene.musicButton.initialX - 70;
     } else {
       // Otherwise, the enter fullscreen one, and return the buttons to orig place
       self.setTexture(self.texture1);
@@ -58,7 +58,6 @@ export class FullscreenButton extends UIButton {
   }
 
   activateButton(self, scene) {
-    console.log('activate')
     self.scene.scale.startFullscreen();  // Will fire an event that calls the function below
                                          // Done like this in case the user enters fullscreen without pressing the button
   }
@@ -67,14 +66,13 @@ export class FullscreenButton extends UIButton {
     self.setTexture(self.texture2);
 
     // Move the buttons to the left (since the menu disappears)
-    self.x = self.initialX - 90;
-    self.scene.musicButton.x = self.scene.musicButton.initialX - 90;
+    self.x = self.initialX - 70;
+    self.scene.musicButton.x = self.scene.musicButton.initialX - 70;
 
     self.activated = true;
   }
 
   deactivateButton(self, scene) {
-    console.log('deactivate')
     self.scene.scale.stopFullscreen();  // Will fire an event that calls the function below
                                         // Done like this in case the user exits fullscreen mode without pressing the button
   }
@@ -113,6 +111,7 @@ export class MusicButton extends UIButton {
         self.activated = true;
       } else {
         // The audio is not loaded, load it now
+		self.setTexture("dots");  // put the dots while loading
         scene.load.audio('music', '/assets/prod/audio/music.mp3');
         scene.load.once('complete', function() {
           scene.sound.play('music');
