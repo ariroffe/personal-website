@@ -174,7 +174,7 @@
 40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,0,0,40,0,0,40,0,0,40,0,0,0,0,0,0,0,0,0,0,40
 </data>
  </layer>
- <objectgroup id="6" name="Objects" visible="0">
+ <objectgroup id="6" name="Objects">
   <object id="1" name="Spawn Point" x="1200" y="704">
    <point/>
   </object>
@@ -329,7 +329,7 @@ será escrito?</property>
    <properties>
     <property name="signX" type="int" value="96"/>
     <property name="signY" type="int" value="514"/>
-    <property name="sm_signX" type="int" value="180"/>
+    <property name="sm_signX" type="int" value="208"/>
     <property name="sm_signY" type="int" value="336"/>
     <property name="text">I received my PhD in Philosophy
 from the University  of Buenos

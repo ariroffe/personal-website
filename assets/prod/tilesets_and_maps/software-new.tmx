@@ -188,7 +188,7 @@
    <properties>
     <property name="signX" type="int" value="240"/>
     <property name="signY" type="int" value="512"/>
-    <property name="sm_signX" type="int" value="320"/>
+    <property name="sm_signX" type="int" value="356"/>
     <property name="sm_signY" type="int" value="316"/>
     <property name="text">I develop computational applications
 for philosophers (for example, for

@@ -133,7 +133,7 @@
                         {
                          "name":"sm_signX",
                          "type":"int",
-                         "value":320
+                         "value":356
                         }, 
                         {
                          "name":"sm_signY",

@@ -576,7 +576,7 @@
                         {
                          "name":"sm_signX",
                          "type":"int",
-                         "value":180
+                         "value":208
                         }, 
                         {
                          "name":"sm_signY",
@@ -602,7 +602,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],

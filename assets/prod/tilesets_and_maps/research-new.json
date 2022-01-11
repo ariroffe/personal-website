@@ -184,7 +184,7 @@
                         {
                          "name":"sm_signX",
                          "type":"int",
-                         "value":608
+                         "value":630
                         }, 
                         {
                          "name":"sm_signY",

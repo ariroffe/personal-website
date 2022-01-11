@@ -110,7 +110,7 @@
                         {
                          "name":"sm_signX",
                          "type":"int",
-                         "value":176
+                         "value":206
                         }, 
                         {
                          "name":"sm_signY",

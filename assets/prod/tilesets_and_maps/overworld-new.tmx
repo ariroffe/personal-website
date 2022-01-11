@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="26">
+ <editorsettings>
+  <export target="overworld-new.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="1365" columns="39">
   <image source="tileset.png" width="1248" height="1120"/>
  </tileset>
@@ -239,7 +242,7 @@
    <properties>
     <property name="signX" type="int" value="756"/>
     <property name="signY" type="int" value="896"/>
-    <property name="sm_signX" type="int" value="176"/>
+    <property name="sm_signX" type="int" value="206"/>
     <property name="sm_signY" type="int" value="960"/>
     <property name="text">Hi! Welcome to my site!
 I'm Ariel Roffe. I'm a
