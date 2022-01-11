@@ -185,7 +185,7 @@ p {
 
 #navbar ul {
 	list-style-type: none;
-    transform: translateY(-43px);
+    /*transform: translateY(-43px); handled in js*/
     transition: transform 0.5s ease;
     /*height: 100%;*/
     width: 100%;
@@ -209,9 +209,8 @@ p {
     font-size: 2rem;
     display: block;
     text-align: center;
-    transition: color 0.2s ease-in-out;
 }
-#navbar ul a:hover {
+#navbar ul a.active {
     color: white;
 }
 
