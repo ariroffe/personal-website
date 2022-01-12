@@ -306,7 +306,7 @@ p {
 #tools #dark-mode {
     color: lightcyan;
 }
-#tools #light-mode-li {
+#tools #dark-mode-li {
     display: none;
 }
 
@@ -400,12 +400,13 @@ section h3:not(:first-of-type) {
 	margin-top: 25px;
 }
 
-section ul.initial-hide li:nth-child(n+6) {
+/* Handled in js (since if js is disabled I want all to be shown at once)
+section ul.expandable-list li:nth-child(n+6) {
     display: none;
-}
+}*/
 
 section .seemore {
-	display: block;
+	display: none;
 	color: var(--emphasis-color);
 	margin-top: 5px;
 	cursor: pointer;

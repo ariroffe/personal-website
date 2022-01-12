@@ -120,3 +120,37 @@ function setActiveLink() {
 }
 setActiveLink();  // Run once at the site entering (in case you press back, for example, and are initially not at the top)
 window.addEventListener("scroll", setActiveLink);
+
+
+// ------------------------------
+// Sections
+
+const expandables = Array.from(document.getElementsByClassName("expandable-list"))
+
+expandables.forEach(function (expandable_ul) {
+    // If more than 5 children
+    if (expandable_ul.children.length > 5) {
+        // Show the "see more" button/link
+        const seemore_link = document.getElementById(expandable_ul.id + "-seemore");
+        seemore_link.style.display = 'block'
+
+        // Initially hide the elements beyond the fifth
+        const children = Array.from(expandable_ul.children);
+        children.slice(5).forEach((line) => line.style.display = 'none');
+
+        // Binding for the "see more" button/link
+        seemore_link.addEventListener("click", () => {
+            // Get an array of the not yet shown child elements
+            const not_shown_lines = children.filter(line => line.style.display === 'none');
+
+            if (not_shown_lines.length <= 5) {
+                // If there are 5 or less not shown items, show all and hide the "see more" link
+                not_shown_lines.forEach(line => line.style.display = 'list-item');
+                seemore_link.style.display = 'none';
+            } else {
+                // If there are more than 5, show the first five
+                not_shown_lines.slice(0, 5).forEach(line => line.style.display = 'list-item');
+            }
+        })
+    }
+})
