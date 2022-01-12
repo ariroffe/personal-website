@@ -1,13 +1,18 @@
 /* ---------------- GLOBAL CONFIG ------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Inconsolata&display=swap');
 
-:root {
-	--background-gray-color: #A9A9A9;
-    --darker-gray-color: #878787;
-	--text-color: #000;
-	--character-hair-color: #C48000;
-	/*--emphasis-color: #724E91;*/
-	--emphasis-color: #861388;
+/* Color schemes (for light and dark mode) */
+html, html[data-theme="light"] {
+	--color-background: #A9A9A9;
+    --color-toolbars: #878787;
+    --color-text: #000;
+	--color-emphasis: #861388;
+}
+html[data-theme="dark"] {
+    --color-background: #21262d;
+    --color-toolbars: #484f58;
+	--color-text: #c9d1d9;
+    --color-emphasis: #ccffff
 }
 
 html,
@@ -26,22 +31,28 @@ body {
     font-family: 'Inconsolata', monospace;
     font-size: 1.7rem;
     line-height: 1.5;
-	background-color: var(--background-gray-color);
+	background-color: var(--color-background);
 }
 
 a {
-    color: var(--emphasis-color);
+    color: var(--color-emphasis);
     text-decoration: none;
 }
 
 p {
-    color: var(--text-color);
+    color: var(--color-text);
     text-align: justify;
 	padding-bottom: 10px;
 }
+h3 {
+    color: var(--color-text);
+}
+li {
+    color: var(--color-text);
+}
 
 *::selection {
-    background: var(--emphasis-color);
+    background: var(--color-emphasis);
     color: white;
     text-shadow: none;
 }
@@ -120,7 +131,7 @@ p {
     padding: 10px;
     margin-top: 3px;
     transform: translateX(3px);
-    background-color: var(--darker-gray-color);
+    background-color: var(--color-toolbars);
     list-style-type: none;
     border-radius: 5px;
     border: 1px solid #666;
@@ -137,7 +148,7 @@ p {
 
 #game-menu li.active-link a {
     cursor: default;
-    color: var(--emphasis-color);
+    color: var(--color-emphasis);
 }
 
 #game-menu li:not(:first-child) {
@@ -155,7 +166,7 @@ p {
 }
 
 #game-menu li:not(.active-link):hover {
-    background-color: var(--background-gray-color);
+    background-color: var(--color-background);
 }
 
 #game-container {
@@ -173,7 +184,7 @@ p {
 	top: 0;
 	right: 0;
 	/*background-color: rgba(0,0,0,0.2);*/
-    background-color: var(--darker-gray-color);
+    background-color: var(--color-toolbars);
     z-index: 101;
 	max-height: 50px;
     overflow: hidden;
@@ -234,7 +245,7 @@ p {
 	top: 0;
 	left: 0;
 	/*background-color: rgba(0,0,0,0.2);*/
-    background-color: var(--darker-gray-color);
+    background-color: var(--color-toolbars);
     z-index: 100;
     border-bottom-right-radius: 5px;
 }
@@ -353,6 +364,7 @@ p {
 }
 
 .hero {
+    color: var(--color-text);
     font-family: 'Dosis', sans-serif;
     font-weight: bold;
     font-size: 8.2rem;
@@ -381,7 +393,7 @@ section {
 	max-width: 1380px;
 	padding: 35px;
 	margin: 30px auto 60px;
-	border: 2px dashed var(--emphasis-color);
+	border: 2px dashed var(--color-emphasis);
 	border-radius: 20px;
 }
 
@@ -391,7 +403,7 @@ section h2 {
     left: -25px;
     font-family: 'Dosis', sans-serif;
     font-size: 3rem;
-    color: var(--emphasis-color);
+    color: var(--color-emphasis);
     text-transform: uppercase;
     transform: rotate(270deg) translateX(-100%);
     transform-origin: left;
@@ -420,7 +432,7 @@ section ul.expandable-list li:nth-child(n+6) {
 
 section .seemore {
 	display: none;
-	color: var(--emphasis-color);
+	color: var(--color-emphasis);
 	margin-top: 5px;
 	cursor: pointer;
 }

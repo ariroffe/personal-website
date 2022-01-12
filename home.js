@@ -30,10 +30,12 @@ const light_mode_button = document.getElementById("light-mode");
 dark_mode_button.addEventListener("click", function() {
     dark_mode_button.parentNode.style.display = 'none';
     light_mode_button.parentNode.style.display = 'flex';
+    document.documentElement.setAttribute('data-theme', 'light');
 });
 light_mode_button.addEventListener("click", function() {
     dark_mode_button.parentNode.style.display = 'flex';
     light_mode_button.parentNode.style.display = 'none';
+    document.documentElement.setAttribute('data-theme', 'dark');
 });
 
 
