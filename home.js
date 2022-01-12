@@ -109,10 +109,14 @@ if (!mobile) {
     nav_ul.addEventListener("pointerout", () => nav_ul.style.transform = "translateY(-" + displaceY  +"px)");
 } else {
     nav_ul.addEventListener("pointerdown", (ev) => {
-        nav_ul.style.transform = "translateY(0)"
+        nav_ul.style.transform = "translateY(0)";
+        nav_ul.parentNode.style.maxHeight = '100%';
         ev.stopPropagation();  // So that the document event below does not fire
     });
-    document.addEventListener("pointerdown", () => nav_ul.style.transform = "translateY(-" + displaceY  +"px)")
+    document.addEventListener("pointerdown", () => {
+        nav_ul.style.transform = "translateY(-" + displaceY  +"px)";
+        nav_ul.parentNode.style.maxHeight = '50px';
+    });
 }
 
 // Link click
