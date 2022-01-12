@@ -174,7 +174,7 @@ p {
 	right: 0;
 	/*background-color: rgba(0,0,0,0.2);*/
     background-color: var(--darker-gray-color);
-    z-index: 100;
+    z-index: 101;
 	max-height: 50px;
     overflow: hidden;
     transition: max-height 0.4s ease;
@@ -214,7 +214,8 @@ p {
     color: white;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:768px),
+       screen and (max-height: 740px) {
     #navbar {
         top: 44px;
         border-bottom-left-radius: 5px;
@@ -234,7 +235,7 @@ p {
 	left: 0;
 	/*background-color: rgba(0,0,0,0.2);*/
     background-color: var(--darker-gray-color);
-    z-index: 101;
+    z-index: 100;
     border-bottom-right-radius: 5px;
 }
 
@@ -310,8 +311,20 @@ p {
     display: none;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 1543px) {
     #tools {
+        top: 50%;
+        transform: translateY(-50%);
+        left: unset;
+        right: 0;
+    }
+}
+@media screen and (max-width:768px),
+       screen and (max-height: 740px) {
+    #tools {
+        top: 0;
+        transform: translateY(0);
+        left: 0;
         height: 45px;
         width: 100%;
         border-bottom-right-radius: 0;
@@ -416,5 +429,14 @@ section .seemore {
     section {
         width: auto;
         margin: 32px 25px 60px 50px;
+    }
+
+    /*Move the section titles down a little so they are not covered by the tools nav*/
+    section h2 {
+        transform: rotate(270deg) translateX(-124%);
+    }
+    /*The intro one a little bit further down*/
+    #intro h2 {
+        transform: rotate(270deg) translateX(-130%);
     }
 }
