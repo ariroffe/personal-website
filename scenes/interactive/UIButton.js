@@ -114,7 +114,12 @@ export class MusicButton extends UIButton {
         self.setTexture("anims_ui", "dots");  // put the dots while loading
         scene.load.audio('music', '/assets/prod/audio/music.mp3');
         scene.load.once('complete', function() {
-          scene.sound.play('music');
+          if (scene.sound.context.state === 'suspended') scene.sound.context.resume();
+          scene.sound.play('music', {
+            volume: 0.65,
+            loop: true,
+            delay: 1,
+          });
           self.setTexture("anims_ui", self.texture2);
           self.activated = true;
         });
