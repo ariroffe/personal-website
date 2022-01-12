@@ -194,7 +194,7 @@ li {
 	/*background-color: rgba(0,0,0,0.2);*/
     background-color: var(--color-toolbars);
     z-index: 101;
-	max-height: 50px;
+	max-height: 100%;
     overflow: hidden;
     transition: max-height 0.4s ease;
 }
@@ -326,7 +326,11 @@ li {
 #tools #dark-mode {
     color: #ccffff;
 }
-#tools #dark-mode-li {
+#dark-mode-li, #light-mode-li {
+    /* Reactivated via javascript */
+    display: none;
+}
+#lang-select-li {
     display: none;
 }
 
