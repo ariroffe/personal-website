@@ -27,17 +27,34 @@ lang_button.addEventListener("click", function() {
 const dark_mode_button = document.getElementById("dark-mode");
 const light_mode_button = document.getElementById("light-mode");
 
-dark_mode_button.addEventListener("click", function() {
+let preferredTheme = localStorage.getItem('theme');
+
+function setLightMode() {
     dark_mode_button.parentNode.style.display = 'none';
     light_mode_button.parentNode.style.display = 'flex';
     document.documentElement.setAttribute('data-theme', 'light');
-});
-light_mode_button.addEventListener("click", function() {
+}
+function setDarkMode() {
     dark_mode_button.parentNode.style.display = 'flex';
     light_mode_button.parentNode.style.display = 'none';
     document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+dark_mode_button.addEventListener("click", function() {
+    setLightMode();
+    localStorage.setItem('theme', 'light');  // Remember for your next visit
+});
+light_mode_button.addEventListener("click", function() {
+    setDarkMode();
+    localStorage.setItem('theme', 'dark');  // Remember for your next visit
 });
 
+// At site init check if the local storage variable is set (if not, it will be null)
+if (preferredTheme === 'light') {
+    setLightMode();
+} else if (preferredTheme === 'dark') {
+    setDarkMode()
+}
 
 // ------------------------------
 // Nav navigation

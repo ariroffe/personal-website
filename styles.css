@@ -14,6 +14,14 @@ html[data-theme="dark"] {
 	--color-text: #c9d1d9;
     --color-emphasis: #ccffff
 }
+@media (prefers-color-scheme: dark) {
+    html {
+        --color-background: #21262d;
+        --color-toolbars: #484f58;
+        --color-text: #c9d1d9;
+        --color-emphasis: #ccffff
+    }
+}
 
 html,
 body,
@@ -316,7 +324,7 @@ li {
     color: wheat;
 }
 #tools #dark-mode {
-    color: lightcyan;
+    color: #ccffff;
 }
 #tools #dark-mode-li {
     display: none;
