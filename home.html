@@ -19,10 +19,10 @@
   
     <nav id="navbar">
       <ul id="navbar-ul" style="transform: translateY(-39px)">
-        <li><a class="nav-link" href="./index.html">Game</a></li>
+        <li><a class="nav-link translatable" href="./index.html" data-ES="Juego">Game</a></li>
         <li><a class="nav-link section-link" href="#intro">Intro</a></li>
-        <li><a class="nav-link section-link" href="#research">Research</a></li>
-        <li><a class="nav-link section-link" href="#teaching">Teaching</a></li>
+        <li><a class="nav-link section-link translatable" href="#research" data-ES="Investigación">Research</a></li>
+        <li><a class="nav-link section-link translatable" href="#teaching" data-ES="Docencia">Teaching</a></li>
         <li><a class="nav-link section-link" href="#software">Software</a></li>
       </ul>
     </nav>
@@ -34,9 +34,9 @@
         <li class="outside-link"><a target="_blank" id="scholar" title="Google Scholar" href="https://scholar.google.com/citations?user=jv4RHn0AAAAJ"><i class="ai ai-google-scholar"></i></a></li>
         <li class="outside-link"><a target="_blank" id="philpapers" title="PhilPeople" href="https://philpeople.org/profiles/ariel-jonathan-roffe"><i class="ai ai-philpapers"></i></a></li>
         <li class="outside-link"><a target="_blank" id="orcid" title="ORCiD" href="https://orcid.org/0000-0002-0051-2028"><i class="ai ai-orcid"></i></a></li>
-        <li id="dark-mode-li"><a id="dark-mode" href="#"><i class="bi bi-moon"></i></a></li>
-        <li id="light-mode-li"><a id="light-mode" href="#"><i class="bi bi-sun"></i></a></li>
-        <li id="lang-select-li"><a id="lang-select" href="#">EN</a></li>
+        <li id="dark-mode-li"><a id="dark-mode" title="Switch to light mode" href="#"><i class="bi bi-moon"></i></a></li>
+        <li id="light-mode-li"><a id="light-mode" title="Switch to dark mode" href="#"><i class="bi bi-sun"></i></a></li>
+        <li id="lang-select-li"><a id="lang-select" title="Change language" href="#">EN</a></li>
       </ul>
     </aside>
 	
@@ -51,29 +51,39 @@
       <img src="assets/prod/atlas/player_frames/wave-000.png" alt="Hi">
       <div>
         <p class="translatable"
-          data-ES="Hola! Soy Ariel Roffé. Soy un investigador en filosofía de Argentina. Blablabla.">
-          Hi! I'm Ariel Roffé. I'm a philosophy reasearcher from Argentina. Blablabla.
-        <p>
-          My research areas are the logic of science and the philosophy of biology (especially of systematics).
-          I also develop computational applications for philosophers. I received my PhD from the University of Buenos Aires in 2020,
+          data-ES="Hola! Soy Ariel Roffé. Soy un investigador en filosofía de Argentina.">
+          Hi! I'm Ariel Roffé. I'm a philosophy reasearcher from Argentina.
+        <p class="translatable"
+          data-ES="Soy doctor en Filosofía por la Universidad de Buenos aires, becario posdoctoral del CONICET y
+          docente del Departamento de Filosofía de la Universidad de Buenos Aires.
+          Mis áreas de investigación son la lógica de la ciencia y la filosofía de la biología (especialmente
+          de la sistemática). También desarrollo aplicaciones computacionales para la filosofía.">
+          I received my PhD from the University of Buenos Aires in 2020,
           I have a research scholarship from CONICET, and a teaching position at the Department of Philosophy of the University of Buenos Aires.
+          My research areas are the logic of science and the philosophy of biology (especially of systematics).
+          I also develop computational applications for philosophers.
         </p>
 
         <p>
-          I am a member of the <a target="_blank" href="http://www.anfibio.com.ar/">Grupo ANFIBIO</a>, the
-          <a target="_blank" href="http://cefhic.web.unq.edu.ar/">Centro de Filosofía e Historia de la Ciencia</a> and
-          the <a target="_blank" href="http://www.ba-logic.com/">BA-Logic Group</a>,
-          as well as other research groups in the philosophy of science and in mathematical logic.
+          <span class="translatable" data-ES="Formo parte del">I am a member of the</span>
+          <a target="_blank" href="http://www.anfibio.com.ar/">Grupo ANFIBIO</a>,
+          <span class="translatable" data-ES="el">the</span>
+          <a target="_blank" href="http://cefhic.web.unq.edu.ar/">Centro de Filosofía e Historia de la Ciencia</a>
+          <span class="translatable" data-ES="y el">and the</span>
+          <a target="_blank" href="http://www.ba-logic.com/">BA-Logic Group</a>,
+          <span class="translatable" data-ES="así como de otros grupos de investigación en filosofía de las ciencias y en lógica matemática.">
+            as well as other research groups in the philosophy of science and in mathematical logic.
+          </span>
         </p>
       </div>
     </section>
 	
     <section id="research">
-      <h2>Research</h2>
+      <h2 class="translatable" data-ES="Investigación">Research</h2>
 
       <img src="assets/prod/atlas/player_frames/right-000.png" alt="Research">
 
-      <h3 class='subtitle'>Articles:</h3>
+      <h3 class='subtitle translatable' data-ES="Artículos:">Articles:</h3>
 
       <ul id="articles" class="expandable-list">
         <li>Roffé, A. J. & Toranzo Calderón, J. S. (2021). Random Formula Generators. Arxiv. <a target="_blank" href="https://arxiv.org/abs/2110.09228">[LINK]</a> <a target="_blank" href="https://arxiv.org/pdf/2110.09228.pdf">[PDF]</a></li>
@@ -93,9 +103,9 @@
         <li>Roffé, A. J. & Ginnobili, S. (2017). ¿Son los genetistas de poblaciones inductivistas estrechos? Scientiae Studia. <a target="_blank" href="https://www.revistas.usp.br/ss/article/view/144940">[LINK]</a> <a target="_blank" href="https://www.revistas.usp.br/ss/article/view/144940/139130">[PDF]</a></li>
         <li>Roffé, A. J. (2014). Sobre la capturabilidad de teorías informales en sistemas axiomáticos formales. Cuadernos de Filosofía. <a target="_blank" href="http://revistascientificas.filo.uba.ar/index.php/CdF/article/view/3013">[LINK]</a> <a target="_blank" href="http://revistascientificas.filo.uba.ar/index.php/CdF/article/download/3013/2649">[PDF]</a></li>
       </ul>
-      <span id="articles-seemore" class="seemore">See more...</span>
+      <span id="articles-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
 
-      <h3>Book Chapters:</h3>
+      <h3 class="translatable" data-ES="Capítulos de libro:">Book Chapters:</h3>
 
       <ul id="book-chapters" class="expandable-list">
         <li>Roffé, A. J., Bernabé, F. & Ginnobili, S. (in press). Theoricity and Testing. In C. Abreu (Ed.), Philosophy of Science in the 21st Century. Contributions of Metatheoretical Structuralism. To be published in the collection Rumos da Epistemología of the Núcleo de Epistemología y Lógica de la Universidade Federal de Santa Catarina.</li>
@@ -105,24 +115,24 @@
         <li>Roffé, A. J. (2015). La inconmensurabilidad entre las teorías planetarias de Ptolomeo y Copérnico: dos enfoques contemporáneos. In J. Ahumada, N. Venturelli & S. Seno Chibeni (Eds.), Selección de Trabajos del IX Encuentro AFHIC y las XXV Jornadas de Epistemología e Historia de la ciencia. Córdoba: Editorial de la UNC. ISBN: 978-987-707-026-2. <a target="_blank" href="http://www.afhic.com/wp-content/uploads/2017/11/08-Ahumada-y-otros-Filosof%C3%ADa-e-Historia-de-la-Ciencia-del-Cono-Sur-IX-Encuentro-correcto.pdf">[PDF]</a></li>
         <li>Roffé, A. J. (2014). La paradoja de Skolem. In E. Barrio (Ed.), Paradojas, paradojas y más paradojas. London: College Publications. <a target="_blank" href="http://www.collegepublications.co.uk/cuadernos/?00007">[LINK]</a></li>
       </ul>
-      <span id="book-chapters-seemore" class="seemore">See more...</span>
+      <span id="book-chapters-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
 
-      <h3>Book Reviews:</h3>
+      <h3 class="translatable" data-ES="Reseñas de libro:">Book Reviews:</h3>
 
       <ul id="reviews" class="expandable-list">
         <li>Roffé, A. J. (2018). Contemporary Perspectives on the Meaning, Roles, and Implications of Chance in Evolution. Review of Chance in Evolution, by G. Ramsey & C. H. Pence (eds.). Science & Education. <a target="_blank" href="https://link.springer.com/article/10.1007/s11191-018-0011-y">[LINK]</a></li>
         <li>Roffé, A. J. (2013). Review of Biology's first law: The tendency for diversity and complexity to increase in evolutionary Systems, by D. W. McShea & R. N. Brandon. Metatheoria. <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/113">[LINK]</a> <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/113/165">[PDF]</a></li>
       </ul>
-      <span id="reviews-seemore" class="seemore">See more...</span>
+      <span id="reviews-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
 
-      <h3>Theses:</h3>
+      <h3 class="translatable" data-ES="Tesis:">Theses:</h3>
 
       <ul>
         <li>Roffé, A. J. (2016). La genética de poblaciones y las fuerzas evolutivas. Tesis de licenciatura. <a target="_blank" href="https://drive.google.com/file/d/11AP8gLxfC19akSpUq4YY-FSjpcBYxiYV/view">[PDF]</a></li>
         <li>Roffé, A. J. (2020). Contrastando reconstrucciones con herramientas computacionales: una aplicación a la cladística. Tesis de doctorado. <a target="_blank" href="https://drive.google.com/file/d/1UaRw1VQ6KoAlGTV22KueKGzzc0wVmJ0w/view?usp=sharing">[PDF]</a></li>
       </ul>
 
-      <h3>Other:</h3>
+      <h3 class="translatable" data-ES="Otros:">Other:</h3>
 
       <ul id="other-research" class="expandable-list">
         <li>Roffé, A. J. & Da Ré, B. (2016). Introducción a las lógicas modales y no clásicas, parte 1. Buenos Aires: OPFyL. </li>
@@ -132,26 +142,40 @@
     </section>
 
     <section id="teaching">
-      <h2>Teaching</h2>
+      <h2 class="translatable" data-ES="Docencia">Teaching</h2>
 
-      <h3>Courses:</h3>
+      <h3 class="translatable" data-ES="Cursos dictados:">Courses:</h3>
 
       <ul id="courses" class="expandable-list">
-        <li>2021, second semester: Methodology of Investigation (Universidad de La Punta)</li>
-        <li>2021, second semester: Philosophy of Science (FCEN-Universidad de Buenos Aires)</li>
-        <li>2021, second semester: Philosophy of Biology  (University of Buenos Aires)</li>
-        <li>2021, first semester: Methodology of Investigation (Universidad de La Punta)</li>
-        <li>2021, first semester: Philosophy of Science (Universidad Nacional de Quilmes)</li>
-        <li>2020, second semester: Methodology of Investigation (Universidad de La Punta)</li>
-        <li>2020, second semester: Logic I  (University of Buenos Aires)</li>
-        <li>2020, first semester: Methodology of Investigation (Universidad de La Punta)</li>
-        <li>2020, first semester: Logic I (University of Buenos Aires)</li>
-        <li>2019, first semester: Logic I (University of Buenos Aires)</li>
-        <li>2019, summer recess: seminar, Python for philosophers (SADAF - Argentinian Society of Philosophical Analysis)</li>
-        <li>2018, first semester: Logic I (University of Buenos Aires)</li>
-        <li>2018, first semester: undergraduate seminar, The logical structure of biology (University of Buenos Aires)</li>
+        <li class="translatable" data-ES="2021, segundo semestre: Metodología de la investigación (Universidad de La Punta)">
+          2021, second semester: Methodology of Investigation (Universidad de La Punta)
+        </li>
+        <li class="translatable" data-ES="2021, segundo semestre: Filosofía de la ciencia (FCEN-Universidad de Buenos Aires)">
+          2021, second semester: Philosophy of Science (FCEN-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2021, segundo semestre: Filosofía de la biología (FFyL-Universidad de Buenos Aires)">
+          2021, second semester: Philosophy of Biology  (FFyL-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2021, primer semestre: Metodología de la investigación (Universidad de La Punta)">
+          2021, first semester: Methodology of Investigation (Universidad de La Punta)</li>
+        <li class="translatable" data-ES="2021, primer semestre: Filosofía de la ciencia (Universidad Nacional de Quilmes)">
+          2021, first semester: Philosophy of Science (Universidad Nacional de Quilmes)</li>
+        <li class="translatable" data-ES="2020, segundo semestre: Metodología de la investigación (Universidad de La Punta)">
+          2020, second semester: Methodology of Investigation (Universidad de La Punta)</li>
+        <li class="translatable" data-ES="2020, segundo semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+          2020, second semester: Logic I  (FFyL-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2020, primer semestre: Metodología de la investigación (Universidad de La Punta)">
+          2020, first semester: Methodology of Investigation (Universidad de La Punta)</li>
+        <li class="translatable" data-ES="2020, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+          2020, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2020, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+          2019, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2019, receso de verano: seminario Python para filósofxs (SADAF - Sociedad Argentina de Análisis Filosófico)">
+          2019, summer recess: seminar, Python for philosophers (SADAF - Argentinian Society of Philosophical Analysis)</li>
+        <li class="translatable" data-ES="2020, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+          2018, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+        <li class="translatable" data-ES="2018, primer semestre: seminario de grado, La estructura lógica de la biología (FFyL-Universidad de Buenos Aires)">
+          2018, first semester: undergraduate seminar, The logical structure of biology (FFyL-Universidad de Buenos Aires)</li>
       </ul>
-      <span id="courses-seemore" class="seemore">See more...</span>
+      <span id="courses-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
 
     </section>
 
@@ -160,31 +184,49 @@
 
       <h3>TAUT</h3>
 
-      <p>TAUT is a website where you can find a variety of randomly-generated, self-correcting logic excercises.</p>
-      <p>You can access it <a href="https://www.taut-logic.com/">here</a>.</p>
+      <p class="translatable" data-ES="TAUT es un sitio web de ejercicios de lógica que se generan al azar y se auto-corrigen">
+        TAUT is a website where you can find a variety of randomly-generated, self-correcting logic excercises.</p>
+      <p>
+        <span class="translatable" data-ES="Puede acceder a él">You can access it</span>
+        <a href="https://www.taut-logic.com/" class="translatable" data-ES="Aquí">here</a>.
+      </p>
       
-      <p>See also:</p>
+      <p class="translatable" data-ES="Véanse también:">See also:</p>
       <ul>
-        <li><a target="_blank" href="http://dailynous.com/2018/11/20/randomly-generated-self-correcting-logic-exercises-site/">Daily Nous post</a></li>
-        <li><a target="_blank" href="https://www.conicet.gov.ar/taut-el-software-desarrollado-por-un-filosofo-del-conicet-para-ensenar-logica/">CONICET article (in spanish)</a></li>
+        <li><a target="_blank" href="http://dailynous.com/2018/11/20/randomly-generated-self-correcting-logic-exercises-site/"
+               class="translatable" data-ES="Post en Daily Nous">Daily Nous post</a></li>
+        <li><a target="_blank" href="https://www.conicet.gov.ar/taut-el-software-desarrollado-por-un-filosofo-del-conicet-para-ensenar-logica/"
+               class="translatable" data-ES="Artículo en CONICET">CONICET article (in spanish)</a></li>
       </ul>
 
       <h3>logics</h3>
-      <p>
-        Logics is a Python framework for mathematical logic. It aims at generality (being able to represent as many
+      <p class="translatable" data-ES="Logics es un paquete de Python para hacer lógica matemática. Apunta a la
+        generalidad (poder representar la mayor cantidad de sistemas posible), a tener código claro y bien documentado, y
+        a poseer un mínimo de dependencias, más que a la rapidez. Algunas de sus aplicaciones pretendidas son el
+        software educativo (p.e. TAUT utiliza una versión previa de este paquete) y la posibilidad de prototipar
+        rápidamente ideas durante el curso de una investigación">
+        Logics is a Python package for mathematical logic. It aims at generality (being able to represent as many
         systems as possible), well-documented and readable code and minimal dependencies, rather than speed. Some of
         its intended applications are educational software (e.g. TAUT uses a previous version of this package), and
         quick prototyping of ideas for research purposes
       </p>
-      <p>You can access it  <a href="https://github.com/ariroffe/logics">here</a>.</p>
-      <p>To see the documentation, see <a href="https://logics.readthedocs.io/en/latest/?">here</a>.</p>
+      <p>
+        <span class="translatable" data-ES="Puede acceder a él">You can access it</span>
+        <a href="https://github.com/ariroffe/logics" class="translatable" data-ES="aquí">here</a>.
+      </p>
+      <p>
+        <span class="translatable" data-ES="Para ver la documentación, haga click">To see the documentation, see</span>
+        <a href="https://logics.readthedocs.io/en/latest/?" class="translatable" data-ES="aquí">here</a>.</p>
 
       <h3>Reconstructor</h3>
-      <p>Reconstructor is a program designed to test and run formal reconstructions of theories, made in the
+      <p class="translatable" data-ES="Reconstructor es un programa diseñado para testear y correr reconstrucciones
+        formales de teorías, hechas bajo la metateoría estructuralista. También hace algunas cosas copadas de lógica,
+        y creo que puede servir para la enseñanza de la lógica.">
+        Reconstructor is a program designed to test and run formal reconstructions of theories, made in the
         structuralist format. It also does some cool logic stuff, and I believe it can be useful for teaching logic.
       </p>
 
-      <p>Downloads:</p>
+      <p class="translatable" data-ES="Descargas:">Downloads:</p>
 
       <h4>[version 2.1]:</h4>
       <ul>
@@ -199,9 +241,36 @@
         <li>Linux [BETA]: <a target="_blank" href="https://drive.google.com/open?id=1VqE5EaiRwkiKOYem6Ch1etgE7jDKcEvN">[DOWNLOAD]</a></li>
       </ul>
 
-      <p>To run the program on Windows simply extract the .rar file (you can use WinRAR for that), and open Reconstructor.exe</p>
-      <p>Note: If you decide to use Reconstructor in the course of your investigations, please cite this article</p>
+      <p class="translatable" data-ES="Para correr el programa en Windows simplemente extraiga el archivo .rar
+        (puede usar WinRAR para eso) y abra Reconstructor.exe">
+        To run the program on Windows simply extract the .rar file (you can use WinRAR for that), and open Reconstructor.exe</p>
+      <p>
+        <span class="translatable" data-ES="Nota: si decide usar Reconstructor en el curso de sus investigaciones, por favor cite">
+          Note: If you decide to use Reconstructor in the course of your investigations, please cite</span>
+        <a href="https://www.tandfonline.com/doi/full/10.1080/11663081.2019.1703467" target="_blank" class="translatable" data-ES="este artículo">this article</a>
+      </p>
+
+      <h3 class="translatable" data-ES="Este hermoso sitio web">This beautiful website</h3>
+      <p class="translatable" data-ES="La parte del juego de este sitio fue creada usando el engine para HTML5 llamado Phaser 3.
+        Los assets que utilicé son todos de dominio público (véase el repositorio de GitHub para los créditos específicos), y
+        algunos fueron editados/creados por mí. Crear el juego fue bastante trabajo, en muchas áreas distintas, pero me
+        divertí y aprendí mucho haciéndolo. Esta parte del sitio está hecha simplemente con HTML, CSS y vanilla JS">
+        The game part of this site was made using the HTML5 game engine Phaser 3. The assets I used are all public domain
+        (see the GitHub repo for the specific credits), and some I created and/or edited myself. Building the game was
+        a lot of work in many different areas, but I had a lot of fun and learned a lot making it.
+        This part of the website was made simply using HTML, CSS and vanilla JS.
+      </p>
+      <p>
+        <span class="translatable" data-ES="Si desea ver el código, puede acceder al repositorio público">
+          If you wish to see the code, you can access the public repository</span>
+        <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="translatable" data-ES="aquí">here</a>.
+      </p>
     </section>
+
+    <footer>
+      <span>Ariel Jonathan Roffé</span>
+      <a href="mailto:ariroffe@hotmail.com">ariroffe@hotmail.com</a>
+    </footer>
 
     <script src="./home.js"></script>
 

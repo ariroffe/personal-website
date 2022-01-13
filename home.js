@@ -46,7 +46,8 @@ function setLanguage(targetLanguage) {
 }
 
 if (currentLanguage === 'ES') setLanguage('ES');  // Run once at site init if the user prefers spanish
-lang_button.addEventListener("click", function() {
+lang_button.addEventListener("click", function(ev) {
+    ev.preventDefault();
     if (currentLanguage === 'EN') {
         setLanguage('ES');
     } else if (currentLanguage === 'ES') {
@@ -74,11 +75,13 @@ function setDarkMode() {
     document.documentElement.setAttribute('data-theme', 'dark');
 }
 
-dark_mode_button.addEventListener("click", function() {
+dark_mode_button.addEventListener("click", function(ev) {
+    ev.preventDefault();
     setLightMode();
     localStorage.setItem('theme', 'light');  // Remember for your next visit
 });
-light_mode_button.addEventListener("click", function() {
+light_mode_button.addEventListener("click", function(ev) {
+    ev.preventDefault();
     setDarkMode();
     localStorage.setItem('theme', 'dark');  // Remember for your next visit
 });
