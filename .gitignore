@@ -4,6 +4,12 @@ to_dos.txt
 venv/
 .idea/
 
+package.json
+package-lock.json
+build/
+node_modules/
+instrucciones_para_minificar.txt
+
 /assets/test/
 /assets/prod/tilesets_and_maps/extrusion_instructions.txt
 /assets/prod/atlas/Instrucciones_para_armar_el_atlas.txt
