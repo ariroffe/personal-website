@@ -46,22 +46,18 @@ a {
     color: var(--color-emphasis);
     text-decoration: none;
 }
-
 p {
     color: var(--color-text);
     text-align: justify;
 	padding-bottom: 10px;
 }
-h3, h4 {
-    color: var(--color-text);
-}
-li {
+h3, h4, li {
     color: var(--color-text);
 }
 
 *::selection {
-    background: var(--color-emphasis);
-    color: white;
+    background: var(--color-toolbars);
+    color: var(--color-emphasis);
     text-shadow: none;
 }
 
@@ -377,7 +373,7 @@ li {
 
 .hero {
     color: var(--color-text);
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Dosis', monospace;
     font-weight: bold;
     font-size: 8.2rem;
     padding: 0 10px;
@@ -413,7 +409,7 @@ section h2 {
     position: absolute;
     top: 0;
     left: -25px;
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Dosis', monospace;
     font-size: 3rem;
     color: var(--color-emphasis);
     text-transform: uppercase;

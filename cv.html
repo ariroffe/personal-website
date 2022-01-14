@@ -7,10 +7,587 @@
     <meta name="googlebot" content="notranslate" />
 
     <title>Ariel Roffe | CV</title>
+
+    <style>
+      /*------ Global Config ------*/
+      @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Inconsolata&display=swap');
+      html, html[data-theme="dark"] {
+        --color-background: #21262d;
+        --color-toolbars: #484f58;
+        --color-text: #c9d1d9;
+        --color-emphasis: #ccffff
+      }
+      html, html[data-theme="light"] {
+        --color-background: #A9A9A9;
+        --color-toolbars: #878787;
+        --color-text: #000;
+        --color-emphasis: #861388;
+      }
+      html {
+        font-size: 10px;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Inconsolata', monospace;
+        font-size: 1.7rem;
+        line-height: 1.5;
+        background-color: var(--color-background);
+      }
+
+      a {
+        color: var(--color-emphasis);
+        text-decoration: none;
+      }
+      p {
+        color: var(--color-text);
+        text-align: justify;
+        padding-bottom: 10px;
+      }
+      h2, h3, h4, li {
+        color: var(--color-text);
+      }
+
+      *::selection {
+        background: var(--color-toolbars);
+        color: var(--color-emphasis);
+        text-shadow: none;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+          transition: background-color 0.11s linear;
+      }
+      section {
+        transition: background-color 0.2s linear;
+      }
+      /*------ Hero and buttons ------*/
+      .hero-wrapper {
+        position: relative;
+        margin: 30px 0 10px;
+      }
+      .hero {
+        color: var(--color-text);
+        font-family: 'Dosis', monospace;
+        font-weight: bold;
+        font-size: 8.2rem;
+        padding: 0 10px;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.2;
+      }
+      .hero-wrapper #buttons-wrapper {
+        position: absolute;
+        top: 0;
+        left: 25px;
+      }
+      .hero-wrapper #lang-select {
+        background-color: var(--color-toolbars);
+        border-radius: 5px;
+        font-size: 2.6rem;
+        padding: 9px 9px;
+        margin-right: 8px;
+      }
+      #light-mode {
+        display: none;
+        color: wheat;
+      }
+      #dark-mode {
+        color: #ccffff;
+      }
+      @media print, screen and (max-width: 1543px) {
+        .hero-wrapper {
+          margin: 10px 0 10px;
+        }
+        .hero {
+          font-size: 5rem;
+        }
+        .hero-wrapper #buttons-wrapper {
+          position: static !important;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 10px;
+
+        }
+        .hero-wrapper #lang-select {
+          padding: 3px 9px !important;
+          margin-right: 15px;
+          font-size: 2.3rem;
+        }
+      }
+      @media print {
+        .hero-wrapper #buttons-wrapper {
+          display: none;
+        }
+        .seemore {
+          display: none !important;
+        }
+        section li {
+          display: list-item !important;
+        }
+      }
+      /*------ Layout ------*/
+      #grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      #grid-container .column {
+        display: flex;
+        flex-direction: column;
+      }
+      @media print, screen and (max-width: 1543px) {
+        #grid-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      section {
+        position: relative;
+        width: 90%;
+        max-width: 1380px;
+        padding: 35px;
+        margin: 20px auto 30px;
+        border: 2px dashed var(--color-emphasis);
+        border-radius: 20px;
+      }
+      section h2 {
+        text-align: center;
+        text-transform: uppercase;
+        font-family: 'Dosis', monospace;
+          margin-bottom: 5px;
+      }
+      section h3 {
+        margin: 20px 0 5px;
+      }
+      section ul {
+        margin-left: 20px;
+      }
+      section .seemore {
+        display: none;
+        color: var(--color-emphasis);
+        margin-top: 5px;
+        cursor: pointer;
+      }
+      section::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px;
+        background-color: var(--color-background);
+        z-index: -1;
+      }
+      section:hover::before {
+        filter: brightness(1.08);
+      }
+      section:hover h2, section:hover h3 {
+        filter: brightness(1.2);
+      }
+
+      /* ---------Footer--------- */
+      footer {
+          width: 100%;
+          height: 100px;
+          padding-bottom: 30px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-text);
+      }
+      footer a, footer span {
+          text-align: center;
+      }
+    </style>
+
   </head>
 
   <body>
-    Holis
+
+    <header class="hero-wrapper">
+      <div id="buttons-wrapper">
+        <a id="lang-select" title="Change language" href="#">EN</a>
+        <a id="dark-mode" title="Switch to light mode" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
+            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+          </svg>
+        </a>
+        <a id="light-mode" title="Switch to dark mode" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
+            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="hero">Ariel Jonathan Roffé</h1>
+    </header>
+
+    <div id="grid-container">
+
+      <div class="column">
+
+        <section id="intro">
+          <h2>Intro</h2>
+
+          <div>
+            <p class="translatable"
+              data-ES="Hola! Soy Ariel Roffé. Soy un investigador en filosofía de Argentina.">
+              Hi! I'm Ariel Roffé. I'm a philosophy reasearcher from Argentina.
+            <p class="translatable"
+              data-ES="Soy doctor en Filosofía por la Universidad de Buenos aires, becario posdoctoral del CONICET y
+              docente del Departamento de Filosofía de la Universidad de Buenos Aires.
+              Mis áreas de investigación son la lógica de la ciencia y la filosofía de la biología (especialmente
+              de la sistemática). También desarrollo aplicaciones computacionales para la filosofía.">
+              I received my PhD from the University of Buenos Aires in 2020,
+              I have a research scholarship from CONICET, and a teaching position at the Department of Philosophy of the University of Buenos Aires.
+              My research areas are the logic of science and the philosophy of biology (especially of systematics).
+              I also develop computational applications for philosophers.
+            </p>
+
+            <p>
+              <span class="translatable" data-ES="Formo parte del">I am a member of the</span>
+              <a target="_blank" href="http://www.anfibio.com.ar/">Grupo ANFIBIO</a>,
+              <span class="translatable" data-ES="el">the</span>
+              <a target="_blank" href="http://cefhic.web.unq.edu.ar/">Centro de Filosofía e Historia de la Ciencia</a>
+              <span class="translatable" data-ES="y el">and the</span>
+              <a target="_blank" href="http://www.ba-logic.com/">BA-Logic Group</a>,
+              <span class="translatable" data-ES="así como de otros grupos de investigación en filosofía de las ciencias y en lógica matemática.">
+                as well as other research groups in the philosophy of science and in mathematical logic.
+              </span>
+            </p>
+          </div>
+        </section>
+
+        <section id="teaching">
+          <h2 class="translatable" data-ES="Docencia">Teaching</h2>
+
+          <h3 class="translatable" data-ES="Cursos dictados:">Courses:</h3>
+
+          <ul id="courses" class="expandable-list" data-show="5">
+            <li class="translatable" data-ES="2021, segundo semestre: Metodología de la investigación (Universidad de La Punta)">
+              2021, second semester: Methodology of Investigation (Universidad de La Punta)
+            </li>
+            <li class="translatable" data-ES="2021, segundo semestre: Filosofía de la ciencia (FCEN-Universidad de Buenos Aires)">
+              2021, second semester: Philosophy of Science (FCEN-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2021, segundo semestre: Filosofía de la biología (FFyL-Universidad de Buenos Aires)">
+              2021, second semester: Philosophy of Biology  (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2021, primer semestre: Metodología de la investigación (Universidad de La Punta)">
+              2021, first semester: Methodology of Investigation (Universidad de La Punta)</li>
+            <li class="translatable" data-ES="2021, primer semestre: Filosofía de la ciencia (Universidad Nacional de Quilmes)">
+              2021, first semester: Philosophy of Science (Universidad Nacional de Quilmes)</li>
+            <li class="translatable" data-ES="2020, segundo semestre: Metodología de la investigación (Universidad de La Punta)">
+              2020, second semester: Methodology of Investigation (Universidad de La Punta)</li>
+            <li class="translatable" data-ES="2020, segundo semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2020, second semester: Logic I  (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2020, primer semestre: Metodología de la investigación (Universidad de La Punta)">
+              2020, first semester: Methodology of Investigation (Universidad de La Punta)</li>
+            <li class="translatable" data-ES="2020, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2020, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2020, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2019, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2019, receso de verano: seminario Python para filósofxs (SADAF - Sociedad Argentina de Análisis Filosófico)">
+              2019, summer recess: seminar, Python for philosophers (SADAF - Argentinian Society of Philosophical Analysis)</li>
+            <li class="translatable" data-ES="2019, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2018, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2018, primer semestre: seminario de grado, La estructura lógica de la biología (FFyL-Universidad de Buenos Aires)">
+              2018, first semester: undergraduate seminar, The logical structure of biology (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2017, segundo semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2017, second semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2017, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2017, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2016, segundo semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2016, second semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2016, receso de invierno: Introducción al pensamiento científico (UBA XXI-Universidad de Buenos Aires)">
+              2016, winter recess: Introduction to scientific thinking (UBA XXI-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2016, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2016, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2015, segundo semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2015, second semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+            <li class="translatable" data-ES="2015, primer semestre: Lógica I (FFyL-Universidad de Buenos Aires)">
+              2015, first semester: Logic I (FFyL-Universidad de Buenos Aires)</li>
+          </ul>
+          <span id="courses-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
+        </section>
+
+      </div>
+
+      <div class="column">
+        <section id="research">
+          <h2 class="translatable" data-ES="Investigación">Research</h2>
+
+          <h3 class='subtitle translatable' data-ES="Artículos:">Articles:</h3>
+
+          <ul id="articles" class="expandable-list" data-show="3">
+            <li>Roffé, A. J. & Toranzo Calderón, J. S. (2021). Random Formula Generators. Arxiv. <a target="_blank" href="https://arxiv.org/abs/2110.09228">[LINK]</a> <a target="_blank" href="https://arxiv.org/pdf/2110.09228.pdf">[PDF]</a></li>
+            <li>León, M., Gimenez, I., Roffé, A. J., Bernabé F. N., y Ginnobili, S. (in press). ¿Hay un programa de investigación científica en memética? — El caso de los cantos de aves. Disputatio.<a target="_blank" href="https://studiahumanitatis.eu/ojs/index.php/disputatio/article/view/512">[LINK]</a> <a target="_blank" href="https://studiahumanitatis.eu/ojs/index.php/disputatio/article/view/ginobili-meme/415">[PDF]</a></li>
+            <li>Roffé, A. J. & Pailos, F. (in press). Translating Metainferences Into Formulae: Satisfaction Operators and Sequent Calculi. Australasian Journal of Logic. <a target="_blank" href="https://ojs.victoria.ac.nz/ajl/article/view/6801">[LINK]</a> <a target="_blank" href="https://ojs.victoria.ac.nz/ajl/article/view/6801/6569">[PDF]</a></li>
+            <li>Blanco, D., Roffé, A. J. & Ginnobili, S. (2020). The Key Role of Underlying Theories for Scientific Explanations. A Darwinian Case Study. Principia. <a target="_blank" href="https://periodicos.ufsc.br/index.php/principia/article/view/71045">[LINK]</a> <a target="_blank" href="https://periodicos.ufsc.br/index.php/principia/article/view/71045/44969">[PDF]</a></li>
+            <li>Roffé, A. J. (2020). El estatus fáctico de la cladística: aportes desde una reconstrucción estructuralista. Metatheoria. <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/264">[LINK]</a> <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/264/281">[PDF]</a></li>
+            <li>Roffé, A. J. (2020). Dynamic Homology and Circularity in Cladistic Analysis. Biology & Philosophy. <a target="_blank" href="https://link.springer.com/article/10.1007%2Fs10539-020-9737-4">[LINK]</a> <a target="_blank" href="http://philsci-archive.pitt.edu/16822/">[preprint]</a></li>
+            <li>Roffé, A. J. & Ginnobili, S. (2020). Optimality Models and the Propensity Interpretation of Fitness. Acta Biotheoretica. <a target="_blank" href="https://link.springer.com/article/10.1007%2Fs10441-019-09369-5">[LINK]</a> <a target="_blank" href="http://philsci-archive.pitt.edu/16568/">[preprint]</a></li>
+            <li>Roffé, A. J. & Ginnobili, S. (2019). El estatus metateórico de ZFEL. Revista de Humanidades de Valparaíso. <a target="_blank" href="https://revistas.uv.cl/index.php/RHV/article/view/1753">[LINK]</a> <a target="_blank" href="https://revistas.uv.cl/index.php/RHV/article/view/1753/2021">[PDF]</a></li>
+            <li>Roffé, A. J. (2019). Drift as Constitutive: Conclusions From a Formal Reconstruction of Population Genetics. History and Philosophy of the Life Sciences. <a target="_blank" href="https://link.springer.com/article/10.1007/s40656-019-0294-6">[LINK]</a></li>
+            <li>Roffé, A. J. (2019). Reconstructor: A computer program that uses three-valued logics to represent lack of information in empirical scientific contexts. Journal of Applied Non-Classical Logics. <a target="_blank" href="https://www.tandfonline.com/doi/full/10.1080/11663081.2019.1703467">[LINK]</a></li>
+            <li>Roffé, A. J., Ginnobili S. & Blanco, D. (2018). Theoricity, Observation and Homology: A Response to Pearson. History and Philosophy of the Life Sciences. <a target="_blank" href="https://link.springer.com/article/10.1007%2Fs40656-018-0210-5">[LINK]</a></li>
+            <li>Rubín, M. & Roffé, A. J. (2018). Against a Metaphysical Understanding of Rejection. Principia. <a target="_blank" href="https://periodicos.ufsc.br/index.php/principia/article/view/1808-1711.2018v22n1p189/pdf">[LINK]</a> <a target="_blank" href="https://periodicos.ufsc.br/index.php/principia/article/view/1808-1711.2018v22n1p189/pdf">[PDF]</a></li>
+            <li>Roffé, A. J. (2017). Genetic Drift as a Directional Factor: Biasing Effects and a priori Predictions. Biology & Philosophy. <a target="_blank" href="https://link.springer.com/article/10.1007%2Fs10539-017-9575-1">[LINK]</a></li>
+            <li>Ginnobili, S. & Roffé, A. J. (2017). Dos usos de los modelos de optimalidad en las explicaciones por selección natural. Metatheoria. <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/161">[LINK]</a> <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/161/199">[PDF]</a></li>
+            <li>Roffé, A. J. & Ginnobili, S. (2017). ¿Son los genetistas de poblaciones inductivistas estrechos? Scientiae Studia. <a target="_blank" href="https://www.revistas.usp.br/ss/article/view/144940">[LINK]</a> <a target="_blank" href="https://www.revistas.usp.br/ss/article/view/144940/139130">[PDF]</a></li>
+            <li>Roffé, A. J. (2014). Sobre la capturabilidad de teorías informales en sistemas axiomáticos formales. Cuadernos de Filosofía. <a target="_blank" href="http://revistascientificas.filo.uba.ar/index.php/CdF/article/view/3013">[LINK]</a> <a target="_blank" href="http://revistascientificas.filo.uba.ar/index.php/CdF/article/download/3013/2649">[PDF]</a></li>
+          </ul>
+          <span id="articles-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
+
+          <h3 class="translatable" data-ES="Capítulos de libro:">Book Chapters:</h3>
+
+          <ul id="book-chapters" class="expandable-list" data-show="2">
+            <li>Roffé, A. J., Bernabé, F. & Ginnobili, S. (in press). Theoricity and Testing. In C. Abreu (Ed.), Philosophy of Science in the 21st Century. Contributions of Metatheoretical Structuralism. To be published in the collection Rumos da Epistemología of the Núcleo de Epistemología y Lógica de la Universidade Federal de Santa Catarina.</li>
+            <li>Roffé, A. J., & Ginnobili, S. (in press). Modelos, teorías e idealización en biología: el caso de los estudios de optimalidad. In A. Cassini & C. Hidalgo (Eds.) La ciencia como construcción de modelos. Editorial de la Sociedad Argentina de Análisis Filosófico.</li>
+            <li>Olmos, A., Roffé, A. J. & Ginnobili, S. (2020). Systemic Analysis and Functional Explanation: Structure and Limitations. In L. Baravalle y L. Zaterka (Eds.), Life and Evolution: Latin American Essays on the History and Philosophy of Biology. Springer. <a target="_blank" href="https://www.springer.com/gp/book/9783030395889">[LINK]</a></li>
+            <li>Roffé, A. J. (2015). La deriva genética como fuerza evolutiva. In J. Ahumada, N. Venturelli & S. Seno Chibeni (Eds.), Selección de Trabajos del IX Encuentro AFHIC y las XXV Jornadas de Epistemología e Historia de la ciencia. Córdoba: Editorial de la UNC. ISBN: 978-987-707-026-2. <a target="_blank" href="http://www.afhic.com/wp-content/uploads/2017/11/08-Ahumada-y-otros-Filosof%C3%ADa-e-Historia-de-la-Ciencia-del-Cono-Sur-IX-Encuentro-correcto.pdf">[PDF]</a></li>
+            <li>Roffé, A. J. (2015). La inconmensurabilidad entre las teorías planetarias de Ptolomeo y Copérnico: dos enfoques contemporáneos. In J. Ahumada, N. Venturelli & S. Seno Chibeni (Eds.), Selección de Trabajos del IX Encuentro AFHIC y las XXV Jornadas de Epistemología e Historia de la ciencia. Córdoba: Editorial de la UNC. ISBN: 978-987-707-026-2. <a target="_blank" href="http://www.afhic.com/wp-content/uploads/2017/11/08-Ahumada-y-otros-Filosof%C3%ADa-e-Historia-de-la-Ciencia-del-Cono-Sur-IX-Encuentro-correcto.pdf">[PDF]</a></li>
+            <li>Roffé, A. J. (2014). La paradoja de Skolem. In E. Barrio (Ed.), Paradojas, paradojas y más paradojas. London: College Publications. <a target="_blank" href="http://www.collegepublications.co.uk/cuadernos/?00007">[LINK]</a></li>
+          </ul>
+          <span id="book-chapters-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
+
+          <h3 class="translatable" data-ES="Reseñas de libro:">Book Reviews:</h3>
+
+          <ul id="reviews" class="expandable-list" data-show="2">
+            <li>Roffé, A. J. (2018). Contemporary Perspectives on the Meaning, Roles, and Implications of Chance in Evolution. Review of Chance in Evolution, by G. Ramsey & C. H. Pence (eds.). Science & Education. <a target="_blank" href="https://link.springer.com/article/10.1007/s11191-018-0011-y">[LINK]</a></li>
+            <li>Roffé, A. J. (2013). Review of Biology's first law: The tendency for diversity and complexity to increase in evolutionary Systems, by D. W. McShea & R. N. Brandon. Metatheoria. <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/113">[LINK]</a> <a target="_blank" href="https://metatheoria.unq.edu.ar/index.php/m/article/view/113/165">[PDF]</a></li>
+          </ul>
+          <span id="reviews-seemore" class="seemore translatable" data-ES="Ver más...">See more...</span>
+
+          <h3 class="translatable" data-ES="Tesis:">Theses:</h3>
+
+          <ul>
+            <li>Roffé, A. J. (2016). La genética de poblaciones y las fuerzas evolutivas. Tesis de licenciatura. <a target="_blank" href="https://drive.google.com/file/d/11AP8gLxfC19akSpUq4YY-FSjpcBYxiYV/view">[PDF]</a></li>
+            <li>Roffé, A. J. (2020). Contrastando reconstrucciones con herramientas computacionales: una aplicación a la cladística. Tesis de doctorado. <a target="_blank" href="https://drive.google.com/file/d/1UaRw1VQ6KoAlGTV22KueKGzzc0wVmJ0w/view?usp=sharing">[PDF]</a></li>
+          </ul>
+
+          <h3 class="translatable" data-ES="Otros:">Other:</h3>
+
+          <ul id="other-research" class="expandable-list" data-show="3">
+            <li>Roffé, A. J. & Da Ré, B. (2016). Introducción a las lógicas modales y no clásicas, parte 1. Buenos Aires: OPFyL. </li>
+            <li>Da Ré, B. & Roffé, A. J. (2016). Introducción a las lógicas modales y no clásicas, parte 2. Buenos Aires: OPFyL. </li>
+          </ul>
+          <span id="other-research-seemore" class="seemore">See more...</span>
+        </section>
+      </div>
+
+      <div class="column">
+        <section id="software">
+          <h2>Software</h2>
+
+         <h3>TAUT</h3>
+
+          <p class="translatable" data-ES="TAUT es un sitio web de ejercicios de lógica que se generan al azar y se auto-corrigen">
+            TAUT is a website where you can find a variety of randomly-generated, self-correcting logic excercises.</p>
+          <p>
+            <span class="translatable" data-ES="Puede acceder a él">You can access it</span>
+            <a href="https://www.taut-logic.com/" class="translatable" data-ES="Aquí">here</a>.
+          </p>
+
+          <p class="translatable" data-ES="Véanse también:">See also:</p>
+          <ul>
+            <li><a target="_blank" href="http://dailynous.com/2018/11/20/randomly-generated-self-correcting-logic-exercises-site/"
+                   class="translatable" data-ES="Post en Daily Nous">Daily Nous post</a></li>
+            <li><a target="_blank" href="https://www.conicet.gov.ar/taut-el-software-desarrollado-por-un-filosofo-del-conicet-para-ensenar-logica/"
+                   class="translatable" data-ES="Artículo en CONICET">CONICET article (in spanish)</a></li>
+          </ul>
+
+          <h3>logics</h3>
+          <p class="translatable" data-ES="Logics es un paquete de Python para hacer lógica matemática. Apunta a la
+            generalidad (poder representar la mayor cantidad de sistemas posible), a tener código claro y bien documentado, y
+            a poseer un mínimo de dependencias, más que a la rapidez. Algunas de sus aplicaciones pretendidas son el
+            software educativo (p.e. TAUT utiliza una versión previa de este paquete) y la posibilidad de prototipar
+            rápidamente ideas durante el curso de una investigación">
+            Logics is a Python package for mathematical logic. It aims at generality (being able to represent as many
+            systems as possible), well-documented and readable code and minimal dependencies, rather than speed. Some of
+            its intended applications are educational software (e.g. TAUT uses a previous version of this package), and
+            quick prototyping of ideas for research purposes
+          </p>
+          <p>
+            <span class="translatable" data-ES="Puede acceder a él">You can access it</span>
+            <a href="https://github.com/ariroffe/logics" class="translatable" data-ES="aquí">here</a>.
+          </p>
+          <p>
+            <span class="translatable" data-ES="Para ver la documentación, haga click">To see the documentation, see</span>
+            <a href="https://logics.readthedocs.io/en/latest/?" class="translatable" data-ES="aquí">here</a>.</p>
+
+          <h3>Reconstructor</h3>
+          <p class="translatable" data-ES="Reconstructor es un programa diseñado para testear y correr reconstrucciones
+            formales de teorías, hechas bajo la metateoría estructuralista. También hace algunas cosas copadas de lógica,
+            y creo que puede servir para la enseñanza de la lógica.">
+            Reconstructor is a program designed to test and run formal reconstructions of theories, made in the
+            structuralist format. It also does some cool logic stuff, and I believe it can be useful for teaching logic.
+          </p>
+
+          <p>
+            <span class="translatable" data-ES="Nota: si decide usar Reconstructor en el curso de sus investigaciones, por favor cite">
+              Note: If you decide to use Reconstructor in the course of your investigations, please cite</span>
+            <a href="https://www.tandfonline.com/doi/full/10.1080/11663081.2019.1703467" target="_blank" class="translatable" data-ES="este artículo">this article</a>
+          </p>
+
+          <h3 class="translatable" data-ES="La aventura de Ariel Roffé">Ariel Roffé's Quest</h3>
+          <p>
+            <span class="translatable" data-ES="Mi sitio web personal puede encontrarse en ">My personal website can be found at</span>
+            <a href="https://arielroffe.quest/">https://arielroffe.quest/</a>.
+          </p>
+          <p class="translatable" data-ES="La parte del juego de este sitio fue creada usando el engine para HTML5 llamado Phaser 3.
+            Los assets que utilicé son todos de dominio público (véase el repositorio de GitHub para los créditos específicos), y
+            algunos fueron editados/creados por mí. Crear el juego fue bastante trabajo, en muchas áreas distintas, pero me
+            divertí y aprendí mucho haciéndolo. Esta parte del sitio está hecha simplemente con HTML, CSS y vanilla JS">
+            The game part of this site was made using the HTML5 game engine Phaser 3. The assets I used are all public domain
+            (see the GitHub repo for the specific credits), and some I created and/or edited myself. Building the game was
+            a lot of work in many different areas, but I had a lot of fun and learned a lot making it.
+            This part of the website was made simply using HTML, CSS and vanilla JS.
+          </p>
+          <p>
+            <span class="translatable" data-ES="Si desea ver el código, puede acceder al repositorio público">
+              If you wish to see the code, you can access the public repository</span>
+            <a target="_blank" href="https://github.com/ariroffe/personal-website" class="translatable" data-ES="aquí">here</a>.
+          </p>
+        </section>
+
+      </div>
+
+    </div>
+
+    <footer>
+      <span>Ariel Jonathan Roffé</span>
+      <a href="mailto:ariroffe@hotmail.com">ariroffe@hotmail.com</a>
+    </footer>
+
+    <script>
+      // ------------------------------
+      // Language selection
+
+      let currentLanguage = 'EN';
+
+      const lang_button = document.getElementById("lang-select");
+
+      const translatable_elements = Array.from(document.getElementsByClassName('translatable'));
+
+      function setSpanish() {
+          currentLanguage = 'ES';
+          lang_button.textContent = 'ES';
+          translatable_elements.forEach(elem => {
+              // Set the english translation in the data-EN attribute in case the user wants to go back
+              if (!elem.hasAttribute("data-EN")) elem.setAttribute('data-EN', elem.textContent);
+              elem.textContent = elem.getAttribute("data-ES");
+          });
+      }
+      function setEnglish() {
+          currentLanguage = 'EN';
+          lang_button.textContent = 'EN';
+          localStorage.setItem('lang', 'EN')
+          translatable_elements.forEach(elem => elem.textContent = elem.getAttribute("data-EN"));
+      }
+      function setLanguage(targetLanguage) {
+          if (targetLanguage === 'EN') {
+              setEnglish();
+          } else if (targetLanguage === 'ES') {
+              setSpanish();
+          }
+      }
+
+      lang_button.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          if (currentLanguage === 'EN') {
+              setLanguage('ES');
+          } else if (currentLanguage === 'ES') {
+              setLanguage('EN');
+          }
+      });
+
+      // ------------------------------
+      // Dark mode and light mode
+
+      let preferredTheme = 'light';
+      const dark_mode_button = document.getElementById("dark-mode");
+      const light_mode_button = document.getElementById("light-mode");
+
+      function setLightMode() {
+          dark_mode_button.style.display = 'none';
+          light_mode_button.style.display = 'inline';
+          document.documentElement.setAttribute('data-theme', 'light');
+      }
+      function setDarkMode() {
+          dark_mode_button.style.display = 'inline';
+          light_mode_button.style.display = 'none';
+          document.documentElement.setAttribute('data-theme', 'dark');
+      }
+
+      dark_mode_button.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          setLightMode();
+      });
+      light_mode_button.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          setDarkMode();
+      });
+
+      // At site init check if the local storage variable is set (if not, it will be null)
+      if (preferredTheme === 'light') {
+          setLightMode();
+      } else if (preferredTheme === 'dark') {
+          setDarkMode();
+      // If local storage is not set, but the user has system-wide preferences
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+          setLightMode();
+      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          setDarkMode();
+      // If none of the above, default to light mode
+      } else{
+          setDarkMode();
+      }
+
+      // ------------------------------
+      // Sections seemore's
+
+      const expandables = Array.from(document.getElementsByClassName("expandable-list"))
+
+      expandables.forEach(function (expandable_ul) {
+        let show_number = parseInt(expandable_ul.getAttribute('data-show'))
+        // If more than 3 children
+        if (expandable_ul.children.length > show_number) {
+          // Show the "see more" button/link
+          const seemore_link = document.getElementById(expandable_ul.id + "-seemore");
+          seemore_link.style.display = 'block'
+
+          // Initially hide the elements beyond the fifth
+          const children = Array.from(expandable_ul.children);
+          children.slice(show_number).forEach((line) => line.style.display = 'none');
+
+          // Binding for the "see more" button/link
+          seemore_link.addEventListener("click", () => {
+            // Get an array of the not yet shown child elements
+            const not_shown_lines = children.filter(line => line.style.display === 'none');
+
+            if (not_shown_lines.length <= show_number) {
+              // If there are show_number or less not shown items, show all and hide the "see more" link
+              not_shown_lines.forEach(line => line.style.display = 'list-item');
+              seemore_link.style.display = 'none';
+            } else {
+              // If there are more than show_number, show the first five
+              not_shown_lines.slice(0, show_number).forEach(line => line.style.display = 'list-item');
+            }
+          })
+        }
+      });
+    </script>
+
   </body>
 
 </html>
