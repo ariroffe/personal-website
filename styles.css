@@ -52,7 +52,7 @@ p {
     text-align: justify;
 	padding-bottom: 10px;
 }
-h3 {
+h3, h4 {
     color: var(--color-text);
 }
 li {
