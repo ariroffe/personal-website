@@ -11,7 +11,7 @@
     <style>
       /*------ Global Config ------*/
       @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Inconsolata&display=swap');
-      html, html[data-theme="dark"] {
+      html[data-theme="dark"] {
         --color-background: #21262d;
         --color-toolbars: #484f58;
         --color-text: #c9d1d9;
@@ -22,6 +22,15 @@
         --color-toolbars: #878787;
         --color-text: #000;
         --color-emphasis: #861388;
+      }
+      @media print {
+        /*In print mode, use light theme colors*/
+        html, html[data-theme="light"][data-theme="dark"] {
+          --color-background: #A9A9A9 !important;
+          --color-toolbars: #878787 !important;
+          --color-text: #000 !important;
+          --color-emphasis: #861388 !important;
+        }
       }
       html {
         font-size: 10px;
