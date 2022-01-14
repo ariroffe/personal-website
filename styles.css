@@ -399,7 +399,7 @@ li {
 
 
 /* ---------SECTIONS--------- */
-section {
+section, div#download-cv-sect {
 	position: relative;
     width: 90%;
 	max-width: 1380px;
@@ -462,6 +462,55 @@ section .seemore {
     /*The intro one a little bit further down*/
     #intro h2 {
         transform: rotate(270deg) translateX(-130%);
+    }
+}
+
+/* ---------Download CV--------- */
+div#download-cv-sect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div#download-cv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+div#download-cv i {
+    font-size: 8rem;
+}
+div#download-cv a:first-child {
+    margin-right: 20px;
+}
+div#download-cv div {
+    height: 60px;
+    padding-left: 20px;
+    border-left: 1px solid var(--color-emphasis);
+    font-size: 2.4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+div#download-cv-sect p {
+    text-align: center;
+    max-width: 65%;
+}
+
+@media screen and (max-width:768px) {
+    div#download-cv i {
+        font-size: 5rem;
+    }
+    div#download-cv div {
+        height: 40px;
+        font-size: 2rem;
+    }
+    div#download-cv-sect p {
+        text-align: justify;
+        font-size: 1.3rem;
+        max-width: 90%;
     }
 }
 

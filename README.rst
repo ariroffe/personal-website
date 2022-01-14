@@ -1,7 +1,7 @@
 Ariel Roffé's Quest (my personal website)
 =========================================
 
-Code for the game and website of `arielroffe.quest`.
+Code for the game and website at `https://arielroffe.quest <https://arielroffe.quest/>`__.
 
 To run it locally, simply clone this repo, cd into it, start a webserver and navigate to `localhost`.
 
