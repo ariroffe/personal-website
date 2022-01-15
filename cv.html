@@ -203,6 +203,51 @@
       section:hover h2, section:hover h3 {
         filter: brightness(1.2);
       }
+      @keyframes appear1 {
+        0% {opacity: 0}
+        20% {opacity: 1}
+      }
+      @keyframes appear2 {
+        0% {opacity: 0}
+        20% {opacity: 0}
+        40% {opacity: 1}
+      }
+      @keyframes appear3 {
+        0% {opacity: 0}
+        20% {opacity: 0}
+        40% {opacity: 0}
+        60% {opacity: 1}
+      }
+      @keyframes appear4 {
+        0% {opacity: 0}
+        20% {opacity: 0}
+        40% {opacity: 0}
+        60% {opacity: 0}
+        80% {opacity: 1}
+      }
+      @keyframes appear5 {
+        0% {opacity: 0}
+        20% {opacity: 0}
+        40% {opacity: 0}
+        60% {opacity: 0}
+        80% {opacity: 0}
+        100% {opacity: 1}
+      }
+      .hero {
+        animation: appear1 3s linear;
+      }
+      #intro {
+        animation: appear2 3s linear;
+      }
+      #teaching {
+        animation: appear3 3s linear;
+      }
+      #research {
+        animation: appear4 3s linear;
+      }
+      #software {
+        animation: appear5 3s linear;
+      }
 
       /* ---------Footer--------- */
       footer {
