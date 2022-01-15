@@ -18,7 +18,7 @@ export class Door extends Phaser.GameObjects.Zone
 	enterDoor(scene) {
 		if (!scene.player.body.touching.none && scene.player.body.wasTouching.none) {
 			if (this.link) {
-				window.location.href = "./home.html#" + this.destination;
+				window.location.href = "./home#" + this.destination;
 			} else {
 				scene.scene.switch(this.destination);
 			}
