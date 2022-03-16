@@ -38,6 +38,12 @@ export class BaseScene extends Phaser.Scene {
     camera.startFollow(this.player);
     camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.wasd = {
+      w: this.input.keyboard.addKey('W'),
+      a: this.input.keyboard.addKey('A'),
+      s: this.input.keyboard.addKey('S'),
+      d: this.input.keyboard.addKey('D'),
+    }
 
     // Camera resize behavior
     this.scale.on('resize', this.resize, this);
@@ -132,16 +138,16 @@ export class BaseScene extends Phaser.Scene {
     // ----------------
     // KEYBOARD MOVEMENT
     // Horizontal movement
-    if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown || this.wasd.a.isDown) {
       moveleft = true;
-    } else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown || this.wasd.d.isDown) {
       moveright = true;
     }
 
     // Vertical movement
-    if (this.cursors.up.isDown) {
+    if (this.cursors.up.isDown || this.wasd.w.isDown) {
       moveup = true;
-    } else if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown || this.wasd.s.isDown) {
       movedown = true;
     }
 
